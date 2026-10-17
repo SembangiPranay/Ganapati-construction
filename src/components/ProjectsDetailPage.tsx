@@ -83,7 +83,7 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
             {filteredProjects.map((project) => (
               <article className="project-showcase-card" key={project.id}>
                 <div className="project-card-image">
-                  <img src={project.image} alt={project.title} />
+                  <img src={project.image} alt={project.title} loading="lazy" decoding="async" />
                   <span className="project-card-num">{project.id}</span>
                   <span className="project-card-badge">{project.category}</span>
                 </div>
@@ -105,7 +105,7 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
                   <div className="project-card-footer">
                     <button
                       type="button"
-                      className="button button--red button--small"
+                      className="button button--red button--small button--full"
                       onClick={() => onContactClick(project.title)}
                     >
                       Enquire Similar Project <Arrow />
