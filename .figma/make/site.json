@@ -1,0 +1,10 @@
+{
+  "description": "Transforms web design concepts into visually accurate, user-friendly websites, ensuring clients receive a final product that matches their vision.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
