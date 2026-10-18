@@ -1,5 +1,12 @@
 import { useState, useEffect, type ReactNode } from 'react'
-import { servicesData, companyProfile, safetyCertifications } from './data/servicesData'
+import {
+  servicesData,
+  companyProfile,
+  safetyCertifications,
+  keyMetrics,
+  industriesServed,
+  whyChooseUs,
+} from './data/servicesData'
 import ServiceDetailPage from './components/ServiceDetailPage'
 import AboutDetailPage from './components/AboutDetailPage'
 import ProjectsDetailPage from './components/ProjectsDetailPage'
@@ -321,6 +328,15 @@ export default function App() {
               Services
             </a>
             <a
+              href="#industries"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateToHome('industries')
+              }}
+            >
+              Industries
+            </a>
+            <a
               className={currentView.type === 'projects' ? 'active' : ''}
               href="#projects"
               onClick={(e) => {
@@ -447,6 +463,15 @@ export default function App() {
 
             <button
               type="button"
+              className="mobile-nav-item"
+              onClick={() => navigateToHome('industries')}
+            >
+              <span>🏭 Industries We Serve</span>
+              <Arrow />
+            </button>
+
+            <button
+              type="button"
               className={`mobile-nav-item ${currentView.type === 'projects' ? 'active' : ''}`}
               onClick={navigateToProjects}
             >
@@ -528,20 +553,26 @@ export default function App() {
             <div className="container hero-inner">
               <div className="hero-copy">
                 <p className="eyebrow eyebrow--light">
-                  {companyProfile.name}
-                  <br />
-                  Visakhapatnam, Andhra Pradesh
+                  {companyProfile.name} • Visakhapatnam, Andhra Pradesh
                 </p>
                 <h1>
-                  Engineering<br />
-                  Excellence in<br />
-                  <span>Steel Infrastructure.</span>
+                  Engineering Excellence in<br />
+                  <span>Steel Infrastructure &amp; Public Utilities.</span>
                 </h1>
                 <p className="hero-subtitle">
-                  Specialists in Structural Fabrications, Erection, Heavy Equipment Works,
-                  <br />
-                  and Industrial Turnkey Commissioning.
+                  Specialists in heavy structural fabrications, high-altitude technological erection, rolling mill equipment assembly, and Government of Andhra Pradesh AMRUT 2.0 municipal water supply pipelines.
                 </p>
+                <div className="hero-badges-row">
+                  <span className="hero-badge-pill">
+                    ✓ Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)
+                  </span>
+                  <span className="hero-badge-pill">
+                    ✓ OHSAS 18001 Certified Standards
+                  </span>
+                  <span className="hero-badge-pill">
+                    ✓ 1,000+ Industrial Projects Delivered
+                  </span>
+                </div>
                 <div className="button-row">
                   <button
                     type="button"
@@ -569,21 +600,40 @@ export default function App() {
             </div>
           </section>
 
-          {/* Core Capabilities Strip (Matching Page 1 Brochure Strip) */}
+          {/* Key Milestone Metrics Strip (Desktop / Laptop Elongation Bar) */}
+          <section className="metrics-strip" aria-label="Key company achievements">
+            <div className="container">
+              <div className="metrics-grid">
+                {keyMetrics.map((m, idx) => (
+                  <div className="metric-box" key={idx}>
+                    <span className="metric-val">{m.value}</span>
+                    <strong className="metric-lbl">{m.label}</strong>
+                    <span className="metric-sub">{m.sub}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Core Capabilities Strip */}
           <section className="capability-strip" aria-label="Core capabilities">
             <div className="container capability-inner">
               <strong>
-                Our Top
+                Our Core
                 <br />
-                Services
+                Divisions
               </strong>
               <div className="capability-list">
-                <span>Structural Works</span>
-                <span>Fabrication Works</span>
-                <span>Erection Works</span>
-                <span>Equipment Installation</span>
-                <span>Maintenance Services</span>
-                <span>Commissioning Work</span>
+                {servicesData.map((s) => (
+                  <span
+                    key={s.id}
+                    onClick={() => navigateToService(s.id)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    {s.title}
+                  </span>
+                ))}
               </div>
             </div>
           </section>
@@ -593,17 +643,26 @@ export default function App() {
             <div className="container about-grid">
               <div className="section-copy">
                 <SectionTitle
-                  kicker="About Us"
+                  kicker="About S Ganapati Construction"
                   title={
                     <>
-                      Building Industrial
+                      Building Industrial &amp; Public
                       <br />
-                      Infrastructure with Precision
+                      Infrastructure with Discipline
                     </>
                   }
                 />
                 <p>
-                  <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>) is a trusted engineering partner in structural fabrication, heavy erection, and industrial equipment assembly. We execute turnkey infrastructure projects across steel plants, cement plants, rolling mills, and material handling systems with disciplined on-time execution.
+                  Headquartered in Visakhapatnam, Andhra Pradesh, <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>, GSTIN: <strong>{companyProfile.gstin}</strong>) is an established industrial contractor specializing in structural steel fabrication, high-altitude erection, mechanical equipment assembly, and urban water infrastructure pipelines.
+                </p>
+                <div className="about-active-pill">
+                  <span>🏛️</span>
+                  <span>
+                    <strong>Active Government Contract:</strong> AP AMRUT 2.0 Urban Water Supply (11,735+ Rmtr HDPE Pipeline laying in Mandapeta &amp; Peddapuram Municipalities)
+                  </span>
+                </div>
+                <p>
+                  Operating with certified safety management under <strong>OHSAS 18001</strong> and execution protocols modeled after the JSW-Dolvi emergency response framework, our 50+ strong professional engineering and rigging crews execute critical turnarounds and greenfield packages for integrated steel plants, rolling mills, cement complexes, and municipal authorities.
                 </p>
                 <div className="feature-row">
                   {strengths.map(([symbol, one, two]) => (
@@ -617,13 +676,22 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <button
-                  type="button"
-                  className="button button--red button--small"
-                  onClick={navigateToAbout}
-                >
-                  Know More About Us <Arrow />
-                </button>
+                <div className="button-row">
+                  <button
+                    type="button"
+                    className="button button--red button--small"
+                    onClick={navigateToAbout}
+                  >
+                    Know More About Us <Arrow />
+                  </button>
+                  <button
+                    type="button"
+                    className="button button--outline-dark button--small"
+                    onClick={() => handleContactClick()}
+                  >
+                    Schedule Consultation
+                  </button>
+                </div>
               </div>
               <div
                 className="about-photo"
@@ -635,11 +703,36 @@ export default function App() {
                 <span>
                   Our
                   <br />
-                  Mission
+                  Mission &amp;
+                  <br />
+                  Commitment
                 </span>
                 <i />
-                <p>To deliver world-class industrial construction solutions with zero-incident safety, certified quality, and disciplined milestone delivery.</p>
+                <p>To deliver heavy industrial construction and public utility infrastructure with uncompromising zero-incident safety, certified quality standards, and disciplined milestone completion.</p>
               </aside>
+            </div>
+          </section>
+
+          {/* Industries We Serve Section */}
+          <section className="industries-section" id="industries">
+            <div className="container">
+              <div className="industries-heading">
+                <SectionTitle kicker="Industries We Serve" title="Mission-Critical Sector Capabilities" />
+                <p>
+                  From metallurgical facilities and power stations to municipal water networks, we provide dedicated engineering, heavy machinery rigging, and civil integration across core infrastructure corridors.
+                </p>
+              </div>
+              <div className="industries-grid">
+                {industriesServed.map((ind) => (
+                  <article className="industry-card" key={ind.id}>
+                    <div>
+                      <span className="industry-tag">{ind.tag}</span>
+                      <h3>{ind.title}</h3>
+                      <p>{ind.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </section>
 
@@ -673,6 +766,11 @@ export default function App() {
                     <div className="service-body">
                       <h3>{service.title}</h3>
                       <p>{service.shortDescription}</p>
+                      <ul className="service-caps-preview">
+                        {service.capabilities.slice(0, 3).map((cap, cIdx) => (
+                          <li key={cIdx}>{cap.title}</li>
+                        ))}
+                      </ul>
                       <button
                         type="button"
                         className="service-arrow-btn"
@@ -682,10 +780,31 @@ export default function App() {
                           navigateToService(service.id)
                         }}
                       >
-                        <Arrow />
+                        Explore Specifications <Arrow />
                       </button>
                     </div>
                   </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Engineering Differentiators (Why Choose SGC) */}
+          <section className="why-us-section" id="differentiators">
+            <div className="container why-us-inner">
+              <div className="why-us-heading">
+                <SectionTitle kicker="Engineering Differentiators" title="Why Industrial Leaders Choose SGC" />
+                <p>
+                  Built on a foundation of precision engineering, heavy-duty fabrication yards, high-altitude rigging expertise, and zero-compromise safety protocols.
+                </p>
+              </div>
+              <div className="why-us-grid">
+                {whyChooseUs.map((w) => (
+                  <div className="why-us-card" key={w.number}>
+                    <b>{w.number}</b>
+                    <h3>{w.title}</h3>
+                    <p>{w.description}</p>
+                  </div>
                 ))}
               </div>
             </div>
@@ -931,77 +1050,70 @@ export default function App() {
         </button>
       </nav>
 
-      {/* Footer */}
-      <footer>
-        <div className="container footer-inner">
-          <div className="footer-brand-block">
-            <Brand footer onBrandClick={() => navigateToHome()} />
-            <p className="footer-tagline">
-              Specialists: Structural Fabrications, Erection, Heavy Equipment Works
-            </p>
-            <div className="footer-legal-line">
-              <span><b>Proprietor:</b> {companyProfile.proprietor}</span>
-              <span className="footer-dot">•</span>
-              <span><b>GSTIN:</b> {companyProfile.gstin}</span>
+      {/* Corporate Multi-Column Footer */}
+      <footer className="site-footer">
+        <div className="container">
+          <div className="footer-corporate-grid">
+            {/* Col 1: Brand & Bio */}
+            <div className="footer-col footer-col--brand">
+              <Brand footer onBrandClick={() => navigateToHome()} />
+              <p className="footer-company-desc">
+                Engineering excellence in structural steel fabrication, high-altitude technological erection, rolling mills, and municipal water supply infrastructure across Andhra Pradesh and nationwide.
+              </p>
+              <div className="footer-proprietor-badge">
+                <span><b>Proprietor:</b> {companyProfile.proprietor}</span>
+                <span><b>GSTIN:</b> {companyProfile.gstin}</span>
+              </div>
+            </div>
+
+            {/* Col 2: Navigation Links */}
+            <div className="footer-col">
+              <h4>Quick Navigation</h4>
+              <ul className="footer-nav-list">
+                <li><a href="#home" onClick={(e) => { e.preventDefault(); navigateToHome(); }}>Home Overview</a></li>
+                <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About Us</a></li>
+                <li><a href="#services" onClick={(e) => { e.preventDefault(); navigateToHome('services'); }}>Core Services</a></li>
+                <li><a href="#industries" onClick={(e) => { e.preventDefault(); navigateToHome('industries'); }}>Industries We Serve</a></li>
+                <li><a href="#projects" onClick={(e) => { e.preventDefault(); navigateToProjects(); }}>Projects Showcase</a></li>
+                <li><a href="#safety" onClick={(e) => { e.preventDefault(); navigateToHome('safety'); }}>Safety Standards</a></li>
+                <li><a href="#contact" onClick={(e) => { e.preventDefault(); navigateToHome('contact'); }}>Contact Office</a></li>
+              </ul>
+            </div>
+
+            {/* Col 3: Services Directory */}
+            <div className="footer-col">
+              <h4>Industrial Services</h4>
+              <ul className="footer-nav-list">
+                {servicesData.map((s) => (
+                  <li key={s.id}>
+                    <a href={`#/services/${s.id}`} onClick={(e) => { e.preventDefault(); navigateToService(s.id); }}>
+                      {s.number}. {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 4: Verified Credentials & HQ */}
+            <div className="footer-col footer-col--contact">
+              <h4>Registered Office</h4>
+              <div className="footer-credentials-card">
+                <p><strong>{companyProfile.name}</strong></p>
+                <p>{companyProfile.address.doorNo}, {companyProfile.address.building}, {companyProfile.address.colony}, {companyProfile.address.area}, {companyProfile.address.state} - {companyProfile.address.pincode}</p>
+                <p><strong>Direct Phones:</strong> +91 {companyProfile.phonePrimary} / +91 {companyProfile.phoneSecondary}</p>
+                <p><strong>Alternate:</strong> +91 {companyProfile.phoneTertiary}</p>
+                <p><strong>Email:</strong> {companyProfile.email}</p>
+                <div className="footer-wo-tag">
+                  ✓ Active Govt Contract: AP AMRUT 2.0 (WO 1314-A1)
+                </div>
+              </div>
             </div>
           </div>
-          <div className="footer-links">
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault()
-                navigateToHome()
-              }}
-            >
-              Home
-            </a>
-            <a
-              href="#services"
-              onClick={(e) => {
-                e.preventDefault()
-                navigateToHome('services')
-              }}
-            >
-              Services
-            </a>
-            <a
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault()
-                navigateToProjects()
-              }}
-            >
-              Projects
-            </a>
-            <a
-              href="#about"
-              onClick={(e) => {
-                e.preventDefault()
-                navigateToAbout()
-              }}
-            >
-              About Us
-            </a>
-            <a
-              href="#safety"
-              onClick={(e) => {
-                e.preventDefault()
-                navigateToHome('safety')
-              }}
-            >
-              Safety &amp; Quality
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault()
-                navigateToHome('contact')
-              }}
-            >
-              Contact
-            </a>
+
+          <div className="footer-bottom-bar">
+            <span>© {new Date().getFullYear()} {companyProfile.name}. All rights reserved.</span>
+            <span>OHSAS 18001 Certified Standards • JSW-Dolvi Emergency Response Model • Civet Projects Pvt Ltd</span>
           </div>
-          <p>© 2024 {companyProfile.name}. All rights reserved.</p>
         </div>
       </footer>
     </div>

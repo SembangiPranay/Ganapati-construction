@@ -56,6 +56,70 @@ export const companyProfile = {
   },
 }
 
+export const keyMetrics = [
+  { value: '11.7+ km', label: 'AMRUT 2.0 Pipeline', sub: 'HDPE 110mm – 355mm Dia' },
+  { value: '1,000+', label: 'Projects Executed', sub: 'Steel, Power & Infrastructure' },
+  { value: '90+ Meters', label: 'Max Lift Elevation', sub: 'High-Altitude Technological Towers' },
+  { value: '100+ MT', label: 'Tandem Crane Lifts', sub: 'Engineered Rigging Operations' },
+  { value: 'Sa 2.5', label: 'Quality Standard', sub: 'Shot Blasted & NDT Certified' },
+]
+
+export const industriesServed = [
+  {
+    id: 'steel',
+    title: 'Steel & Metallurgical Complexes',
+    description: 'Blast furnaces, continuous casting units, rolling mills (WRM), melt shops, and Coke Oven battery machinery installation.',
+    tag: 'Industrial Core',
+  },
+  {
+    id: 'water',
+    title: 'Urban Water Supply & Utilities',
+    description: 'AP AMRUT 2.0 municipal water transmission schemes, heavy HDPE pipeline networks, trenchless boring, and CC cutting.',
+    tag: 'Govt Infrastructure',
+  },
+  {
+    id: 'cement',
+    title: 'Cement & Mineral Processing',
+    description: 'Clinker storage silos, raw material mills, rotary kiln structures, bucket elevators, and bulk transfer stations.',
+    tag: 'Process Industry',
+  },
+  {
+    id: 'power',
+    title: 'Thermal & Power Generation',
+    description: 'Heavy boiler supporting frameworks, coal handling plants (CHP), steam pipe racks, and turbine hall structures.',
+    tag: 'Energy Infrastructure',
+  },
+  {
+    id: 'rmhs',
+    title: 'Ports & RMHS Material Handling',
+    description: 'Long-span technological conveyor galleries, junction towers, take-up units, and port bulk cargo terminal networks.',
+    tag: 'Bulk Logistics',
+  },
+]
+
+export const whyChooseUs = [
+  {
+    number: '01',
+    title: 'Equipped Fabrication Yards',
+    description: 'Modern fabrication bays equipped with automated Submerged Arc Welding (SAW), high-definition CNC profile cutters, and plate bending rolls for heavy built-up sections up to 80mm.',
+  },
+  {
+    number: '02',
+    title: 'High-Altitude Rigging & Erection',
+    description: 'Experienced rigging masters, heavy crane fleet (50T to 250T), and precise laser optical alignment conforming to AISC, IS 800, and IS 12843 engineering codes.',
+  },
+  {
+    number: '03',
+    title: '100% Quality & Hydrostatic Testing',
+    description: 'Comprehensive NDT verification (Ultrasonic, MPI, Dye Penetrant, Radiography) and 100% hydrostatic testing for all hydraulic lines and AMRUT 2.0 HDPE pipeline sections.',
+  },
+  {
+    number: '04',
+    title: 'Certified OHSAS 18001 Safety Culture',
+    description: 'Disciplined Tool Box Talks (TBT), JSW-Dolvi emergency response protocols, smart confined-space surveillance, and strict Permit-to-Work (PTW/LOTO) enforcement across every site.',
+  },
+]
+
 export const servicesData: ServiceDetail[] = [
   {
     id: 'structural-works',
