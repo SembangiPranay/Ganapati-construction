@@ -14,6 +14,7 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
 
   const categories = [
     'All',
+    'Water & Public Infrastructure',
     'Equipment Installation',
     'Commissioning & Specialized Machinery',
     'Structural Works',
@@ -23,7 +24,11 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
   const filteredProjects =
     activeCategory === 'All'
       ? projectsData
-      : projectsData.filter((p) => p.category.toLowerCase().includes(activeCategory.toLowerCase()))
+      : projectsData.filter(
+          (p) =>
+            p.category.toLowerCase().includes(activeCategory.toLowerCase()) ||
+            (p.secondaryCategory && p.secondaryCategory.toLowerCase().includes(activeCategory.toLowerCase()))
+        )
 
   return (
     <div className="projects-detail-view">
@@ -54,7 +59,7 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
           </div>
           <h1>Engineered Lifting. Controlled Erection. Assured Stability.</h1>
           <p className="detail-hero-tagline">
-            Showcase of industrial machinery installation, coke oven SCP systems, RMHS conveyor networks, and heavy technological erection.
+            Showcase of Government of Andhra Pradesh AMRUT 2.0 municipal water supply networks, industrial machinery installation, coke oven SCP systems, RMHS conveyor networks, and heavy technological erection.
           </p>
           <div className="detail-hero-actions">
             <button type="button" className="button button--red" onClick={() => onContactClick()}>
@@ -87,18 +92,61 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
           {/* Projects Grid */}
           <div className="projects-showcase-grid">
             {filteredProjects.map((project) => (
-              <article className="project-showcase-card" key={project.id}>
+              <article
+                className={`project-showcase-card ${project.isVerifiedWO ? 'project-showcase-card--verified' : ''}`}
+                key={project.id}
+              >
                 <div className="project-card-image">
                   <img src={project.image} alt={project.title} loading="lazy" decoding="async" />
                   <span className="project-card-num">{project.id}</span>
                   <span className="project-card-badge">{project.category}</span>
+                  {project.isVerifiedWO && (
+                    <span className="project-card-verified-tag">✓ Official Work Order</span>
+                  )}
                 </div>
                 <div className="project-card-body">
                   <div className="project-card-meta">
                     <span className="project-loc">📍 {project.location}</span>
+                    {project.client && <span className="project-client">🏛️ {project.client}</span>}
                   </div>
                   <h3>{project.title}</h3>
-                  <p>{project.scope}</p>
+
+                  {project.isVerifiedWO && project.woDetails && (
+                    <div className="wo-verified-credential-box">
+                      <div className="wo-verified-header">
+                        <span className="wo-seal-badge">✓ VERIFIED WORK ORDER</span>
+                        <span className="wo-ref-code">{project.woNumber}</span>
+                      </div>
+                      <div className="wo-client-details">
+                        <p><strong>Issuing Main Contractor:</strong> {project.woDetails.issuingClient}</p>
+                        <p><strong>Government Scheme:</strong> {project.woDetails.scheme}</p>
+                        <p><strong>Contractor Entity:</strong> {project.woDetails.contractor} (Proprietor: {project.woDetails.proprietor} • GSTIN: {project.woDetails.gstin})</p>
+                      </div>
+
+                      <div className="wo-schedule-box">
+                        <strong>HDPE Pipeline Diameter Schedule (11,735+ Rmtr):</strong>
+                        <div className="wo-pipes-grid">
+                          {project.woDetails.pipeSizes.map((pipe, pIdx) => (
+                            <div className="wo-pipe-item" key={pIdx}>
+                              <span className="pipe-dia">{pipe.dia}</span>
+                              <span className="pipe-len">{pipe.length}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="wo-operations-box">
+                        <strong>Verified Engineering Operations:</strong>
+                        <ul className="wo-operations-list">
+                          {project.woDetails.operations.map((op, oIdx) => (
+                            <li key={oIdx}>{op}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  <p className="project-scope-text">{project.scope}</p>
 
                   <div className="project-metrics-row">
                     {project.metrics.map((m, idx) => (

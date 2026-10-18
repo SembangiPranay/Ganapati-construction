@@ -22,26 +22,35 @@ export interface ServiceDetail {
 
 export const companyProfile = {
   name: 'S GANAPATI CONSTRUCTION',
-  legalName: 'S Ganapati Construction',
+  legalName: 'M/S. S GANAPATI CONSTRUCTION',
   proprietor: 'Garaka Sreedevi',
   phonePrimary: '94417 71333',
-  phoneSecondary: '90320 79333',
+  phoneSecondary: '91005 49053',
+  phoneTertiary: '90320 79333',
   gstin: '37DIPPG2975E1ZX',
   email: 'sganapati1585@gmail.com',
   address: {
-    doorNo: '11-30/27, F-no.303',
+    doorNo: 'Door No. 11-30/27, 3rd Floor, Flat No 303',
     building: 'GSN Towers',
-    colony: 'Bhagath Singh Nagar, Yellapuvanipalem',
+    colony: 'Yellapuvanipalem, SC BC Colony (Near Swimming Pool)',
+    ward: 'Revenue Ward 89 (Old No. 66)',
     area: 'Gopalapatnam, Visakhapatnam',
     state: 'Andhra Pradesh',
     pincode: '530027',
-    full: '11-30/27, F-no.303, GSN Towers, Bhagath Singh Nagar, Yellapuvanipalem, Gopalapatnam, Visakhapatnam, Andhra Pradesh - 530027',
+    full: 'Door No. 11-30/27, 3rd Floor, Flat No 303, GSN Towers, Yellapuvanipalem, SC BC Colony, Near Swimming Pool, Gopalapatnam, Visakhapatnam, Andhra Pradesh - 530027',
   },
-  slogan: 'Engineering Excellence in Steel Infrastructure',
-  tagline: 'Specialists: Structural Fabrications, Erection, Heavy Equipment Works',
+  slogan: 'Engineering Excellence in Steel Infrastructure & Public Utilities',
+  tagline: 'Specialists: Structural Fabrications, Erection, Heavy Equipment Works & Infrastructure Pipelines',
+  majorClients: [
+    'Civet Projects Pvt Ltd (AMRUT 2.0 Scheme - Govt of AP)',
+    'Integrated Steel Plants & Metallurgical Facilities',
+    'Heavy Engineering & Material Handling Complexes',
+    'Municipal & Urban Infrastructure Authorities',
+  ],
   metrics: {
     projects: '1000+ Projects Executed',
     professionals: '50+ Certified Professionals',
+    pipeline: '11.7+ km Pipeline Network (AMRUT 2.0)',
     safety: 'OHSAS 18001 Certified Standards',
     quality: 'International Quality Standards',
   },
@@ -52,12 +61,12 @@ export const servicesData: ServiceDetail[] = [
     id: 'structural-works',
     number: '01',
     title: 'Structural Works',
-    shortDescription: 'Industrial steel frameworks, technological structures, process buildings, and support systems.',
-    tagline: 'Comprehensive structural engineering and fabrication for large-scale industrial complexes.',
+    shortDescription: 'Industrial steel frameworks, technological platforms, process buildings, and pipeline civil integration.',
+    tagline: 'Comprehensive structural engineering and fabrication for large-scale industrial & municipal complexes.',
     heroImage: '/assets/industrial-crane-site.jpg',
     badgeColor: 'green',
     fullDescription:
-      'S Ganapati Construction specializes in large-scale structural works across steel plants, cement plants, material handling facilities, and power infrastructure. We deliver end-to-end solutions spanning engineering review, material sourcing, structural framing, and integrated site assembly with strict dimensional tolerances and safety compliance.',
+      'S Ganapati Construction specializes in large-scale structural works across steel plants, cement plants, material handling facilities, and government infrastructure corridors. We deliver end-to-end solutions spanning engineering review, material sourcing, structural framing, and integrated site assembly with strict dimensional tolerances and safety compliance.',
     capabilities: [
       {
         title: 'Industrial Plant Steel Framework',
@@ -269,7 +278,7 @@ export const servicesData: ServiceDetail[] = [
     id: 'maintenance-services',
     number: '05',
     title: 'Maintenance Services',
-    shortDescription: 'Industrial maintenance, bearing fitting, gearbox overhauling, and hydraulic/pneumatic piping.',
+    shortDescription: 'Industrial plant maintenance, bearing fitting, gearbox overhauling, and pipeline hydrostatic testing.',
     tagline: 'Planned turnaround maintenance, precision alignment, and emergency shutdown support.',
     heroImage: '/assets/pipe-rigging.jpg',
     badgeColor: 'green',
@@ -289,7 +298,7 @@ export const servicesData: ServiceDetail[] = [
         description: 'Idler frame alignment, pulley vulcanization, belt tensioning, take-up counterweight calibration, and chute liner maintenance.',
       },
       {
-        title: 'Hydraulic & Pneumatic Pipeline Installation',
+        title: 'Hydraulic & Pneumatic Pipeline Testing',
         description: 'Fabrication, chemical pickling, flushing, and high-pressure hydrostatic testing of industrial hydraulic power pack lines.',
       },
     ],
@@ -323,24 +332,24 @@ export const servicesData: ServiceDetail[] = [
     id: 'commissioning-works',
     number: '06',
     title: 'Commissioning & Specialized Machinery',
-    shortDescription: 'Coke oven & CDQ systems, launching gantries, and Raw Material Handling System (RMHS) commissioning.',
-    tagline: 'Specialized industrial commissioning, battery equipment alignment, and launching gantry erection.',
+    shortDescription: 'Coke oven & CDQ systems, launching gantries, RMHS conveyor networks, and AMRUT 2.0 public utilities.',
+    tagline: 'Specialized industrial commissioning, battery equipment alignment, and public infrastructure pipelines.',
     heroImage: '/assets/coke-oven-machinery.jpg',
     badgeColor: 'red',
     fullDescription:
-      'We excel in specialized industrial machinery erection, precision battery equipment alignment, and commissioning for complex metallurgical and infrastructure works. From Coke Oven Stamping-Charging-Pushing (SCP) cars and Coke Dry Quenching (CDQ) systems to Segmental Launching Gantries and RMHS conveyor networks, we ensure seamless operational handover.',
+      'We excel in specialized industrial machinery erection, precision battery equipment alignment, and public infrastructure pipeline commissioning. From Coke Oven Stamping-Charging-Pushing (SCP) cars and CDQ systems to Segmental Launching Gantries, RMHS conveyor networks, and Government of Andhra Pradesh AMRUT 2.0 water pipeline networks, we ensure seamless operational handover.',
     capabilities: [
       {
         title: 'Coke Oven & CDQ System Equipment',
         description: 'Erection, alignment, and commissioning of Coke Pusher Machines, Stamping Charging Cars, and Coke Dry Quenching chambers & duct systems.',
       },
       {
-        title: 'Launching Gantry & Heavy Bridge Segment Erection',
-        description: 'Installation of segmental launching gantry systems, guide rail platforms, gantry car marching systems, and hydraulic lifting modules.',
+        title: 'AMRUT 2.0 Water Supply & HDPE Pipeline Networks',
+        description: 'Full-scale execution of 11.7+ km HDPE transmission lines (110mm to 355mm dia) with automated Butt Fusion jointing, hydrotesting, and trenchless auger crossings.',
       },
       {
-        title: 'Battery Equipment Precision Alignment',
-        description: 'Micro-alignment using optical lasers and heavy-duty positioning tools to guarantee long-term operational reliability.',
+        title: 'Launching Gantry & Heavy Bridge Segment Erection',
+        description: 'Installation of segmental launching gantry systems, guide rail platforms, gantry car marching systems, and hydraulic lifting modules.',
       },
       {
         title: 'RMHS Belt Conveyor Network Commissioning',
@@ -348,36 +357,101 @@ export const servicesData: ServiceDetail[] = [
       },
     ],
     machineryEquipment: [
+      'Automated HDPE Butt Fusion Welding Machines (110mm to 355mm)',
+      'Horizontal Trenchless Auger Boring Rigs for Road/Drain Crossings',
+      'Concrete Road Groove Cutters & Heavy CC Breakers',
+      'High-Pressure Hydrostatic Pipeline Testing Pumps',
       'Segmental Launching Gantry Systems with Hydraulic Walking Modules',
-      'Heavy Rail Alignment & Precision Survey Theodolites',
-      'Coke Oven Battery Guide Rail Installation Tools',
-      'Tower Crane Booms & High-Rigidity Rigging Sets',
-      'Dynamic Balancing Instruments & Load Monitoring Cells',
     ],
     qualitySafety: [
-      'Full pre-commissioning dry runs and sequential interlock verification',
-      'Confined space smart surveillance monitoring during CDQ duct works',
+      '100% Hydrostatic Pressure Testing of all pipeline sections prior to commissioning',
+      'Confined space smart surveillance monitoring during CDQ and pipeline works',
       'Contractor Safety Code enforcement with daily supervisor sign-offs',
       'Zero-compromise safety protocols verified under JSW-Dolvi Model',
     ],
     applications: [
+      'Government AMRUT 2.0 Municipal Water Supply Infrastructure',
       'Coke Oven Batteries & CDQ Plants in Metallurgical Complexes',
       'Highway & Elevated Metro Segmental Launching Bridges',
       'Raw Material Handling Systems (RMHS) in Ports & Steel Plants',
-      'Specialized Process Chemical & Mineral Refining Plants',
     ],
     specifications: [
-      { label: 'Machinery Types', value: 'Coke Pusher, SCP Cars, CDQ Ducts, Launching Gantries' },
-      { label: 'Conveyor Networks', value: 'RMHS Belt Conveyors up to 2,500 TPH capacity' },
-      { label: 'Alignment Precision', value: 'Sub-millimeter guide rail tolerance' },
-      { label: 'Handover Protocol', value: 'Full trial run & commercial commissioning sign-off' },
+      { label: 'Work Order Reference', value: 'WO.NO.CPPL/AP AMRUT 2.0/2025-26/1314-A1' },
+      { label: 'HDPE Pipe Sizes', value: '110mm, 160mm, 200mm, 250mm, 315mm, 355mm Dia' },
+      { label: 'Jointing Technique', value: 'Precision Butt Fusion Welding & Hydrotested' },
+      { label: 'Trenchless Crossings', value: 'Auger Boring under highways, roads & drains' },
     ],
   },
 ]
 
-export const projectsData = [
+export interface ProjectItem {
+  id: string
+  title: string
+  location: string
+  client: string
+  category: string
+  secondaryCategory?: string
+  image: string
+  scope: string
+  metrics: string[]
+  isVerifiedWO?: boolean
+  woNumber?: string
+  woDetails?: {
+    scheme: string
+    issuingClient: string
+    cin: string
+    contractor: string
+    proprietor: string
+    gstin: string
+    totalLength: string
+    pipeSizes: { dia: string; length: string }[]
+    operations: string[]
+    contractPeriod: string
+  }
+}
+
+export const projectsData: ProjectItem[] = [
   {
     id: '01',
+    title: 'AP AMRUT 2.0 Municipal Water Supply & HDPE Pipeline Project',
+    location: 'Mandapeta & Peddapuram Municipalities, Andhra Pradesh',
+    client: 'M/s. Civet Projects Pvt Ltd (Govt of AP AMRUT 2.0 Scheme)',
+    category: 'Water & Public Infrastructure',
+    secondaryCategory: 'Commissioning & Specialized Machinery',
+    image: '/assets/pipe-rigging.jpg',
+    scope: 'Official direct Work Order (WO.NO.CPPL/AP AMRUT 2.0/2025-26/1314-A1) for laying 11,735+ running meters of heavy HDPE pipelines (110mm to 355mm Dia). Comprehensive technical scope covers machine and manual excavation across all soil types and hard rock, concrete road groove cutting and CC breaking (>7" thickness), trenchless auger boring for road and drain crossings, automated Butt Fusion welding, valves/specials installation, and 100% hydrostatic pressure testing.',
+    metrics: ['11,735+ Rmtr (11.7+ km)', '110mm – 355mm Dia HDPE', 'Trenchless Auger Boring', 'Butt Fusion & Hydrotested', 'Mandapeta & Peddapuram'],
+    isVerifiedWO: true,
+    woNumber: 'WO.NO.CPPL/AP AMRUT 2.0/2025-26/1314-A1',
+    woDetails: {
+      scheme: 'Government of Andhra Pradesh AMRUT 2.0 Scheme (Atal Mission for Rejuvenation and Urban Transformation - Water Supply)',
+      issuingClient: 'M/s. Civet Projects Pvt Ltd (Hyderabad / Rajahmundry, AP)',
+      cin: 'U45500TG1018PTC122108',
+      contractor: 'M/S. S GANAPATI CONSTRUCTION',
+      proprietor: 'Garaka Sreedevi',
+      gstin: '37DIPPG2975E1ZX',
+      totalLength: '11,735+ Running Meters (11.7+ km)',
+      pipeSizes: [
+        { dia: '110 mm Dia', length: '4,715 Rmtr' },
+        { dia: '160 mm Dia', length: '3,649 Rmtr' },
+        { dia: '200 mm Dia', length: '2,004 Rmtr' },
+        { dia: '250 mm Dia', length: '193 Rmtr' },
+        { dia: '315 mm Dia', length: '902 Rmtr' },
+        { dia: '355 mm Dia', length: '272 Rmtr' },
+      ],
+      operations: [
+        'Machine and manual trench excavation in ordinary soil, hard soil, and hard rock with dewatering',
+        'Concrete road groove cutting with mechanical cutters & CC breaking (up to & above 7" thickness)',
+        'Trenchless Auger Boring for road, highway & drain crossings without surface interruption',
+        'Automated Butt Fusion jointing executed by certified welding technicians',
+        'Supply and lowering of valves, specials, air valves, scour valves & valve chambers',
+        '100% Hydrostatic pressure testing of pipe sections at rated test bars before commissioning',
+      ],
+      contractPeriod: '2025 – 2026',
+    },
+  },
+  {
+    id: '02',
     title: 'Wire Rod Mill (WRM) Equipment Assembly',
     location: 'Industrial Steel Complex, AP',
     client: 'Integrated Steel Plant Facility',
@@ -385,9 +459,10 @@ export const projectsData = [
     image: '/assets/gearbox-assembly.jpg',
     scope: 'Complete mechanical assembly, alignment, and foundation setting for reduction gearboxes, mill stands, pinch rolls, and drive motors.',
     metrics: ['Precision Laser Alignment', '0.04mm Tolerance', 'Commissioned on Schedule'],
+    isVerifiedWO: false,
   },
   {
-    id: '02',
+    id: '03',
     title: 'Coke Oven SCP Car & CDQ System Installation',
     location: 'Metallurgical Complex, South India',
     client: 'Major Steel Manufacturer',
@@ -395,19 +470,21 @@ export const projectsData = [
     image: '/assets/coke-oven-machinery.jpg',
     scope: 'Assembly, rail alignment, and mechanical erection of Coke Pusher Machines, Stamping Charging Cars, and Coke Dry Quenching ducts.',
     metrics: ['Coke Oven SCP Cars', 'CDQ Chamber Ducts', 'Zero-Incident Delivery'],
+    isVerifiedWO: false,
   },
   {
-    id: '03',
+    id: '04',
     title: 'RMHS Raw Material Handling Conveyor Network',
-    location: 'Visakhapatnam, Andhra Pradesh',
+    location: 'Visakhapatnam Port / Plant Corridor, AP',
     client: 'Bulk Material Handling Terminal',
     category: 'Structural Works',
     image: '/assets/rmhs-conveyor-network.jpg',
     scope: 'Turnkey fabrication and high-altitude erection of long-span conveyor galleries, transfer towers, junction houses, and take-up towers.',
     metrics: ['2,500 TPH Capacity', '45m High Galleries', 'Sa 2.5 Blasted & Coated'],
+    isVerifiedWO: false,
   },
   {
-    id: '04',
+    id: '05',
     title: 'Heavy Crane Lifting & Technological Structure Erection',
     location: 'Industrial Infrastructure Project',
     client: 'Heavy Engineering Complex',
@@ -415,26 +492,18 @@ export const projectsData = [
     image: '/assets/crane-high-lift.jpg',
     scope: 'Crane and heavy lifting operations using crawler and tower cranes for prefabricated steel structures, furnace frames, and vessel placements.',
     metrics: ['100+ MT Single Lifts', 'Tower & Crawler Cranes', '100% Lifeline Compliance'],
-  },
-  {
-    id: '05',
-    title: 'Bucket Elevator Erection for Bulk Material Handling',
-    location: 'Cement & Mineral Processing Facility',
-    client: 'Industrial Processing Plant',
-    category: 'Equipment Installation',
-    image: '/assets/rotary-bucket-wheel.jpg',
-    scope: 'Vertical bucket elevator erection, boot-and-head casing alignment, internal chain/belt installation, and drive tensioning tests.',
-    metrics: ['High-Lift Vertical Units', 'Heavy Duty Drive Setup', 'Trial Run Tested'],
+    isVerifiedWO: false,
   },
   {
     id: '06',
-    title: 'Heavy Segmental Launching Gantry & Bridge Modules',
+    title: 'Segmental Launching Gantry & Bridge Modules',
     location: 'Infrastructure Corridor',
     client: 'Bridge & Infrastructure Authority',
     category: 'Commissioning & Specialized Machinery',
     image: '/assets/heavy-platform-skid.jpg',
     scope: 'Installation and testing of Segmental Launching Gantry systems including guide rail platforms, marching systems, and hydraulic lifting modules.',
     metrics: ['Hydraulic Walking Modules', 'Guide Rail Platforms', 'Precision Load Tested'],
+    isVerifiedWO: false,
   },
 ]
 

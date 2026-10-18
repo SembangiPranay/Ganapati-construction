@@ -691,7 +691,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Featured Projects (Matching Brochure Formats) */}
+          {/* Featured Projects (Matching Brochure Formats & Official Work Orders) */}
           <section className="projects" id="projects">
             <div className="project-intro">
               <div>
@@ -702,7 +702,7 @@ export default function App() {
                   Speaks for Itself
                 </h2>
                 <p>
-                  Specialized execution in Wire Rod Mills (WRM), Coke Oven SCP cars, RMHS conveyor networks, and heavy gantry installations.
+                  Official contractor for Government of Andhra Pradesh AMRUT 2.0 Water Supply Schemes, Wire Rod Mills (WRM), Coke Oven SCP machinery, and RMHS conveyor networks.
                 </p>
                 <button
                   type="button"
@@ -715,26 +715,59 @@ export default function App() {
             </div>
             <div
               className="project-photo"
-              style={{ backgroundImage: "url('/assets/gearbox-assembly.jpg')" }}
+              style={{ backgroundImage: "url('/assets/pipe-rigging.jpg')" }}
             />
             <div className="project-list">
               {[
-                ['01', 'Wire Rod Mill (WRM) Equipment Assembly', 'Industrial Steel Complex', 'equipment-installation'],
-                ['02', 'Coke Oven SCP Car & CDQ System Installation', 'Metallurgical Facility', 'commissioning-works'],
-                ['03', 'RMHS Raw Material Conveyor Network', 'Visakhapatnam Port / Plant', 'structural-works'],
-              ].map(([number, name, place, sId], index) => (
+                {
+                  number: '01',
+                  name: 'AP AMRUT 2.0 Municipal Water Supply & HDPE Pipeline Project',
+                  place: 'Mandapeta & Peddapuram | Civet Projects (Govt of AP)',
+                  badge: '✓ Official WO: 1314-A1 (11.7+ km HDPE)',
+                  action: () => navigateToProjects(),
+                  isVerified: true,
+                },
+                {
+                  number: '02',
+                  name: 'Wire Rod Mill (WRM) Equipment Assembly',
+                  place: 'Integrated Steel Plant Complex',
+                  badge: 'Precision Laser Aligned (0.04mm)',
+                  action: () => navigateToService('equipment-installation'),
+                  isVerified: false,
+                },
+                {
+                  number: '03',
+                  name: 'Coke Oven SCP Car & CDQ System Installation',
+                  place: 'Metallurgical Facility, South India',
+                  badge: 'Coke Pusher & CDQ Duct Systems',
+                  action: () => navigateToService('commissioning-works'),
+                  isVerified: false,
+                },
+                {
+                  number: '04',
+                  name: 'RMHS Raw Material Conveyor Network',
+                  place: 'Visakhapatnam Port / Plant Corridor',
+                  badge: '2,500 TPH High-Bay Galleries',
+                  action: () => navigateToService('structural-works'),
+                  isVerified: false,
+                },
+              ].map((proj) => (
                 <div
-                  className="project-item"
-                  key={number}
+                  className={`project-item ${proj.isVerified ? 'project-item--verified' : ''}`}
+                  key={proj.number}
                   style={{ cursor: 'pointer' }}
-                  onClick={() => navigateToService(sId)}
+                  onClick={proj.action}
                 >
-                  <b>{number}</b>
+                  <b>{proj.number}</b>
                   <span>
-                    <strong>{name}</strong>
-                    <small>{place}</small>
+                    <strong>
+                      {proj.name}
+                      {proj.isVerified && <span className="verified-badge-pill">✓ Official WO</span>}
+                    </strong>
+                    <small>{proj.place}</small>
+                    <span className="project-highlight-note">{proj.badge}</span>
                   </span>
-                  {index === 2 && <Arrow />}
+                  <Arrow />
                 </div>
               ))}
             </div>
@@ -804,11 +837,15 @@ export default function App() {
                   <Icon name="phone" />
                   <strong>
                     <a href={`tel:+91${companyProfile.phonePrimary}`} style={{ color: 'inherit' }}>
-                      {companyProfile.phonePrimary}
+                      +91 {companyProfile.phonePrimary}
                     </a>
                     <br />
                     <a href={`tel:+91${companyProfile.phoneSecondary}`} style={{ color: 'inherit' }}>
-                      {companyProfile.phoneSecondary}
+                      +91 {companyProfile.phoneSecondary}
+                    </a>
+                    <br />
+                    <a href={`tel:+91${companyProfile.phoneTertiary}`} style={{ color: 'inherit' }}>
+                      +91 {companyProfile.phoneTertiary}
                     </a>
                   </strong>
                 </p>
@@ -850,6 +887,7 @@ export default function App() {
                     onChange={(e) => setSelectedProjectType(e.target.value)}
                   >
                     <option value="">Select Required Service</option>
+                    <option value="Water & Public Infrastructure (AMRUT 2.0)">00. Water &amp; Public Infrastructure (AMRUT 2.0 Pipeline)</option>
                     <option value="Structural Works">01. Structural Works</option>
                     <option value="Fabrication Works">02. Fabrication Works</option>
                     <option value="Erection Works">03. Erection Works</option>

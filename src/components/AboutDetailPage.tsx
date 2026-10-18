@@ -71,7 +71,56 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
                 <span className="profile-pill"><b>GSTIN:</b> {companyProfile.gstin}</span>
                 <span className="profile-pill"><b>Proprietor:</b> {companyProfile.proprietor}</span>
                 <span className="profile-pill"><b>HQ:</b> Visakhapatnam, AP</span>
+                <span className="profile-pill"><b>Work Order:</b> AP AMRUT 2.0 (11.7+ km HDPE)</span>
                 <span className="profile-pill"><b>Track Record:</b> 1000+ Projects</span>
+              </div>
+            </section>
+
+            {/* Major Clients & Government Work Orders */}
+            <section className="detail-card">
+              <div className="detail-section-heading">
+                <span className="eyebrow eyebrow--green">Client Credentials</span>
+                <h2>Government Contracts &amp; Industrial Clients</h2>
+              </div>
+              <p className="detail-lead-paragraph">
+                S Ganapati Construction is entrusted by leading EPC contractors and public infrastructure authorities to execute critical water supply networks and heavy technological installations.
+              </p>
+              <div className="client-contracts-grid">
+                <div className="client-contract-box verified-contract">
+                  <div className="contract-header">
+                    <span className="verified-seal">✓ OFFICIAL WORK ORDER</span>
+                    <h3>Govt of Andhra Pradesh AMRUT 2.0 Scheme</h3>
+                  </div>
+                  <div className="contract-meta-list">
+                    <p><strong>Main Contractor:</strong> M/s. Civet Projects Pvt Ltd (CIN: U45500TG1018PTC122108)</p>
+                    <p><strong>Work Order Ref:</strong> WO.NO.CPPL/AP AMRUT 2.0/2025-26/1314-A1</p>
+                    <p><strong>Project:</strong> Urban Water Supply &amp; HDPE Pipeline Network in Mandapeta &amp; Peddapuram Municipalities, AP.</p>
+                    <p><strong>Scope:</strong> 11,735+ Rmtr (11.7+ km) 110mm to 355mm Dia HDPE, CC road cutting, trenchless auger crossings, and 100% hydrostatic testing.</p>
+                  </div>
+                  <div className="contract-tags">
+                    <span>11,735+ Rmtr HDPE Pipeline</span>
+                    <span>Trenchless Auger Boring</span>
+                    <span>Butt Fusion Jointing</span>
+                    <span>100% Hydrostatic Tested</span>
+                  </div>
+                </div>
+
+                <div className="client-contract-box">
+                  <div className="contract-header">
+                    <span className="industry-seal">HEAVY INDUSTRIAL SECTOR</span>
+                    <h3>Metallurgical &amp; Process Facilities</h3>
+                  </div>
+                  <div className="contract-meta-list">
+                    <p><strong>Sectors:</strong> Integrated Steel Plants, Cement Manufacturing, Bulk Material Handling Terminals, and Thermal Power Stations.</p>
+                    <p><strong>Specializations:</strong> Precision rolling mill installation, Coke Oven Stamping-Charging-Pushing (SCP) cars, CDQ systems, and 2500 TPH conveyor galleries.</p>
+                  </div>
+                  <div className="contract-tags">
+                    <span>Wire Rod Mills (WRM)</span>
+                    <span>Coke Oven &amp; CDQ Cars</span>
+                    <span>RMHS Conveyors (2,500 TPH)</span>
+                    <span>Heavy Crane Lifting</span>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -169,8 +218,12 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
                   <span>{companyProfile.gstin}</span>
                 </div>
                 <div className="sidebar-contact-row">
-                  <strong>Direct Phone:</strong>
+                  <strong>Direct Phones:</strong>
                   <span>{companyProfile.phonePrimary} / {companyProfile.phoneSecondary}</span>
+                </div>
+                <div className="sidebar-contact-row">
+                  <strong>Alternate:</strong>
+                  <span>+91 {companyProfile.phoneTertiary}</span>
                 </div>
                 <div className="sidebar-contact-row">
                   <strong>Email:</strong>
@@ -179,6 +232,10 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
                 <div className="sidebar-contact-row">
                   <strong>Registered Office:</strong>
                   <span>{companyProfile.address.full}</span>
+                </div>
+                <div className="sidebar-contact-row">
+                  <strong>Active Govt WO:</strong>
+                  <span style={{ color: '#174735', fontWeight: 700 }}>WO 1314-A1 (AMRUT 2.0 Water Supply)</span>
                 </div>
               </div>
 
