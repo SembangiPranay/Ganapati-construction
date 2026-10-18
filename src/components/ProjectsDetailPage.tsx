@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import {
   authenticProjects,
-  masterGalleryPhotos,
   OfficialProject,
   ProjectGalleryPhoto,
 } from '../data/projectsData'
@@ -36,40 +35,8 @@ export default function ProjectsDetailPage({
 
   // Gallery Lightbox State
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false)
-  const [lightboxPhotos, setLightboxPhotos] = useState<ProjectGalleryPhoto[]>(masterGalleryPhotos)
+  const [lightboxPhotos, setLightboxPhotos] = useState<ProjectGalleryPhoto[]>([])
   const [lightboxIndex, setLightboxIndex] = useState<number>(0)
-
-  // Master Gallery Category Filter
-  const [activeGalleryFilter, setActiveGalleryFilter] = useState<string>('all')
-
-  const galleryCategories = [
-    { id: 'all', label: `All 28 Photographs (${masterGalleryPhotos.length})` },
-    {
-      id: 'steel-structures',
-      label: `Heavy Steel Structures (${masterGalleryPhotos.filter((p) => p.category === 'steel-structures').length})`,
-    },
-    {
-      id: 'crane-lifts',
-      label: `Crane Lifts & Rigging (${masterGalleryPhotos.filter((p) => p.category === 'crane-lifts').length})`,
-    },
-    {
-      id: 'bridges-fob',
-      label: `Bridges & Railway FOBs (${masterGalleryPhotos.filter((p) => p.category === 'bridges-fob').length})`,
-    },
-    {
-      id: 'foundations-civil',
-      label: `Civil Foundations (${masterGalleryPhotos.filter((p) => p.category === 'foundations-civil').length})`,
-    },
-    {
-      id: 'utilities',
-      label: `Piping & Utilities (${masterGalleryPhotos.filter((p) => p.category === 'utilities').length})`,
-    },
-  ]
-
-  const filteredMasterPhotos = masterGalleryPhotos.filter((p) => {
-    if (activeGalleryFilter === 'all') return true
-    return p.category === activeGalleryFilter
-  })
 
   // Open Lightbox handler
   const openLightbox = (photos: ProjectGalleryPhoto[], index: number) => {
@@ -96,7 +63,7 @@ export default function ProjectsDetailPage({
               Home
             </button>
             <span className="breadcrumb-sep">/</span>
-            <span className="breadcrumb-current">Our Works Portfolio &amp; Site Photography</span>
+            <span className="breadcrumb-current">Our Works Portfolio &amp; Site Documentation</span>
           </div>
           <button
             type="button"
@@ -118,14 +85,14 @@ export default function ProjectsDetailPage({
         <div className="container detail-hero-inner">
           <div className="detail-hero-badge">
             <span className="detail-number-badge green">PORTFOLIO</span>
-            <span className="detail-badge-text">Single-Page Verified Dossier &amp; Full Gallery</span>
+            <span className="detail-badge-text">Single-Page Verified Dossier &amp; Site Photography</span>
           </div>
           <h1>Our Works &amp; Executed Industrial Contracts</h1>
           <p className="detail-hero-tagline">
             Complete single-page engineering documentation: Government of Andhra Pradesh AMRUT 2.0
             water transmission networks, JSW Steel &amp; Cement Toranagallu heavy structural
-            fabrication and technological erection, certified milestone billing sheets, and 28
-            authentic high-resolution site photographs.
+            fabrication and technological erection, certified milestone billing sheets, and authentic
+            high-resolution site photographs.
           </p>
           <div className="detail-hero-actions">
             <button
@@ -138,9 +105,9 @@ export default function ProjectsDetailPage({
             <button
               type="button"
               className="button button--outline"
-              onClick={() => scrollToSection('master-gallery')}
+              onClick={() => scrollToSection(authenticProjects[0].id)}
             >
-              📸 View 28-Photo Master Gallery
+              Explore Project Dossiers ↓
             </button>
           </div>
         </div>
@@ -149,7 +116,7 @@ export default function ProjectsDetailPage({
       {/* Sticky Project Jump Bar */}
       <nav className="project-jump-nav-bar" aria-label="Project quick jump navigation">
         <div className="container jump-nav-inner">
-          <span className="jump-nav-label">Quick Jump:</span>
+          <span className="jump-nav-label">Jump to Contract:</span>
           <div className="jump-nav-links">
             {authenticProjects.map((proj) => (
               <button
@@ -161,13 +128,6 @@ export default function ProjectsDetailPage({
                 <b>{proj.projectNumber}.</b> {proj.shortTitle}
               </button>
             ))}
-            <button
-              type="button"
-              className="jump-nav-btn jump-nav-btn--gallery"
-              onClick={() => scrollToSection('master-gallery')}
-            >
-              📸 Master Photo Gallery (28)
-            </button>
           </div>
         </div>
       </nav>
@@ -175,401 +135,444 @@ export default function ProjectsDetailPage({
       {/* Main Content: All 4 Projects Fully Displayed on the Same Page */}
       <main className="detail-main-content">
         <div className="container">
-          {authenticProjects.map((project, pIndex) => (
-            <article
-              className="full-project-block"
-              id={project.id}
-              key={project.id}
-              aria-label={project.title}
-            >
-              {/* Project Header Banner */}
-              <div className="project-block-header">
-                <div className="project-block-meta-row">
-                  <span className="project-block-number">Project {project.projectNumber}</span>
-                  <span className="project-block-seal">{project.verifiedBadge}</span>
-                  <span className="project-block-cat">{project.categoryLabel}</span>
-                  <span className="project-block-contract-type">{project.contractType}</span>
-                </div>
+          {authenticProjects.map((project) => {
+            const photos = project.galleryPhotos || []
+            const leadPhoto = photos[0]
+            const photo2 = photos[1]
+            const photo3 = photos[2]
+            const photo4 = photos[3]
 
-                <h2 className="project-block-title">{project.title}</h2>
-
-                <div className="project-block-submeta">
-                  <span>
-                    📍 <strong>Location:</strong> {project.location}, {project.districtState}
-                  </span>
-                  <span>
-                    🏛️ <strong>Issuing Entity:</strong> {project.client}
-                  </span>
-                  <span>
-                    🏢 <strong>End Beneficiary:</strong> {project.endClient}
-                  </span>
-                  <span>
-                    📄 <strong>Contract Ref:</strong> <code>{project.workOrderNo}</code>
-                  </span>
-                </div>
-
-                {/* Key Metrics Strip */}
-                <div className="project-block-metrics-strip">
-                  {project.keyMetrics.map((m, idx) => (
-                    <div className="project-metric-box" key={idx}>
-                      <span className="project-metric-val">{m.value}</span>
-                      <strong className="project-metric-lbl">{m.label}</strong>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 2-Column Responsive Layout: Engineering Data + Prominent Photos */}
-              <div className="project-block-grid">
-                {/* Left Column: Official Specifications & Technical Data */}
-                <div className="project-info-column">
-                  {/* Executive Summary */}
-                  <div className="project-data-card">
-                    <h3>Executive Summary &amp; Scope Overview</h3>
-                    <p className="project-summary-lead">{project.summary}</p>
-                    <ul className="project-scope-checklist">
-                      {project.detailedScope.map((item, idx) => (
-                        <li key={idx}>
-                          <span className="check-bullet">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+            return (
+              <article
+                className="full-project-block"
+                id={project.id}
+                key={project.id}
+                aria-label={project.title}
+              >
+                {/* 1. Project Header Banner */}
+                <div className="project-block-header">
+                  <div className="project-block-meta-row">
+                    <span className="project-block-number">Project {project.projectNumber}</span>
+                    <span className="project-block-seal">{project.verifiedBadge}</span>
+                    <span className="project-block-cat">{project.categoryLabel}</span>
+                    <span className="project-block-contract-type">{project.contractType}</span>
                   </div>
 
-                  {/* Official Credentials & Compliance Card */}
-                  <div className="project-data-card">
-                    <h3>Official Credentials &amp; Contractor Identity</h3>
-                    <dl className="project-cred-dl">
-                      <dt>Contract Code:</dt>
-                      <dd>
-                        <code>{project.workOrderNo}</code>
-                      </dd>
-                      <dt>Issuing Authority:</dt>
-                      <dd>{project.client}</dd>
-                      <dt>Executing Contractor:</dt>
-                      <dd>
-                        <strong>M/S S GANAPATI CONSTRUCTION</strong>
-                      </dd>
-                      <dt>GSTIN:</dt>
-                      <dd>
-                        <code>37DIPPG2975E1ZX</code>
-                      </dd>
-                      <dt>Proprietor / Key Contact:</dt>
-                      <dd>Garaka Sreedevi / G Suresh Reddy (Cell: 9441771333)</dd>
-                      <dt>Contract Validity:</dt>
-                      <dd>{project.validityPeriod}</dd>
-                    </dl>
+                  <h2 className="project-block-title">{project.title}</h2>
+
+                  <div className="project-block-submeta">
+                    <span>
+                      📍 <strong>Location:</strong> {project.location}, {project.districtState}
+                    </span>
+                    <span>
+                      🏛️ <strong>Issuing Entity:</strong> {project.client}
+                    </span>
+                    <span>
+                      🏢 <strong>End Beneficiary:</strong> {project.endClient}
+                    </span>
+                    <span>
+                      📄 <strong>Contract Ref:</strong> <code>{project.workOrderNo}</code>
+                    </span>
                   </div>
 
-                  {/* Technical Table 1: HDPE Pipe Schedule (AMRUT 2.0) */}
-                  {project.pipeSchedule && (
-                    <div className="project-data-card">
-                      <h3>HDPE Pipeline Diameter &amp; Length Schedule (11.7+ km)</h3>
-                      <div className="table-responsive-wrapper">
-                        <table className="project-data-table">
-                          <thead>
-                            <tr>
-                              <th>Pipe Diameter</th>
-                              <th>Total Running Meters</th>
-                              <th>Specification</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {project.pipeSchedule.map((p, idx) => (
-                              <tr key={idx}>
-                                <td>
-                                  <strong>{p.dia}</strong>
-                                </td>
-                                <td>
-                                  <b>{p.length}</b>
-                                </td>
-                                <td>{p.specification || 'PE100 High-Density Polyethylene'}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                  {/* Key Metrics Strip */}
+                  <div className="project-block-metrics-strip">
+                    {project.keyMetrics.map((m, idx) => (
+                      <div className="project-metric-box" key={idx}>
+                        <span className="project-metric-val">{m.value}</span>
+                        <strong className="project-metric-lbl">{m.label}</strong>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Technical Table 2: Contract Rates (JSW Toranagallu) */}
-                  {project.ratesSchedule && (
-                    <div className="project-data-card">
-                      <h3>Contract Rate Schedule (Per MT Basis)</h3>
-                      <div className="table-responsive-wrapper">
-                        <table className="project-data-table">
-                          <thead>
-                            <tr>
-                              <th>Job Description</th>
-                              <th>UOM</th>
-                              <th>Unit Rate</th>
-                              <th>Rate In Words</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {project.ratesSchedule.map((r, idx) => (
-                              <tr key={idx}>
-                                <td>
-                                  <strong>{r.item}</strong>
-                                </td>
-                                <td>{r.uom}</td>
-                                <td>
-                                  <span className="rate-badge">{r.rate}</span>
-                                </td>
-                                <td>{r.inwards}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Technical Table 3: Certified Running Account Billing Items (RA 01 & RA 02) */}
-                  {project.executedBillingItems && (
-                    <div className="project-data-card">
-                      <h3>Certified &amp; Executed Quantities (Running Account Measurement)</h3>
-                      <div className="table-responsive-wrapper">
-                        <table className="project-data-table">
-                          <thead>
-                            <tr>
-                              <th>Item</th>
-                              <th>Particulars of Work</th>
-                              <th>UOM</th>
-                              <th>Rate</th>
-                              <th>Quantity</th>
-                              <th>Certified Amount</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {project.executedBillingItems.map((b, idx) => (
-                              <tr key={idx}>
-                                <td>{b.slNo}</td>
-                                <td>{b.description}</td>
-                                <td>{b.uom}</td>
-                                <td>{b.rate}</td>
-                                <td>
-                                  <strong>{b.qty}</strong>
-                                </td>
-                                <td>
-                                  <strong>{b.amount}</strong>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Financial Milestone Summary (If applicable) */}
-                  {project.financialSummary && (
-                    <div className="project-data-card project-data-card--highlight">
-                      <h3>Milestone Financial Summary</h3>
-                      <div className="financial-milestone-grid">
-                        {project.financialSummary.billNo && (
-                          <div className="fin-box">
-                            <span className="fin-lbl">Bill Reference</span>
-                            <strong className="fin-val">{project.financialSummary.billNo}</strong>
-                          </div>
-                        )}
-                        {project.financialSummary.invoiceNo && (
-                          <div className="fin-box">
-                            <span className="fin-lbl">Tax Invoice</span>
-                            <strong className="fin-val">{project.financialSummary.invoiceNo}</strong>
-                          </div>
-                        )}
-                        {project.financialSummary.grossAmount && (
-                          <div className="fin-box">
-                            <span className="fin-lbl">Gross Billed Value</span>
-                            <strong className="fin-val fin-val--gross">
-                              {project.financialSummary.grossAmount}
-                            </strong>
-                          </div>
-                        )}
-                        {project.financialSummary.cumulativeValueToDate && (
-                          <div className="fin-box">
-                            <span className="fin-lbl">Cumulative Value to Date</span>
-                            <strong className="fin-val fin-val--cumulative">
-                              {project.financialSummary.cumulativeValueToDate}
-                            </strong>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Safety Protocols */}
-                  <div className="project-data-card">
-                    <h3>Quality &amp; Site Safety Assurance</h3>
-                    <ul className="project-safety-checklist">
-                      {project.safetyStandards.map((safe, idx) => (
-                        <li key={idx}>
-                          <span className="shield-bullet">🛡️</span>
-                          <span>{safe}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    ))}
                   </div>
                 </div>
 
-                {/* Right Column: Prominent Project Site Photography Showcase */}
-                <div className="project-photos-column">
-                  <div className="project-photos-header">
-                    <h3>📸 Authentic Site Photography ({project.galleryPhotos?.length || 4})</h3>
-                    <span className="photo-prompt-badge">🔍 Click Any Photo for Full Screen</span>
-                  </div>
-
-                  <div className="project-photos-showcase-grid">
-                    {(project.galleryPhotos && project.galleryPhotos.length > 0
-                      ? project.galleryPhotos
-                      : project.imageSlots
-                    ).map((photoItem, photoIdx) => {
-                      const photoUrl =
-                        'url' in photoItem
-                          ? (photoItem as ProjectGalleryPhoto).url
-                          : (photoItem as { imageUrl?: string }).imageUrl || project.coverImage
-
-                      const photoTitle = photoItem.title
-                      const photoDesc = photoItem.description
-
-                      return (
-                        <div
-                          className="project-photo-card"
-                          key={photoIdx}
-                          onClick={() => {
-                            const pList =
-                              project.galleryPhotos && project.galleryPhotos.length > 0
-                                ? project.galleryPhotos
-                                : masterGalleryPhotos
-                            openLightbox(pList, photoIdx)
-                          }}
-                        >
-                          <div className="project-photo-img-wrap">
-                            <img
-                              src={photoUrl}
-                              alt={photoTitle}
-                              loading="lazy"
-                              decoding="async"
-                            />
-                            <div className="photo-card-hover-overlay">
-                              <span className="hover-expand-btn">⤢ View Full Screen</span>
-                            </div>
-                            <span className="photo-corner-badge">Photo {photoIdx + 1}</span>
-                          </div>
-
-                          <div className="project-photo-caption">
-                            <h4>{photoTitle}</h4>
-                            <p>{photoDesc}</p>
-                          </div>
+                {/* 2. Big Landscaped Photo On Top */}
+                {leadPhoto && (
+                  <div
+                    className="project-lead-landscape-card"
+                    onClick={() => openLightbox(photos, 0)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View full-screen photograph of ${leadPhoto.title}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        openLightbox(photos, 0)
+                      }
+                    }}
+                  >
+                    <div className="lead-photo-img-wrap">
+                      <img
+                        src={leadPhoto.url}
+                        alt={leadPhoto.title}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="lead-photo-gradient-overlay">
+                        <div className="lead-photo-meta-content">
+                          <span className="lead-photo-tag">
+                            📸 Photo 1 of 4 • Primary Site Landscape • Project {project.projectNumber}
+                          </span>
+                          <h3 className="lead-photo-title">{leadPhoto.title}</h3>
+                          <p className="lead-photo-desc">{leadPhoto.description}</p>
                         </div>
-                      )
-                    })}
+                        <span className="lead-expand-pill">⤢ View Full Screen</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. Project Body: Flowing Full-Width Layout (No cramped side column) */}
+                <div className="project-body-content">
+                  {/* Scope & Contractor Identity + Photo 2 in balanced layout */}
+                  <div className="project-scope-credentials-section">
+                    <div className="scope-credentials-col">
+                      {/* Executive Summary */}
+                      <div className="project-data-card">
+                        <h3>Executive Summary &amp; Scope Overview</h3>
+                        <p className="project-summary-lead">{project.summary}</p>
+                        <ul className="project-scope-checklist">
+                          {project.detailedScope.map((item, idx) => (
+                            <li key={idx}>
+                              <span className="check-bullet">✓</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Official Credentials & Compliance Card */}
+                      <div className="project-data-card">
+                        <h3>Official Credentials &amp; Contractor Identity</h3>
+                        <dl className="project-cred-dl">
+                          <dt>Contract Code:</dt>
+                          <dd>
+                            <code>{project.workOrderNo}</code>
+                          </dd>
+                          <dt>Issuing Authority:</dt>
+                          <dd>{project.client}</dd>
+                          <dt>Executing Contractor:</dt>
+                          <dd>
+                            <strong>M/S S GANAPATI CONSTRUCTION</strong>
+                          </dd>
+                          <dt>GSTIN:</dt>
+                          <dd>
+                            <code>37DIPPG2975E1ZX</code>
+                          </dd>
+                          <dt>Proprietor / Key Contact:</dt>
+                          <dd>Garaka Sreedevi / G Suresh Reddy (Cell: 9441771333)</dd>
+                          <dt>Contract Validity:</dt>
+                          <dd>{project.validityPeriod}</dd>
+                        </dl>
+                      </div>
+                    </div>
+
+                    {/* Photo 2: Featured Inline Site Photography */}
+                    {photo2 && (
+                      <div
+                        className="project-featured-inline-photo"
+                        onClick={() => openLightbox(photos, 1)}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`View full-screen photograph of ${photo2.title}`}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            openLightbox(photos, 1)
+                          }
+                        }}
+                      >
+                        <div className="inline-photo-img-wrap">
+                          <img
+                            src={photo2.url}
+                            alt={photo2.title}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div className="inline-photo-hover-overlay">
+                            <span className="hover-expand-btn">⤢ View Full Screen</span>
+                          </div>
+                          <span className="inline-photo-badge">Photo 2 of 4</span>
+                        </div>
+                        <div className="inline-photo-caption">
+                          <span className="inline-cat-tag">{photo2.categoryLabel}</span>
+                          <h4>{photo2.title}</h4>
+                          <p>{photo2.description}</p>
+                        </div>
+                        <div className="inline-photo-inspection-note">
+                          <span>🔍 In-Field Verification: Certified according to approved engineering drawings and site safety protocols.</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Card Bottom CTA for Project */}
-                  <div className="project-side-cta">
-                    <h4>Interested in Similar Engineering Execution?</h4>
-                    <p>
-                      Our estimation and project office provides detailed bills of quantities (BOQ),
-                      certified equipment schedules, and turnaround plans for EPC contractors.
-                    </p>
-                    <div className="project-side-cta-buttons">
-                      <button
-                        type="button"
-                        className="button button--red"
-                        onClick={() => onContactClick(project.shortTitle)}
-                      >
-                        Enquire for This Scope <Arrow />
-                      </button>
-                      <a
-                        href="tel:+919441771333"
-                        className="button button--outline-dark"
-                      >
-                        📞 Call: +91 9441771333
-                      </a>
+                  {/* Technical Specifications & Certified Measurement Tables (Full Width) */}
+                  <div className="project-technical-tables-section">
+                    {/* Technical Table 1: HDPE Pipe Schedule (AMRUT 2.0) */}
+                    {project.pipeSchedule && (
+                      <div className="project-data-card">
+                        <h3>HDPE Pipeline Diameter &amp; Length Schedule (11.7+ km Network)</h3>
+                        <div className="table-responsive-wrapper">
+                          <table className="project-data-table">
+                            <thead>
+                              <tr>
+                                <th>Pipe Diameter</th>
+                                <th>Total Running Meters</th>
+                                <th>Specification</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {project.pipeSchedule.map((p, idx) => (
+                                <tr key={idx}>
+                                  <td>
+                                    <strong>{p.dia}</strong>
+                                  </td>
+                                  <td>
+                                    <b>{p.length}</b>
+                                  </td>
+                                  <td>{p.specification || 'PE100 High-Density Polyethylene'}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Technical Table 2: Contract Rates (JSW Toranagallu) */}
+                    {project.ratesSchedule && (
+                      <div className="project-data-card">
+                        <h3>Contract Rate Schedule (Per MT Basis)</h3>
+                        <div className="table-responsive-wrapper">
+                          <table className="project-data-table">
+                            <thead>
+                              <tr>
+                                <th>Job Description</th>
+                                <th>UOM</th>
+                                <th>Unit Rate</th>
+                                <th>Rate In Words</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {project.ratesSchedule.map((r, idx) => (
+                                <tr key={idx}>
+                                  <td>
+                                    <strong>{r.item}</strong>
+                                  </td>
+                                  <td>{r.uom}</td>
+                                  <td>
+                                    <span className="rate-badge">{r.rate}</span>
+                                  </td>
+                                  <td>{r.inwards}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Technical Table 3: Certified Running Account Billing Items (RA 01 & RA 02) */}
+                    {project.executedBillingItems && (
+                      <div className="project-data-card">
+                        <h3>Certified &amp; Executed Quantities (Running Account Measurement)</h3>
+                        <div className="table-responsive-wrapper">
+                          <table className="project-data-table">
+                            <thead>
+                              <tr>
+                                <th>Item</th>
+                                <th>Particulars of Work</th>
+                                <th>UOM</th>
+                                <th>Rate</th>
+                                <th>Quantity</th>
+                                <th>Certified Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {project.executedBillingItems.map((b, idx) => (
+                                <tr key={idx}>
+                                  <td>{b.slNo}</td>
+                                  <td>{b.description}</td>
+                                  <td>{b.uom}</td>
+                                  <td>{b.rate}</td>
+                                  <td>
+                                    <strong>{b.qty}</strong>
+                                  </td>
+                                  <td>
+                                    <strong>{b.amount}</strong>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Financial Milestone Summary (If applicable) */}
+                    {project.financialSummary && (
+                      <div className="project-data-card project-data-card--highlight">
+                        <h3>Milestone Financial Summary</h3>
+                        <div className="financial-milestone-grid">
+                          {project.financialSummary.billNo && (
+                            <div className="fin-box">
+                              <span className="fin-lbl">Bill Reference</span>
+                              <strong className="fin-val">{project.financialSummary.billNo}</strong>
+                            </div>
+                          )}
+                          {project.financialSummary.invoiceNo && (
+                            <div className="fin-box">
+                              <span className="fin-lbl">Tax Invoice</span>
+                              <strong className="fin-val">{project.financialSummary.invoiceNo}</strong>
+                            </div>
+                          )}
+                          {project.financialSummary.grossAmount && (
+                            <div className="fin-box">
+                              <span className="fin-lbl">Gross Billed Value</span>
+                              <strong className="fin-val fin-val--gross">
+                                {project.financialSummary.grossAmount}
+                              </strong>
+                            </div>
+                          )}
+                          {project.financialSummary.cumulativeValueToDate && (
+                            <div className="fin-box">
+                              <span className="fin-lbl">Cumulative Value to Date</span>
+                              <strong className="fin-val fin-val--cumulative">
+                                {project.financialSummary.cumulativeValueToDate}
+                              </strong>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 4. Dual In-Field Engineering Execution Photos (Photo 3 & Photo 4) */}
+                  {(photo3 || photo4) && (
+                    <div className="project-dual-photos-strip">
+                      <div className="dual-photos-heading">
+                        <h3>📸 In-Field Execution Photography ({photos.length} Total Site Records)</h3>
+                        <span className="photo-prompt-badge">🔍 Click Any Photo for Full Screen</span>
+                      </div>
+
+                      <div className="dual-photos-grid">
+                        {photo3 && (
+                          <div
+                            className="dual-photo-card"
+                            onClick={() => openLightbox(photos, 2)}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`View full-screen photograph of ${photo3.title}`}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                openLightbox(photos, 2)
+                              }
+                            }}
+                          >
+                            <div className="dual-photo-img-wrap">
+                              <img
+                                src={photo3.url}
+                                alt={photo3.title}
+                                loading="lazy"
+                                decoding="async"
+                              />
+                              <div className="dual-photo-hover-overlay">
+                                <span className="hover-expand-btn">⤢ View Full Screen</span>
+                              </div>
+                              <span className="dual-photo-badge">Photo 3 of 4</span>
+                            </div>
+                            <div className="dual-photo-caption">
+                              <span className="inline-cat-tag">{photo3.categoryLabel}</span>
+                              <h4>{photo3.title}</h4>
+                              <p>{photo3.description}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {photo4 && (
+                          <div
+                            className="dual-photo-card"
+                            onClick={() => openLightbox(photos, 3)}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`View full-screen photograph of ${photo4.title}`}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                openLightbox(photos, 3)
+                              }
+                            }}
+                          >
+                            <div className="dual-photo-img-wrap">
+                              <img
+                                src={photo4.url}
+                                alt={photo4.title}
+                                loading="lazy"
+                                decoding="async"
+                              />
+                              <div className="dual-photo-hover-overlay">
+                                <span className="hover-expand-btn">⤢ View Full Screen</span>
+                              </div>
+                              <span className="dual-photo-badge">Photo 4 of 4</span>
+                            </div>
+                            <div className="dual-photo-caption">
+                              <span className="inline-cat-tag">{photo4.categoryLabel}</span>
+                              <h4>{photo4.title}</h4>
+                              <p>{photo4.description}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 5. Quality & Safety Protocols + Project Contact Action Bar */}
+                  <div className="project-footer-action-strip">
+                    <div className="project-safety-box">
+                      <h4>Quality &amp; Site Safety Assurance</h4>
+                      <ul className="project-safety-checklist">
+                        {project.safetyStandards.map((safe, idx) => (
+                          <li key={idx}>
+                            <span className="shield-bullet">🛡️</span>
+                            <span>{safe}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="project-cta-box">
+                      <h4>Interested in Similar Engineering Execution?</h4>
+                      <p>
+                        Our estimation and project office provides detailed bills of quantities (BOQ),
+                        certified equipment schedules, and turnaround plans for EPC contractors.
+                      </p>
+                      <div className="project-cta-buttons">
+                        <button
+                          type="button"
+                          className="button button--red"
+                          onClick={() => onContactClick(project.shortTitle)}
+                        >
+                          Enquire for This Scope <Arrow />
+                        </button>
+                        <a href="tel:+919441771333" className="button button--outline-dark">
+                          📞 Call: +91 9441771333
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Section Bottom Footer Divider */}
-              <div className="project-block-divider">
-                <span>End of Project {project.projectNumber} Specification</span>
-                <button
-                  type="button"
-                  className="scroll-top-link"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  ↑ Back to Top
-                </button>
-              </div>
-            </article>
-          ))}
-
-          {/* ==========================================================================
-             MASTER 28-PHOTO SITE GALLERY SHOWCASE (FULL PAGE IMMERSIVE GRID)
-             ========================================================================== */}
-          <section className="master-site-gallery-section" id="master-gallery">
-            <div className="master-gallery-header">
-              <span className="eyebrow eyebrow--green">Comprehensive Visual Archive</span>
-              <h2>Authentic Project Site Photography (28 Verified Records)</h2>
-              <p>
-                Explore high-resolution, unedited site photographs documenting heavy structural steel
-                frameworks, high-altitude crawler crane rigging, composite railway and bridge girders,
-                foundation bolt grouting, and public municipal utility installations across Andhra Pradesh
-                and Karnataka.
-              </p>
-            </div>
-
-            {/* Gallery Category Filter Pills */}
-            <div className="master-gallery-filter-bar">
-              {galleryCategories.map((cat) => (
-                <button
-                  type="button"
-                  key={cat.id}
-                  className={`master-filter-pill ${activeGalleryFilter === cat.id ? 'active' : ''}`}
-                  onClick={() => setActiveGalleryFilter(cat.id)}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Full Width Master Photo Grid */}
-            <div className="master-gallery-cards-grid">
-              {filteredMasterPhotos.map((photo, pIdx) => (
-                <article
-                  className="master-photo-card"
-                  key={photo.id}
-                  onClick={() => openLightbox(filteredMasterPhotos, pIdx)}
-                >
-                  <div className="master-photo-img-wrap">
-                    <img
-                      src={photo.url}
-                      alt={photo.title}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="master-photo-overlay">
-                      <span className="fullscreen-pill">⤢ Full Screen</span>
-                      <span className="category-pill">{photo.categoryLabel}</span>
-                    </div>
-                    <span className="master-photo-idx">#{pIdx + 1}</span>
-                  </div>
-
-                  <div className="master-photo-meta">
-                    {photo.projectTitle && (
-                      <span className="master-proj-tag">{photo.projectTitle}</span>
-                    )}
-                    <h3>{photo.title}</h3>
-                    <p>{photo.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+                {/* Section Bottom Footer Divider */}
+                <div className="project-block-divider">
+                  <span>End of Project {project.projectNumber} Official Specification</span>
+                  <button
+                    type="button"
+                    className="scroll-top-link"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  >
+                    ↑ Back to Top
+                  </button>
+                </div>
+              </article>
+            )
+          })}
 
           {/* Bottom Tender Consultation Banner */}
           <div className="projects-bottom-cta">
@@ -582,13 +585,18 @@ export default function ProjectsDetailPage({
                 and municipal authorities across India.
               </p>
             </div>
-            <button
-              type="button"
-              className="button button--red"
-              onClick={() => onContactClick('All Projects & Engineering Tenders')}
-            >
-              Request Technical Consultation <Arrow />
-            </button>
+            <div className="cta-buttons">
+              <button
+                type="button"
+                className="button button--red"
+                onClick={() => onContactClick('All Projects & Engineering Tenders')}
+              >
+                Request Technical Consultation <Arrow />
+              </button>
+              <a href="tel:+919441771333" className="button button--outline">
+                📞 +91 9441771333
+              </a>
+            </div>
           </div>
         </div>
       </main>

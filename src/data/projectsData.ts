@@ -670,8 +670,26 @@ export const masterGalleryPhotos: ProjectGalleryPhoto[] = [
   },
 ]
 
-// Automatically bind project-specific gallery photos to authenticProjects
+// Explicitly curate exactly 4 high-impact authentic site photos per project
+// Photo 0: Primary Landscaped Lead Banner Photo (top of project)
+// Photo 1: Featured In-line Scope & Fabrication Photo
+// Photo 2 & 3: In-Field Execution & Technical Measurement Photo Pair
+const curatedProjectPhotosMap: Record<string, string[]> = {
+  'amrut-master-1314-a1': ['p01', 'p02', 'p24', 'p03'],
+  'jsw-toranagallu-steel-cement': ['p04', 'p06', 'p07', 'p08'],
+  'mandapeta-ulb-ra01': ['p09', 'p10', 'p11', 'p12'],
+  'peddapuram-ulb-ra02': ['p13', 'p25', 'p18', 'p27'],
+}
+
 authenticProjects.forEach((p) => {
-  p.galleryPhotos = masterGalleryPhotos.filter((g) => g.projectId === p.id)
+  const targetIds = curatedProjectPhotosMap[p.id]
+  if (targetIds) {
+    p.galleryPhotos = targetIds
+      .map((id) => masterGalleryPhotos.find((g) => g.id === id))
+      .filter((g): g is ProjectGalleryPhoto => Boolean(g))
+  } else {
+    p.galleryPhotos = masterGalleryPhotos.filter((g) => g.projectId === p.id).slice(0, 4)
+  }
 })
+
 

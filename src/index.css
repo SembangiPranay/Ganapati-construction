@@ -2514,7 +2514,7 @@ section[id] {
   color: #ffbe3b;
 }
 
-/* Full Project Showcase Block */
+/* Full Project Showcase Block (Single-Page Flow) */
 .full-project-block {
   margin-top: 40px;
   margin-bottom: 60px;
@@ -2622,23 +2622,112 @@ section[id] {
   letter-spacing: 0.4px;
 }
 
-/* 2-Column Responsive Project Grid */
-.project-block-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 32px;
-  padding: 32px;
+/* ==========================================================================
+   PHOTO 1: BIG LANDSCAPED PHOTO ON TOP
+   ========================================================================== */
+.project-lead-landscape-card {
+  width: 100%;
+  position: relative;
+  background: #0b1712;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: 2px solid #e2dbcf;
 }
-@media (max-width: 1024px) {
-  .project-block-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 24px;
-  }
+.lead-photo-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  min-height: 280px;
+  max-height: 460px;
+  overflow: hidden;
+}
+.lead-photo-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+  display: block;
+}
+.project-lead-landscape-card:hover .lead-photo-img-wrap img {
+  transform: scale(1.03);
+}
+.lead-photo-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(7, 20, 14, 0.94) 0%,
+    rgba(7, 20, 14, 0.4) 45%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 24px 32px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.lead-photo-meta-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 780px;
+}
+.lead-photo-tag {
+  color: #ffbe3b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.lead-photo-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+}
+.lead-photo-desc {
+  font-size: 13px;
+  color: #d4e5dc;
+  margin: 0;
+  line-height: 1.45;
+}
+.lead-expand-pill {
+  background: rgba(255, 255, 255, 0.95);
+  color: #174735;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.project-lead-landscape-card:hover .lead-expand-pill {
+  background: var(--red, #cf2027);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(207, 32, 39, 0.45);
 }
 
-/* Left Column: Data & Specs Cards */
-.project-info-column {
+/* ==========================================================================
+   PROJECT BODY CONTENT: INTEGRATED FULL-WIDTH FLOW
+   ========================================================================== */
+.project-body-content {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Section: Scope & Contractor Identity + Photo 2 in Balanced Grid */
+.project-scope-credentials-section {
+  display: grid;
+  grid-template-columns: 1.22fr 0.78fr;
+  gap: 28px;
+  align-items: start;
+}
+.scope-credentials-col {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -2718,7 +2807,105 @@ section[id] {
   font-weight: 700;
 }
 
-/* Technical Tables */
+/* Photo 2: Featured Inline Site Photography */
+.project-featured-inline-photo {
+  background: #fbfaf7;
+  border: 1px solid #dfd8cb;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.project-featured-inline-photo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  border-color: #174735;
+}
+.inline-photo-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: #111;
+  overflow: hidden;
+}
+.inline-photo-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+.project-featured-inline-photo:hover .inline-photo-img-wrap img {
+  transform: scale(1.05);
+}
+.inline-photo-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 35, 25, 0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.project-featured-inline-photo:hover .inline-photo-hover-overlay {
+  opacity: 1;
+}
+.inline-photo-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+.inline-photo-caption {
+  padding: 14px 16px;
+  flex: 1;
+}
+.inline-cat-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #174735;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.inline-photo-caption h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #171c19;
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+.inline-photo-caption p {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #4e5751;
+  margin: 0;
+}
+.inline-photo-inspection-note {
+  background: #f3efe6;
+  border-top: 1px solid #e5ded2;
+  padding: 9px 16px;
+  font-size: 11px;
+  color: #58615b;
+  line-height: 1.4;
+}
+
+/* Section: Technical Tables (Full Width) */
+.project-technical-tables-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
 .table-responsive-wrapper {
   overflow-x: auto;
   margin-top: 10px;
@@ -2801,22 +2988,28 @@ section[id] {
   color: #0b5e39;
 }
 
-/* Right Column: Prominent Site Photo Showcase (2x2 Grid) */
-.project-photos-column {
+/* ==========================================================================
+   PHOTO 3 & PHOTO 4: DUAL IN-FIELD EXECUTION PHOTO STRIP
+   ========================================================================== */
+.project-dual-photos-strip {
+  background: #f5f2eb;
+  border: 1px solid #e1dacd;
+  border-radius: 6px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
-.project-photos-header {
+.dual-photos-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: 2px solid #174735;
 }
-.project-photos-header h3 {
+.dual-photos-heading h3 {
   font-size: 16px;
   font-weight: 700;
   color: #174735;
@@ -2831,19 +3024,14 @@ section[id] {
   padding: 3px 8px;
   border-radius: 3px;
 }
-.project-photos-showcase-grid {
+.dual-photos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
-@media (max-width: 600px) {
-  .project-photos-showcase-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.project-photo-card {
+.dual-photo-card {
   background: #ffffff;
-  border: 1px solid #dfd8cc;
+  border: 1px solid #ded6c8;
   border-radius: 4px;
   overflow: hidden;
   cursor: pointer;
@@ -2851,39 +3039,39 @@ section[id] {
   display: flex;
   flex-direction: column;
 }
-.project-photo-card:hover {
+.dual-photo-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
   border-color: #174735;
 }
-.project-photo-img-wrap {
+.dual-photo-img-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   background: #111;
   overflow: hidden;
 }
-.project-photo-img-wrap img {
+.dual-photo-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
   display: block;
 }
-.project-photo-card:hover .project-photo-img-wrap img {
-  transform: scale(1.06);
+.dual-photo-card:hover .dual-photo-img-wrap img {
+  transform: scale(1.05);
 }
-.photo-card-hover-overlay {
+.dual-photo-hover-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 35, 25, 0.45);
+  background: rgba(15, 35, 25, 0.42);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
-.project-photo-card:hover .photo-card-hover-overlay {
+.dual-photo-card:hover .dual-photo-hover-overlay {
   opacity: 1;
 }
 .hover-expand-btn {
@@ -2895,58 +3083,83 @@ section[id] {
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
-.photo-corner-badge {
+.dual-photo-badge {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(0, 0, 0, 0.7);
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.75);
   color: #ffffff;
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 6px;
+  padding: 2px 7px;
   border-radius: 2px;
-  backdrop-filter: blur(4px);
 }
-.project-photo-caption {
-  padding: 10px 12px;
-  background: #ffffff;
+.dual-photo-caption {
+  padding: 12px 14px;
   flex: 1;
 }
-.project-photo-caption h4 {
-  font-size: 13px;
+.dual-photo-caption h4 {
+  font-size: 13.5px;
   font-weight: 700;
-  color: #1a221e;
+  color: #171c19;
   margin: 0 0 4px;
-  line-height: 1.3;
+  line-height: 1.35;
 }
-.project-photo-caption p {
+.dual-photo-caption p {
   font-size: 11.5px;
   line-height: 1.45;
-  color: #555f58;
+  color: #515c55;
   margin: 0;
 }
-.project-side-cta {
-  background: #fbf8f2;
-  border: 1px solid #ebdcc5;
-  border-radius: 4px;
-  padding: 18px;
+
+/* ==========================================================================
+   QUALITY & SAFETY + FOOTER ACTION STRIP
+   ========================================================================== */
+.project-footer-action-strip {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: stretch;
 }
-.project-side-cta h4 {
-  font-size: 14px;
+.project-safety-box {
+  background: #fbfaf7;
+  border: 1px solid #e4ddd1;
+  border-radius: 4px;
+  padding: 20px;
+}
+.project-safety-box h4 {
+  font-size: 15px;
   font-weight: 700;
   color: #174735;
-  margin: 0 0 6px;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e4ddd1;
 }
-.project-side-cta p {
-  font-size: 12px;
-  line-height: 1.5;
-  color: #444e47;
-  margin: 0 0 14px;
-}
-.project-side-cta-buttons {
+.project-cta-box {
+  background: linear-gradient(135deg, #174735 0%, #0d281e 100%);
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+}
+.project-cta-box h4 {
+  color: #ffffff;
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.project-cta-box p {
+  color: #c9dad0;
+  font-size: 12px;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+.project-cta-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .project-block-divider {
   background: #f3efe6;
@@ -2972,177 +3185,13 @@ section[id] {
   text-decoration: underline;
 }
 
-/* ==========================================================================
-   MASTER 28-PHOTO SITE GALLERY SHOWCASE
-   ========================================================================== */
-.master-site-gallery-section {
-  margin-top: 60px;
-  margin-bottom: 50px;
-  background: #0d1a14;
-  color: #ffffff;
-  border-radius: 6px;
-  padding: 48px 36px 56px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-  scroll-margin-top: 130px;
-}
-.master-gallery-header {
-  max-width: 760px;
-  margin-bottom: 28px;
-}
-.master-gallery-header h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 8px 0 12px;
-}
-.master-gallery-header p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #b0c4b9;
-  margin: 0;
-}
-.master-gallery-filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-.master-filter-pill {
-  background: rgba(255, 255, 255, 0.08);
-  color: #d2e3d9;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.master-filter-pill:hover {
-  background: rgba(255, 255, 255, 0.18);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.35);
-}
-.master-filter-pill.active {
-  background: var(--red, #cf2027);
-  color: #ffffff;
-  border-color: var(--red, #cf2027);
-  box-shadow: 0 4px 12px rgba(207, 32, 39, 0.4);
-}
-.master-gallery-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-.master-photo-card {
-  background: #14251d;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-  display: flex;
-  flex-direction: column;
-}
-.master-photo-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-  border-color: #ffbe3b;
-}
-.master-photo-img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  background: #000;
-  overflow: hidden;
-}
-.master-photo-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-  display: block;
-}
-.master-photo-card:hover .master-photo-img-wrap img {
-  transform: scale(1.07);
-}
-.master-photo-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 20, 15, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.master-photo-card:hover .master-photo-overlay {
-  opacity: 1;
-}
-.fullscreen-pill {
-  background: #ffffff;
-  color: #174735;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 5px 10px;
-  border-radius: 3px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-.category-pill {
-  background: #174735;
-  color: #ffbe3b;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-.master-photo-idx {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #ffbe3b;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 2px;
-}
-.master-photo-meta {
-  padding: 14px 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.master-proj-tag {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #ffbe3b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-.master-photo-meta h3 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 6px;
-  line-height: 1.35;
-}
-.master-photo-meta p {
-  font-size: 12px;
-  line-height: 1.45;
-  color: #a4beaf;
-  margin: 0;
-}
+/* Bottom Tender Consultation Banner */
 .projects-bottom-cta {
   background: linear-gradient(135deg, #174735 0%, #0c261c 100%);
   color: #ffffff;
   border-radius: 6px;
   padding: 36px 40px;
+  margin-top: 20px;
   margin-bottom: 60px;
   display: flex;
   justify-content: space-between;
@@ -3186,8 +3235,12 @@ section[id] {
   animation: fadeInLightbox 0.2s ease-out;
 }
 @keyframes fadeInLightbox {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .lightbox-container {
   flex: 1;
@@ -3294,8 +3347,14 @@ section[id] {
   animation: zoomInStage 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes zoomInStage {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 .lightbox-nav-btn {
   position: absolute;
@@ -3379,15 +3438,31 @@ section[id] {
   object-fit: cover;
 }
 
+@media (max-width: 992px) {
+  .project-scope-credentials-section {
+    grid-template-columns: 1fr;
+  }
+  .project-body-content {
+    padding: 24px;
+    gap: 24px;
+  }
+  .lead-photo-gradient-overlay {
+    padding: 18px 20px;
+  }
+  .lead-photo-title {
+    font-size: 17px;
+  }
+  .project-footer-action-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .project-block-header {
     padding: 20px 18px;
   }
   .project-block-title {
     font-size: 20px;
-  }
-  .project-block-grid {
-    padding: 18px;
   }
   .project-cred-dl {
     grid-template-columns: 1fr;
@@ -3396,11 +3471,11 @@ section[id] {
   .project-cred-dl dt {
     margin-top: 4px;
   }
-  .master-site-gallery-section {
-    padding: 32px 18px;
-  }
-  .master-gallery-cards-grid {
+  .dual-photos-grid {
     grid-template-columns: 1fr;
+  }
+  .lead-photo-img-wrap {
+    min-height: 220px;
   }
   .lightbox-stage {
     padding: 10px 14px;
@@ -3417,4 +3492,5 @@ section[id] {
     right: 8px;
   }
 }
+
 
