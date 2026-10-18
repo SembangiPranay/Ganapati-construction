@@ -936,6 +936,9 @@ export default function App() {
         <div className="container footer-inner">
           <div className="footer-brand-block">
             <Brand footer onBrandClick={() => navigateToHome()} />
+            <p className="footer-tagline">
+              Specialists: Structural Fabrications, Erection, Heavy Equipment Works
+            </p>
             <div className="footer-legal-line">
               <span><b>Proprietor:</b> {companyProfile.proprietor}</span>
               <span className="footer-dot">•</span>

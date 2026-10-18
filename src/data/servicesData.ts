@@ -117,7 +117,7 @@ export const servicesData: ServiceDetail[] = [
     title: 'Fabrication Works',
     shortDescription: 'Precision fabrication of structural steel components, built-up girders, and bulk handling vessels.',
     tagline: 'High-tolerance fabrication with automatic submerged arc welding and certified NDT testing.',
-    heroImage: '/assets/welding-sparks.jpg',
+    heroImage: '/assets/welding.jpg',
     badgeColor: 'red',
     fullDescription:
       'Operating equipped fabrication yards with automated cutting, submerged arc welding, and plate bending, we fabricate heavy built-up plate girders, box columns, storage bins, chutes, and hoppers engineered for high mechanical stress, vibration, and harsh thermal environments.',

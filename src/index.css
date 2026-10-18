@@ -160,8 +160,7 @@ nav a.active::after { content: ''; height: 2px; background: var(--red); position
 footer { background: #fff; min-height: 120px; }
 .footer-inner { min-height: 120px; display: grid; grid-template-columns: 35% 32% 33%; align-items: center; }
 .brand-mark--small { transform: scale(.82); transform-origin: left center; margin-right: -6px; }
-.brand--footer { position: relative; }
-.brand--footer::after { content: 'Specialists: Structural Fabrications, Erection, Heavy Equipment Works'; position: absolute; left: 57px; bottom: -14px; font-size: 5px; color: #555; border-bottom: 1px solid var(--red); padding-bottom: 4px; }
+.brand--footer { display: inline-flex; align-items: center; }
 .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 28px; padding-left: 20px; border-left: 1px solid #ddd; font-size: 8px; }
 .footer-inner > p { margin: 0; padding-top: 20px; border-top: 1px solid var(--red); text-align: right; font-size: 7px; color: #555; }
 
@@ -1387,14 +1386,25 @@ section[id] {
   flex-direction: column;
   gap: 6px;
 }
-.footer-legal-line {
+.footer-tagline {
   font-size: 10px;
   color: #555;
+  margin: 0;
+  line-height: 1.4;
+  padding-left: 2px;
+  border-bottom: 1px solid var(--red);
+  padding-bottom: 4px;
+  width: fit-content;
+}
+.footer-legal-line {
+  font-size: 10.5px;
+  color: #333;
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
   padding-left: 2px;
+  margin-top: 2px;
 }
 .footer-dot {
   color: var(--red);
