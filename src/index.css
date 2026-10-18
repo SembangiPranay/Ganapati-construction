@@ -135,7 +135,15 @@ nav a.active::after { content: ''; height: 3px; background: var(--red); position
 .service-body p { margin: 0; font-size: 13px; line-height: 1.6; color: #525654; }
 .service-caps-preview { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #f0eee9; padding-top: 12px; }
 .service-caps-preview li { font-size: 12px; color: #333; display: flex; align-items: center; gap: 7px; line-height: 1.35; }
-.service-caps-preview li::before { content: '✓'; color: var(--green); font-weight: 800; font-size: 11px; }
+.service-caps-preview li::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: var(--green);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
 
 /* Engineering Differentiators (Why Choose SGC) */
 .why-us-section { background: #14221d; color: #fff; padding: 92px 0 88px; position: relative; overflow: hidden; }
@@ -2384,11 +2392,14 @@ section[id] {
   padding-left: 16px;
 }
 .wo-operations-list li::before {
-  content: "✔";
+  content: "";
   position: absolute;
-  left: 0;
-  color: #174735;
-  font-size: 10px;
+  left: 3px;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  background-color: #174735;
+  border-radius: 50%;
 }
 
 /* About Page Client Contracts Grid */
@@ -3857,6 +3868,93 @@ section[id] {
   .project-cta-box {
     padding: 14px 12px;
   }
+}
+
+/* ==========================================================================
+   CORPORATE VECTOR ICONS & BADGES (Zero Cartoonish Emojis)
+   ========================================================================== */
+.meta-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 5px;
+  width: 14px;
+  height: 14px;
+  color: #ffbe3b;
+  flex-shrink: 0;
+}
+.pill-check-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+  width: 14px;
+  height: 14px;
+  color: #52b788;
+  flex-shrink: 0;
+}
+.seal-check-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.card-photo-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 13px;
+  height: 13px;
+}
+.card-loc-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  width: 12px;
+  height: 12px;
+  color: var(--red);
+}
+.active-pill-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(23, 71, 53, 0.12);
+  border-radius: 4px;
+  color: #174735;
+  flex-shrink: 0;
+}
+.active-pill-icon-wrap svg {
+  width: 15px;
+  height: 15px;
+}
+.shield-bullet svg,
+.dossier-shield-icon svg {
+  width: 15px;
+  height: 15px;
+  color: #174735;
+  vertical-align: middle;
+}
+.gallery-callout-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #174735;
+}
+.dossier-close-btn svg,
+.lightbox-close-btn svg,
+.drawer-close-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+.hover-expand-btn svg,
+.lead-expand-pill svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  width: 13px;
+  height: 13px;
 }
 
 

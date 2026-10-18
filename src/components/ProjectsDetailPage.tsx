@@ -6,6 +6,15 @@ import {
 } from '../data/projectsData'
 import { companyProfile } from '../data/servicesData'
 import FullScreenImageViewer from './FullScreenImageViewer'
+import {
+  PinIcon,
+  BuildingIcon,
+  DocumentIcon,
+  ShieldIcon,
+  CameraIcon,
+  PhoneIcon,
+  ExpandIcon,
+} from './CorporateIcons'
 
 interface ProjectsDetailPageProps {
   initialProjectId?: string
@@ -163,16 +172,16 @@ export default function ProjectsDetailPage({
 
                   <div className="project-block-submeta">
                     <span>
-                      📍 <strong>Location:</strong> {project.location}, {project.districtState}
+                      <PinIcon className="meta-icon" /> <strong>Location:</strong> {project.location}, {project.districtState}
                     </span>
                     <span>
-                      🏛️ <strong>Issuing Entity:</strong> {project.client}
+                      <BuildingIcon className="meta-icon" /> <strong>Issuing Entity:</strong> {project.client}
                     </span>
                     <span>
-                      🏢 <strong>End Beneficiary:</strong> {project.endClient}
+                      <BuildingIcon className="meta-icon" /> <strong>End Beneficiary:</strong> {project.endClient}
                     </span>
                     <span>
-                      📄 <strong>Contract Ref:</strong> <code>{project.workOrderNo}</code>
+                      <DocumentIcon className="meta-icon" /> <strong>Contract Ref:</strong> <code>{project.workOrderNo}</code>
                     </span>
                   </div>
 
@@ -211,12 +220,14 @@ export default function ProjectsDetailPage({
                       <div className="lead-photo-gradient-overlay">
                         <div className="lead-photo-meta-content">
                           <span className="lead-photo-tag">
-                            📸 Photo 1 of 4 • Primary Site Landscape • Project {project.projectNumber}
+                            Photo 1 of 4 • Primary Site Landscape • Project {project.projectNumber}
                           </span>
                           <h3 className="lead-photo-title">{leadPhoto.title}</h3>
                           <p className="lead-photo-desc">{leadPhoto.description}</p>
                         </div>
-                        <span className="lead-expand-pill">⤢ View Full Screen</span>
+                        <span className="lead-expand-pill">
+                          <ExpandIcon /> View Full Screen
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -234,7 +245,7 @@ export default function ProjectsDetailPage({
                         <ul className="project-scope-checklist">
                           {project.detailedScope.map((item, idx) => (
                             <li key={idx}>
-                              <span className="check-bullet">✓</span>
+                              <span className="check-bullet"><CheckIcon /></span>
                               <span>{item}</span>
                             </li>
                           ))}
@@ -293,7 +304,9 @@ export default function ProjectsDetailPage({
                             decoding="async"
                           />
                           <div className="inline-photo-hover-overlay">
-                            <span className="hover-expand-btn">⤢ View Full Screen</span>
+                            <span className="hover-expand-btn">
+                              <ExpandIcon /> View Full Screen
+                            </span>
                           </div>
                           <span className="inline-photo-badge">Photo 2 of 4</span>
                         </div>
@@ -303,7 +316,7 @@ export default function ProjectsDetailPage({
                           <p>{photo2.description}</p>
                         </div>
                         <div className="inline-photo-inspection-note">
-                          <span>🔍 In-Field Verification: Certified according to approved engineering drawings and site safety protocols.</span>
+                          <span><strong>Field Verification:</strong> Certified according to approved engineering drawings and site safety protocols.</span>
                         </div>
                       </div>
                     )}
@@ -454,8 +467,8 @@ export default function ProjectsDetailPage({
                   {(photo3 || photo4) && (
                     <div className="project-dual-photos-strip">
                       <div className="dual-photos-heading">
-                        <h3>📸 In-Field Execution Photography ({photos.length} Total Site Records)</h3>
-                        <span className="photo-prompt-badge">🔍 Click Any Photo for Full Screen</span>
+                        <h3>In-Field Execution Photography ({photos.length} Total Site Records)</h3>
+                        <span className="photo-prompt-badge">Tap Photo to Expand</span>
                       </div>
 
                       <div className="dual-photos-grid">
@@ -480,7 +493,9 @@ export default function ProjectsDetailPage({
                                 decoding="async"
                               />
                               <div className="dual-photo-hover-overlay">
-                                <span className="hover-expand-btn">⤢ View Full Screen</span>
+                                <span className="hover-expand-btn">
+                                  <ExpandIcon /> View Full Screen
+                                </span>
                               </div>
                               <span className="dual-photo-badge">Photo 3 of 4</span>
                             </div>
@@ -513,7 +528,9 @@ export default function ProjectsDetailPage({
                                 decoding="async"
                               />
                               <div className="dual-photo-hover-overlay">
-                                <span className="hover-expand-btn">⤢ View Full Screen</span>
+                                <span className="hover-expand-btn">
+                                  <ExpandIcon /> View Full Screen
+                                </span>
                               </div>
                               <span className="dual-photo-badge">Photo 4 of 4</span>
                             </div>
@@ -535,7 +552,9 @@ export default function ProjectsDetailPage({
                       <ul className="project-safety-checklist">
                         {project.safetyStandards.map((safe, idx) => (
                           <li key={idx}>
-                            <span className="shield-bullet">🛡️</span>
+                            <span className="shield-bullet">
+                              <ShieldIcon />
+                            </span>
                             <span>{safe}</span>
                           </li>
                         ))}
@@ -557,10 +576,10 @@ export default function ProjectsDetailPage({
                           Enquire for This Scope <Arrow />
                         </button>
                         <a href={`tel:+91${companyProfile.phonePrimary}`} className="button button--outline-dark">
-                          📞 +91 {companyProfile.phonePrimary}
+                          <PhoneIcon /> +91 {companyProfile.phonePrimary}
                         </a>
                         <a href={`tel:+91${companyProfile.phoneSecondary}`} className="button button--outline-dark">
-                          📞 +91 {companyProfile.phoneSecondary}
+                          <PhoneIcon /> +91 {companyProfile.phoneSecondary}
                         </a>
                       </div>
                     </div>
@@ -602,10 +621,10 @@ export default function ProjectsDetailPage({
                 Request Technical Consultation <Arrow />
               </button>
               <a href={`tel:+91${companyProfile.phonePrimary}`} className="button button--outline">
-                📞 +91 {companyProfile.phonePrimary}
+                <PhoneIcon /> +91 {companyProfile.phonePrimary}
               </a>
               <a href={`tel:+91${companyProfile.phoneSecondary}`} className="button button--outline">
-                📞 +91 {companyProfile.phoneSecondary}
+                <PhoneIcon /> +91 {companyProfile.phoneSecondary}
               </a>
             </div>
           </div>

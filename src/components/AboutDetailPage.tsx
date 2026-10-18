@@ -1,4 +1,5 @@
 import { companyProfile, safetyCertifications, trainingTopics } from '../data/servicesData'
+import { CheckIcon } from './CorporateIcons'
 
 interface AboutDetailPageProps {
   onNavigateHome: () => void
@@ -89,7 +90,7 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
               <div className="client-contracts-grid">
                 <div className="client-contract-box verified-contract">
                   <div className="contract-header">
-                    <span className="verified-seal">✓ OFFICIAL WORK ORDER</span>
+                    <span className="verified-seal"><CheckIcon className="seal-check-icon" /> OFFICIAL WORK ORDER</span>
                     <h3>Govt of Andhra Pradesh AMRUT 2.0 Scheme</h3>
                   </div>
                   <div className="contract-meta-list">
@@ -175,7 +176,7 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
               <div className="safety-cards-grid">
                 {safetyCertifications.map((item, idx) => (
                   <div className="safety-feature-box" key={idx}>
-                    <strong>✓ {item.title}</strong>
+                    <strong><CheckIcon className="seal-check-icon" /> {item.title}</strong>
                     <p>{item.description}</p>
                   </div>
                 ))}

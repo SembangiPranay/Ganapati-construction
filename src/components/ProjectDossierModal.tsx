@@ -1,5 +1,14 @@
 import { useState, useEffect } from 'react'
 import { OfficialProject } from '../data/projectsData'
+import {
+  CloseIcon,
+  PinIcon,
+  BuildingIcon,
+  DocumentIcon,
+  CameraIcon,
+  ShieldIcon,
+  CheckIcon,
+} from './CorporateIcons'
 
 interface ProjectDossierModalProps {
   project: OfficialProject | null
@@ -44,7 +53,7 @@ export default function ProjectDossierModal({
         {/* Header */}
         <header className="dossier-modal-header">
           <div className="dossier-header-meta">
-            <span className="dossier-num-badge">{project.projectNumber}</span>
+            <span className="dossier-num-badge">Project {project.projectNumber}</span>
             <span className="dossier-verified-seal">{project.verifiedBadge}</span>
             <span className="dossier-cat-pill">{project.categoryLabel}</span>
           </div>
@@ -54,13 +63,13 @@ export default function ProjectDossierModal({
             aria-label="Close project dossier"
             onClick={onClose}
           >
-            ✕
+            <CloseIcon />
           </button>
           <h2 className="dossier-title">{project.title}</h2>
           <div className="dossier-submeta">
-            <span>📍 <strong>Location:</strong> {project.location}, {project.districtState}</span>
-            <span>🏛️ <strong>Client:</strong> {project.client}</span>
-            <span>📄 <strong>Contract:</strong> {project.workOrderNo}</span>
+            <span><PinIcon className="meta-icon" /> <strong>Location:</strong> {project.location}, {project.districtState}</span>
+            <span><BuildingIcon className="meta-icon" /> <strong>Client:</strong> {project.client}</span>
+            <span><DocumentIcon className="meta-icon" /> <strong>Contract:</strong> {project.workOrderNo}</span>
           </div>
 
           {/* Navigation Tabs */}
@@ -70,28 +79,28 @@ export default function ProjectDossierModal({
               className={`dossier-tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
               onClick={() => setActiveTab('overview')}
             >
-              📋 Scope &amp; Overview
+              Scope &amp; Overview
             </button>
             <button
               type="button"
               className={`dossier-tab-btn ${activeTab === 'technical' ? 'active' : ''}`}
               onClick={() => setActiveTab('technical')}
             >
-              ⚙️ Technical &amp; Quantities
+              Technical &amp; Quantities
             </button>
             <button
               type="button"
               className={`dossier-tab-btn ${activeTab === 'credentials' ? 'active' : ''}`}
               onClick={() => setActiveTab('credentials')}
             >
-              🏛️ Official Credentials
+              Official Credentials
             </button>
             <button
               type="button"
               className={`dossier-tab-btn ${activeTab === 'gallery' ? 'active' : ''}`}
               onClick={() => setActiveTab('gallery')}
             >
-              🖼️ Site Photos (Slots)
+              Site Photographs
             </button>
           </nav>
         </header>
@@ -120,7 +129,7 @@ export default function ProjectDossierModal({
                 <ul className="dossier-scope-list">
                   {project.detailedScope.map((item, idx) => (
                     <li key={idx}>
-                      <span className="dossier-check-icon">✓</span>
+                      <span className="dossier-check-icon"><CheckIcon /></span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -132,7 +141,7 @@ export default function ProjectDossierModal({
                 <ul className="dossier-safety-list">
                   {project.safetyStandards.map((safe, idx) => (
                     <li key={idx}>
-                      <span className="dossier-shield-icon">🛡️</span>
+                      <span className="dossier-shield-icon"><ShieldIcon /></span>
                       <span>{safe}</span>
                     </li>
                   ))}
@@ -327,7 +336,7 @@ export default function ProjectDossierModal({
           {activeTab === 'gallery' && (
             <div className="dossier-tab-pane">
               <div className="gallery-placeholder-callout">
-                <div className="gallery-callout-icon">📸</div>
+                <div className="gallery-callout-icon"><CameraIcon /></div>
                 <div>
                   <h4>{project.awaitingUserImages ? 'Project Site Photography Setup' : 'Verified Project Site Photography'}</h4>
                   <p>{project.placeholderNote}</p>

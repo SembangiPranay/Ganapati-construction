@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { ProjectGalleryPhoto } from '../data/projectsData'
+import { CloseIcon } from './CorporateIcons'
 
 interface FullScreenImageViewerProps {
   photos: ProjectGalleryPhoto[]
@@ -88,7 +89,7 @@ export default function FullScreenImageViewer({
               onClick={onClose}
               aria-label="Close full-screen image viewer"
             >
-              ✕
+              <CloseIcon />
             </button>
           </div>
         </header>

@@ -12,6 +12,13 @@ import ServiceDetailPage from './components/ServiceDetailPage'
 import AboutDetailPage from './components/AboutDetailPage'
 import ProjectsDetailPage from './components/ProjectsDetailPage'
 import ProjectDossierModal from './components/ProjectDossierModal'
+import {
+  CloseIcon,
+  CheckIcon,
+  CameraIcon,
+  PinIcon,
+  GovEmblemIcon,
+} from './components/CorporateIcons'
 
 const Arrow = () => <span aria-hidden="true">→</span>
 
@@ -443,7 +450,7 @@ export default function App() {
             aria-label="Close menu"
             onClick={() => setMobileMenuOpen(false)}
           >
-            ✕
+            <CloseIcon />
           </button>
         </div>
 
@@ -454,7 +461,7 @@ export default function App() {
               className={`mobile-nav-item ${currentView.type === 'home' ? 'active' : ''}`}
               onClick={() => navigateToHome()}
             >
-              <span>🏠 Home Overview</span>
+              <span>Home Overview</span>
               <Arrow />
             </button>
 
@@ -463,7 +470,7 @@ export default function App() {
               className={`mobile-nav-item ${currentView.type === 'about' ? 'active' : ''}`}
               onClick={navigateToAbout}
             >
-              <span>🏢 About S Ganapati Construction</span>
+              <span>About Company</span>
               <Arrow />
             </button>
 
@@ -488,7 +495,7 @@ export default function App() {
               className="mobile-nav-item"
               onClick={() => navigateToHome('industries')}
             >
-              <span>🏭 Industries We Serve</span>
+              <span>Industries We Serve</span>
               <Arrow />
             </button>
 
@@ -497,7 +504,7 @@ export default function App() {
               className={`mobile-nav-item ${currentView.type === 'projects' ? 'active' : ''}`}
               onClick={navigateToProjects}
             >
-              <span>🏗️ Our Works (4 Authentic Projects)</span>
+              <span>Projects Showcase</span>
               <Arrow />
             </button>
 
@@ -506,7 +513,7 @@ export default function App() {
               className="mobile-nav-item"
               onClick={() => navigateToHome('safety')}
             >
-              <span>🛡️ OHSAS 18001 Safety Standards</span>
+              <span>Safety Standards (OHSAS 18001)</span>
               <Arrow />
             </button>
 
@@ -515,7 +522,7 @@ export default function App() {
               className="mobile-nav-item"
               onClick={() => navigateToHome('contact')}
             >
-              <span>📞 Contact &amp; GSTIN Details</span>
+              <span>Contact &amp; Head Office</span>
               <Arrow />
             </button>
           </div>
@@ -587,13 +594,13 @@ export default function App() {
                 </p>
                 <div className="hero-badges-row">
                   <span className="hero-badge-pill">
-                    ✓ Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)
+                    <CheckIcon className="pill-check-icon" /> Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)
                   </span>
                   <span className="hero-badge-pill">
-                    ✓ OHSAS 18001 Certified Standards
+                    <CheckIcon className="pill-check-icon" /> OHSAS 18001 Certified Standards
                   </span>
                   <span className="hero-badge-pill">
-                    ✓ 1,000+ Industrial Projects Delivered
+                    <CheckIcon className="pill-check-icon" /> 1,000+ Industrial Projects Delivered
                   </span>
                 </div>
                 <div className="button-row">
@@ -679,7 +686,7 @@ export default function App() {
                   Headquartered in Visakhapatnam, Andhra Pradesh, <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>, Managing Director: <strong>{companyProfile.managingDirector}</strong>, GSTIN: <strong>{companyProfile.gstin}</strong>) is an established industrial contractor specializing in structural steel fabrication, high-altitude erection, mechanical equipment assembly, and urban water infrastructure pipelines.
                 </p>
                 <div className="about-active-pill">
-                  <span>🏛️</span>
+                  <span className="active-pill-icon-wrap"><GovEmblemIcon /></span>
                   <span>
                     <strong>Active Government Contract:</strong> AP AMRUT 2.0 Urban Water Supply (11,735+ Rmtr HDPE Pipeline laying in Mandapeta &amp; Peddapuram Municipalities)
                   </span>
@@ -862,12 +869,12 @@ export default function App() {
                       <span className="home-work-num">Project {proj.projectNumber}</span>
                       <span className="home-work-badge">{proj.verifiedBadge}</span>
                       <div className="home-work-photo-indicator">
-                        <span>📸 {proj.galleryPhotos?.length || proj.imageSlots.length} Authentic Site Photos</span>
+                        <span><CameraIcon className="card-photo-icon" /> {proj.galleryPhotos?.length || proj.imageSlots.length} Site Photographs</span>
                       </div>
                     </div>
                     <div className="home-work-content">
                       <div className="home-work-meta">
-                        <span className="home-work-loc">📍 {proj.location}</span>
+                        <span className="home-work-loc"><PinIcon className="card-loc-icon" /> {proj.location}</span>
                         <span className="home-work-cat">{proj.categoryLabel}</span>
                       </div>
                       <h3>{proj.title}</h3>
@@ -1141,7 +1148,7 @@ export default function App() {
                 <p><strong>Alternate:</strong> +91 {companyProfile.phoneTertiary}</p>
                 <p><strong>Email:</strong> {companyProfile.email}</p>
                 <div className="footer-wo-tag">
-                  ✓ Active Govt Contract: AP AMRUT 2.0 (WO 1314-A1)
+                  <CheckIcon className="seal-check-icon" /> Active Govt Contract: AP AMRUT 2.0 (WO 1314-A1)
                 </div>
               </div>
             </div>
