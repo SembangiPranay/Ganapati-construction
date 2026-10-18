@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { companyProfile, safetyCertifications, trainingTopics } from '../data/servicesData'
 
 interface AboutDetailPageProps {
   onNavigateHome: () => void
@@ -19,7 +19,7 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
               Home
             </button>
             <span className="breadcrumb-sep">/</span>
-            <span className="breadcrumb-current">About Us</span>
+            <span className="breadcrumb-current">About S Ganapati Construction</span>
           </div>
           <button type="button" className="button button--outline-dark button--small" onClick={onNavigateHome}>
             <BackArrow /> Back to Overview
@@ -29,16 +29,16 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
 
       {/* Hero */}
       <section className="detail-hero">
-        <div className="detail-hero-backdrop" style={{ backgroundImage: "url('/assets/steel-worker.jpg')" }} />
+        <div className="detail-hero-backdrop" style={{ backgroundImage: "url('/assets/safety-team-site.jpg')" }} />
         <div className="detail-hero-overlay" />
         <div className="container detail-hero-inner">
           <div className="detail-hero-badge">
             <span className="detail-number-badge red">SGC</span>
-            <span className="detail-badge-text">Company Profile &amp; Ethos</span>
+            <span className="detail-badge-text">Company Profile &amp; Governance</span>
           </div>
-          <h1>Building Industrial Infrastructure with Precision</h1>
+          <h1>Engineering Excellence in Steel Infrastructure</h1>
           <p className="detail-hero-tagline">
-            Trusted structural fabrication, erection, and heavy mechanical engineering partner based in Visakhapatnam, Andhra Pradesh.
+            Specialists in Structural Fabrications, Erection, and Heavy Equipment Works headquartered in Visakhapatnam, Andhra Pradesh.
           </p>
           <div className="detail-hero-actions">
             <button type="button" className="button button--red" onClick={onContactClick}>
@@ -55,91 +55,99 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
       <main className="detail-main-content">
         <div className="container detail-layout-grid">
           <div className="detail-primary-col">
+            {/* Who We Are */}
             <section className="detail-card">
               <div className="detail-section-heading">
-                <span className="eyebrow">Who We Are</span>
-                <h2>Decades of Industrial Engineering Expertise</h2>
+                <span className="eyebrow">Company Profile</span>
+                <h2>S Ganapati Construction</h2>
               </div>
               <p className="detail-lead-paragraph">
-                S Ganapati Construction is a premier engineering contractor specializing in structural steel fabrication, high-altitude structural erection, and heavy industrial equipment installation. Headquartered in Visakhapatnam, we serve major industrial clients across India, delivering robust, code-compliant, and on-time engineering solutions.
+                <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>) is an established industrial engineering and contracting firm specializing in structural works, heavy fabrication, on-site erection, mechanical equipment installation, and turnkey commissioning.
               </p>
               <p>
-                Our multidisciplinary teams of certified structural engineers, coded welders, experienced riggers, and dedicated safety officers bring disciplined execution to every phase of project delivery. From greenfield industrial plants to complex shutdown revamps, we ensure highest standards of workmanship and zero-compromise safety.
+                Operating with certified occupational safety procedures under <strong>OHSAS 18001</strong> standards, we execute critical packages across integrated steel plants, cement manufacturing complexes, heavy material handling corridors, rolling mills, and power stations.
               </p>
+              <div className="profile-specs-pill-row">
+                <span className="profile-pill"><b>GSTIN:</b> {companyProfile.gstin}</span>
+                <span className="profile-pill"><b>Proprietor:</b> {companyProfile.proprietor}</span>
+                <span className="profile-pill"><b>HQ:</b> Visakhapatnam, AP</span>
+                <span className="profile-pill"><b>Track Record:</b> 1000+ Projects</span>
+              </div>
             </section>
 
-            {/* Core Values */}
+            {/* Work Approach */}
             <section className="detail-card">
               <div className="detail-section-heading">
-                <span className="eyebrow">Core Values</span>
-                <h2>The Principles Guiding Our Work</h2>
+                <span className="eyebrow">Work Approach</span>
+                <h2>Core Operational Focus</h2>
               </div>
               <div className="capabilities-grid">
                 <div className="capability-card">
                   <div className="capability-header">
                     <span className="capability-idx">01</span>
-                    <h3>Safety Above All</h3>
+                    <h3>Precision Engineering</h3>
                   </div>
-                  <p>Uncompromising commitment to zero lost-time injuries through daily hazard analysis, comprehensive PPE compliance, and strict adherence to international HSE protocols.</p>
+                  <p>Adherence to tight engineering tolerances, certified welding procedures (WPS/PQR), and sub-millimeter laser optical alignment.</p>
                 </div>
                 <div className="capability-card">
                   <div className="capability-header">
                     <span className="capability-idx">02</span>
-                    <h3>Precision Engineering</h3>
+                    <h3>On-Site Technical Expertise</h3>
                   </div>
-                  <p>Adherence to tight fabrication tolerances, certified welding procedures, and optical/laser alignment methods that guarantee operational reliability.</p>
+                  <p>Deploying experienced rigging masters, coded welders, structural supervisors, and heavy equipment operators for high-altitude technological erection.</p>
                 </div>
                 <div className="capability-card">
                   <div className="capability-header">
                     <span className="capability-idx">03</span>
-                    <h3>On-Time Milestone Delivery</h3>
+                    <h3>Project Safety &amp; Compliance</h3>
                   </div>
-                  <p>Disciplined project scheduling and critical path management to ensure industrial facilities commence commercial operations without delays.</p>
+                  <p>Adherence to OHSAS 18001, Contractor Safety Code enforcement, smart confined-space monitoring, and JSW-Dolvi Model emergency response plans.</p>
                 </div>
                 <div className="capability-card">
                   <div className="capability-header">
                     <span className="capability-idx">04</span>
-                    <h3>Client-Centric Transparency</h3>
+                    <h3>On-Time Execution &amp; Quality</h3>
                   </div>
-                  <p>Open communication, continuous technical reporting, and flexible adaptation to plant shutdown requirements and evolving site challenges.</p>
+                  <p>Disciplined critical-path scheduling to ensure industrial facilities and plant shutdown packages are delivered ahead of commercial deadlines.</p>
                 </div>
               </div>
             </section>
 
-            {/* Mission & Vision */}
+            {/* Certifications & Safety */}
             <section className="detail-card">
               <div className="detail-section-heading">
-                <span className="eyebrow">Vision &amp; Mission</span>
-                <h2>Driving Industrial Progress</h2>
+                <span className="eyebrow">Safety Benchmarks</span>
+                <h2>Certified Occupational Health &amp; Safety Standards</h2>
               </div>
-              <div className="vision-mission-grid">
-                <div className="vm-box">
-                  <strong>Our Mission</strong>
-                  <p>To deliver world-class industrial construction, structural fabrication, and heavy lifting solutions through skilled craftsmanship, certified quality assurance, and an unwavering safety culture.</p>
-                </div>
-                <div className="vm-box vm-box--alt">
-                  <strong>Our Vision</strong>
-                  <p>To be the most dependable and sought-after engineering construction partner for India’s core industrial sectors, recognized for structural integrity, technical prowess, and flawless project delivery.</p>
-                </div>
+              <p className="detail-lead-paragraph">
+                All manufacturing, fabrication yards, and project sites comply with <strong>OHSAS 18001 Occupational Health &amp; Safety Management System</strong>.
+              </p>
+              <div className="safety-cards-grid">
+                {safetyCertifications.map((item, idx) => (
+                  <div className="safety-feature-box" key={idx}>
+                    <strong>✓ {item.title}</strong>
+                    <p>{item.description}</p>
+                  </div>
+                ))}
               </div>
             </section>
 
-            {/* Safety & Quality Policy */}
+            {/* Workforce Training */}
             <section className="detail-card">
               <div className="detail-section-heading">
-                <span className="eyebrow">Commitment</span>
-                <h2>Health, Safety &amp; Environment (HSE) Policy</h2>
+                <span className="eyebrow">Workforce Development</span>
+                <h2>Structured Training &amp; Safety Programs</h2>
               </div>
               <p>
-                At S Ganapati Construction, safety is not merely a compliance checklist—it is an ingrained core culture. Every employee, from senior project managers to apprentice fitters, possesses the authority to stop work if unsafe conditions arise.
+                We believe safety is not a requirement, it is an ingrained responsibility. Our site personnel undergo structured learning modules covering:
               </p>
-              <div className="equipment-tag-cloud">
-                <span className="equipment-tag">100% Fall Protection at Heights</span>
-                <span className="equipment-tag">Daily Tool Box Safety Briefings</span>
-                <span className="equipment-tag">Third-Party Certified Lifting Gear</span>
-                <span className="equipment-tag">Mandatory Full PPE Protocols</span>
-                <span className="equipment-tag">Hot Work &amp; Confined Space Permits</span>
-                <span className="equipment-tag">First Aid Certified Site Personnel</span>
+              <div className="training-topics-grid">
+                {trainingTopics.map((topic, idx) => (
+                  <div className="training-item" key={idx}>
+                    <span className="training-num">0{idx + 1}</span>
+                    <span>{topic}</span>
+                  </div>
+                ))}
               </div>
             </section>
           </div>
@@ -147,32 +155,42 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
           {/* Sidebar */}
           <aside className="detail-sidebar-col">
             <div className="sidebar-card contact-cta-card">
-              <span className="eyebrow eyebrow--green">Get In Touch</span>
-              <h3>Partner with Us</h3>
-              <p>Looking for a reliable fabrication and erection contractor for your next infrastructure project?</p>
+              <span className="eyebrow eyebrow--green">Official Contact</span>
+              <h3>S Ganapati Construction</h3>
+              <p>Specialists in Structural Fabrications, Erection, Heavy Equipment Works.</p>
+
               <div className="sidebar-contacts">
                 <div className="sidebar-contact-row">
-                  <strong>Headquarters:</strong>
-                  <span>GSN Towers, Visakhapatnam, AP</span>
+                  <strong>Proprietor:</strong>
+                  <span>{companyProfile.proprietor}</span>
                 </div>
                 <div className="sidebar-contact-row">
-                  <strong>Contact Numbers:</strong>
-                  <span>94417 71333 / 90320 79333</span>
+                  <strong>GSTIN Registration:</strong>
+                  <span>{companyProfile.gstin}</span>
+                </div>
+                <div className="sidebar-contact-row">
+                  <strong>Direct Phone:</strong>
+                  <span>{companyProfile.phonePrimary} / {companyProfile.phoneSecondary}</span>
                 </div>
                 <div className="sidebar-contact-row">
                   <strong>Email:</strong>
-                  <span>sganapati1585@gmail.com</span>
+                  <span>{companyProfile.email}</span>
+                </div>
+                <div className="sidebar-contact-row">
+                  <strong>Registered Office:</strong>
+                  <span>{companyProfile.address.full}</span>
                 </div>
               </div>
+
               <button type="button" className="button button--red button--full" onClick={onContactClick}>
-                Contact Our Team <Arrow />
+                Send Project Enquiry <Arrow />
               </button>
             </div>
 
             <div className="sidebar-card badge-card">
               <div className="badge-highlight">
-                <strong>Registered Contractor</strong>
-                <p>Licensed engineering contractor specialized in industrial, metallurgical, and power infrastructure works.</p>
+                <strong>1000+ Projects Experience</strong>
+                <p>Over a decade of trusted industrial execution for heavy infrastructure, steel mills, and process plants.</p>
               </div>
             </div>
           </aside>

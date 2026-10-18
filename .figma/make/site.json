@@ -1,7 +1,11 @@
 {
-  "description": "Transforms web design concepts into visually accurate, user-friendly websites, ensuring clients receive a final product that matches their vision.",
+  "title": "S Ganapati Construction | Structural Fabrication, Erection & Heavy Equipment Works",
+  "description": "Specialists in structural fabrications, high-altitude erection, heavy equipment works, and industrial commissioning based in Visakhapatnam, Andhra Pradesh. GSTIN: 37DIPPG2975E1ZX.",
+  "icons": {
+    "icon": "/favicon.png"
+  },
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,

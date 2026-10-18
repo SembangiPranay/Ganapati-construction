@@ -1,15 +1,23 @@
 import { useState, useEffect, type ReactNode } from 'react'
-import { servicesData } from './data/servicesData'
+import { servicesData, companyProfile, safetyCertifications } from './data/servicesData'
 import ServiceDetailPage from './components/ServiceDetailPage'
 import AboutDetailPage from './components/AboutDetailPage'
 import ProjectsDetailPage from './components/ProjectsDetailPage'
 
 const Arrow = () => <span aria-hidden="true">→</span>
 
-function Mark({ small = false }: { small?: boolean }) {
+function BrandLogo({ small = false }: { small?: boolean }) {
   return (
-    <div className={`brand-mark ${small ? 'brand-mark--small' : ''}`} aria-hidden="true">
-      <span>ॐ</span>
+    <div className={`brand-logo-container ${small ? 'brand-logo-container--small' : ''}`} aria-hidden="true">
+      <img
+        src="/assets/ganapati-logo.png"
+        alt="S Ganapati Construction Logo"
+        className="brand-logo-img"
+        width={small ? 36 : 46}
+        height={small ? 45 : 58}
+        loading="eager"
+        decoding="async"
+      />
     </div>
   )
 }
@@ -33,7 +41,7 @@ function Brand({
       }}
       aria-label="S Ganapati Construction home"
     >
-      <Mark small={footer} />
+      <BrandLogo small={footer} />
       <span className="brand-copy">
         <strong>S GANAPATI</strong>
         <small>CONSTRUCTION</small>
@@ -157,17 +165,10 @@ function Icon({ name }: { name: string }) {
 }
 
 const strengths = [
-  ['helmet', 'Experienced', 'Team'],
-  ['target', 'Precision', 'Execution'],
-  ['shield', 'Safety', 'Focused'],
+  ['helmet', 'Experienced', 'Workforce'],
+  ['target', 'Precision', 'Engineering'],
+  ['shield', 'Safety', 'OHSAS 18001'],
   ['team', 'Client', 'Centric'],
-]
-
-const quality = [
-  ['helmet', 'Safety-First', 'Approach'],
-  ['gear', 'Quality', 'Control'],
-  ['team', 'Trained', 'Workforce'],
-  ['document', 'Compliance', '& Standards'],
 ]
 
 type ActiveView =
@@ -340,7 +341,7 @@ export default function App() {
                 navigateToHome('safety')
               }}
             >
-              Safety &amp; Quality
+              Safety &amp; Certifications
             </a>
             <a
               href="#contact"
@@ -424,12 +425,12 @@ export default function App() {
               className={`mobile-nav-item ${currentView.type === 'about' ? 'active' : ''}`}
               onClick={navigateToAbout}
             >
-              <span>🏢 About Our Company</span>
+              <span>🏢 About S Ganapati Construction</span>
               <Arrow />
             </button>
 
             <div className="mobile-nav-group">
-              <span className="mobile-group-title">Services &amp; Capabilities</span>
+              <span className="mobile-group-title">6 Core Industrial Services</span>
               {servicesData.map((s) => (
                 <button
                   type="button"
@@ -449,7 +450,7 @@ export default function App() {
               className={`mobile-nav-item ${currentView.type === 'projects' ? 'active' : ''}`}
               onClick={navigateToProjects}
             >
-              <span>🏗️ Projects Showcase</span>
+              <span>🏗️ Projects Portfolio</span>
               <Arrow />
             </button>
 
@@ -458,7 +459,7 @@ export default function App() {
               className="mobile-nav-item"
               onClick={() => navigateToHome('safety')}
             >
-              <span>🛡️ Safety &amp; Quality Protocols</span>
+              <span>🛡️ OHSAS 18001 Safety Standards</span>
               <Arrow />
             </button>
 
@@ -467,7 +468,7 @@ export default function App() {
               className="mobile-nav-item"
               onClick={() => navigateToHome('contact')}
             >
-              <span>📞 Contact &amp; Enquiries</span>
+              <span>📞 Contact &amp; GSTIN Details</span>
               <Arrow />
             </button>
           </div>
@@ -478,20 +479,20 @@ export default function App() {
               className="button button--red button--full"
               onClick={() => handleContactClick()}
             >
-              Get a Fast Project Quote <Arrow />
+              Get Project Estimation <Arrow />
             </button>
 
             <div className="mobile-drawer-contact-links">
-              <a href="tel:+919441771333" className="drawer-quick-link">
-                <PhoneCallIcon /> <span>Call 94417 71333</span>
+              <a href={`tel:+91${companyProfile.phonePrimary}`} className="drawer-quick-link">
+                <PhoneCallIcon /> <span>Call {companyProfile.phonePrimary}</span>
               </a>
               <a
-                href="https://wa.me/919441771333?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20S%20Ganapati%20Construction%20services."
+                href={`https://wa.me/91${companyProfile.phonePrimary}?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20S%20Ganapati%20Construction%20services.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="drawer-quick-link whatsapp-link"
               >
-                <WhatsAppIcon /> <span>Chat on WhatsApp</span>
+                <WhatsAppIcon /> <span>WhatsApp</span>
               </a>
             </div>
           </div>
@@ -527,23 +528,19 @@ export default function App() {
             <div className="container hero-inner">
               <div className="hero-copy">
                 <p className="eyebrow eyebrow--light">
-                  Industrial engineering
+                  {companyProfile.name}
                   <br />
-                  built for tomorrow
+                  Visakhapatnam, Andhra Pradesh
                 </p>
                 <h1>
-                  Structural
-                  <br />
-                  Fabrication.
-                  <br />
-                  Erection.
-                  <br />
-                  <span>Heavy Equipment Works.</span>
+                  Engineering<br />
+                  Excellence in<br />
+                  <span>Steel Infrastructure.</span>
                 </h1>
                 <p className="hero-subtitle">
-                  Reliable engineering and construction solutions
+                  Specialists in Structural Fabrications, Erection, Heavy Equipment Works,
                   <br />
-                  for industrial infrastructure.
+                  and Industrial Turnkey Commissioning.
                 </p>
                 <div className="button-row">
                   <button
@@ -554,7 +551,7 @@ export default function App() {
                     Explore Our Work <Arrow />
                   </button>
                   <a className="button button--outline" href="#contact">
-                    Contact Us
+                    Contact Our Office
                   </a>
                 </div>
                 <div className="slider-index">
@@ -564,24 +561,21 @@ export default function App() {
                 </div>
               </div>
               <p className="hero-statement">
-                Precision
-                <br />
-                engineering
-                <br />
-                for a stronger
-                <br />
+                Precision<br />
+                Engineering<br />
+                for a stronger<br />
                 tomorrow
               </p>
             </div>
           </section>
 
-          {/* Capabilities Strip */}
+          {/* Core Capabilities Strip (Matching Page 1 Brochure Strip) */}
           <section className="capability-strip" aria-label="Core capabilities">
             <div className="container capability-inner">
               <strong>
-                Our Core
+                Our Top
                 <br />
-                Capabilities
+                Services
               </strong>
               <div className="capability-list">
                 <span>Structural Works</span>
@@ -609,7 +603,7 @@ export default function App() {
                   }
                 />
                 <p>
-                  S Ganapati Construction is a trusted partner in structural fabrication, erection and heavy equipment works. We deliver reliable, safe and high-quality solutions for industrial and infrastructure projects through a skilled team and disciplined execution.
+                  <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>) is a trusted engineering partner in structural fabrication, heavy erection, and industrial equipment assembly. We execute turnkey infrastructure projects across steel plants, cement plants, rolling mills, and material handling systems with disciplined on-time execution.
                 </p>
                 <div className="feature-row">
                   {strengths.map(([symbol, one, two]) => (
@@ -631,7 +625,10 @@ export default function App() {
                   Know More About Us <Arrow />
                 </button>
               </div>
-              <div className="about-photo">
+              <div
+                className="about-photo"
+                style={{ backgroundImage: "url('/assets/safety-team-site.jpg')" }}
+              >
                 <div className="photo-slash" aria-hidden="true" />
               </div>
               <aside className="mission">
@@ -641,21 +638,21 @@ export default function App() {
                   Mission
                 </span>
                 <i />
-                <p>To deliver world-class industrial construction solutions with safety, quality and on-time execution.</p>
+                <p>To deliver world-class industrial construction solutions with zero-incident safety, certified quality, and disciplined milestone delivery.</p>
               </aside>
             </div>
           </section>
 
-          {/* Services Section */}
+          {/* 6 Core Industrial Services Section */}
           <section className="services section" id="services">
             <div className="container">
               <div className="services-heading">
-                <SectionTitle kicker="Our Services" title="Specialists in Industrial Construction & Erection" />
+                <SectionTitle kicker="Our Top Services" title="Specialists in Industrial Construction & Erection" />
                 <p>
-                  We provide end-to-end solutions in structural fabrications, erection and heavy equipment works for a wide range of industrial applications.
+                  We provide end-to-end solutions in structural fabrications, high-altitude erection, mechanical installation, and commissioning across heavy industrial sectors.
                 </p>
               </div>
-              <div className="service-grid">
+              <div className="service-grid service-grid--6">
                 {servicesData.map((service, index) => (
                   <article
                     className="service-card"
@@ -671,7 +668,7 @@ export default function App() {
                   >
                     <div className="service-image">
                       <img src={service.heroImage} alt={service.title} loading="lazy" decoding="async" />
-                      <span className={index % 2 ? 'number red' : 'number'}>0{index + 1}</span>
+                      <span className={index % 2 ? 'number red' : 'number'}>{service.number}</span>
                     </div>
                     <div className="service-body">
                       <h3>{service.title}</h3>
@@ -679,7 +676,7 @@ export default function App() {
                       <button
                         type="button"
                         className="service-arrow-btn"
-                        aria-label={`View detailed information on ${service.title}`}
+                        aria-label={`View detailed specifications on ${service.title}`}
                         onClick={(e) => {
                           e.stopPropagation()
                           navigateToService(service.id)
@@ -694,7 +691,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Featured Projects */}
+          {/* Featured Projects (Matching Brochure Formats) */}
           <section className="projects" id="projects">
             <div className="project-intro">
               <div>
@@ -705,9 +702,7 @@ export default function App() {
                   Speaks for Itself
                 </h2>
                 <p>
-                  A showcase of our industrial construction,
-                  <br />
-                  fabrication and erection projects.
+                  Specialized execution in Wire Rod Mills (WRM), Coke Oven SCP cars, RMHS conveyor networks, and heavy gantry installations.
                 </p>
                 <button
                   type="button"
@@ -718,12 +713,15 @@ export default function App() {
                 </button>
               </div>
             </div>
-            <div className="project-photo" />
+            <div
+              className="project-photo"
+              style={{ backgroundImage: "url('/assets/gearbox-assembly.jpg')" }}
+            />
             <div className="project-list">
               {[
-                ['01', 'Industrial Plant Structure', 'Visakhapatnam, AP', 'structural-fabrication'],
-                ['02', 'Heavy Equipment Installation', 'Industrial Project', 'heavy-equipment-works'],
-                ['03', 'Steel Structure Erection', 'Industrial Facility', 'structural-erection'],
+                ['01', 'Wire Rod Mill (WRM) Equipment Assembly', 'Industrial Steel Complex', 'equipment-installation'],
+                ['02', 'Coke Oven SCP Car & CDQ System Installation', 'Metallurgical Facility', 'commissioning-works'],
+                ['03', 'RMHS Raw Material Conveyor Network', 'Visakhapatnam Port / Plant', 'structural-works'],
               ].map(([number, name, place, sId], index) => (
                 <div
                   className="project-item"
@@ -742,39 +740,42 @@ export default function App() {
             </div>
           </section>
 
-          {/* Quality & Safety */}
+          {/* Safety & Quality Section (OHSAS 18001 & JSW Model) */}
           <section className="quality" id="safety">
             <div className="container quality-grid">
               <div className="quality-copy">
-                <SectionTitle kicker="Safety & Quality" title="People. Process. Performance." />
+                <SectionTitle kicker="Certifications & Safety" title="Certified OHSAS 18001 Standards" />
                 <p>
-                  We follow strict safety protocols and quality standards to ensure every project is delivered safely, efficiently and to specification.
+                  All manufacturing, fabrication yards, and project sites strictly comply with the <strong>OHSAS 18001 Occupational Health &amp; Safety Management System</strong>, supported by smart confined-space cameras, automated PPE tracking, and the JSW-Dolvi Model.
                 </p>
                 <div className="feature-row">
-                  {quality.map(([symbol, one, two]) => (
-                    <div className="feature" key={one}>
-                      <Icon name={symbol} />
+                  {safetyCertifications.slice(0, 3).map((item, idx) => (
+                    <div className="feature" key={idx}>
+                      <Icon name={item.icon} />
                       <span>
-                        {one}
+                        {item.title.split(' ')[0]}
                         <br />
-                        {two}
+                        {item.title.split(' ').slice(1, 3).join(' ')}
                       </span>
                     </div>
                   ))}
                 </div>
                 <div className="safety-assurance">
-                  <span>Safety assurance</span>
-                  <strong>Disciplined execution at every project site</strong>
+                  <span>Safety Policy</span>
+                  <strong>"Safety is not a requirement, it is a responsibility."</strong>
                 </div>
               </div>
               <div className="quality-visual">
-                <div className="quality-photo" />
+                <div
+                  className="quality-photo"
+                  style={{ backgroundImage: "url('/assets/workforce-training.jpg')" }}
+                />
                 <div className="quality-caption">
-                  <small>Our commitment</small>
+                  <small>Our Safety Benchmark</small>
                   <strong>
-                    Safe work.
+                    OHSAS 18001 Certified.
                     <br />
-                    Reliable outcomes.
+                    Accident-Free Execution.
                   </strong>
                 </div>
               </div>
@@ -784,7 +785,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Contact Section */}
+          {/* Contact Section with Official GSTIN & Proprietor */}
           <section className="contact" id="contact">
             <div className="container contact-grid">
               <div className="contact-heading">
@@ -795,36 +796,44 @@ export default function App() {
                   Next Project
                 </h2>
                 <p>
-                  Get in touch with our team for enquiries,
-                  <br />
-                  project discussions or site consultations.
+                  Get in touch with S Ganapati Construction for technical tenders, fabrication drawings, crane lift schedules, or site surveys.
                 </p>
               </div>
               <address className="contact-details">
                 <p>
                   <Icon name="phone" />
                   <strong>
-                    <a href="tel:+919441771333" style={{ color: 'inherit' }}>94417 71333</a>
+                    <a href={`tel:+91${companyProfile.phonePrimary}`} style={{ color: 'inherit' }}>
+                      {companyProfile.phonePrimary}
+                    </a>
                     <br />
-                    <a href="tel:+919032079333" style={{ color: 'inherit' }}>90320 79333</a>
+                    <a href={`tel:+91${companyProfile.phoneSecondary}`} style={{ color: 'inherit' }}>
+                      {companyProfile.phoneSecondary}
+                    </a>
                   </strong>
                 </p>
                 <p>
                   <Icon name="mail" />
-                  <a href="mailto:sganapati1585@gmail.com" style={{ color: 'inherit' }}>
-                    sganapati1585@gmail.com
+                  <a href={`mailto:${companyProfile.email}`} style={{ color: 'inherit' }}>
+                    {companyProfile.email}
                   </a>
                 </p>
                 <p>
                   <Icon name="pin" />
                   <span>
-                    11-30/27, F-no. 303, GSN Towers,
+                    <b>{companyProfile.name}</b>
                     <br />
-                    Bhagath Singh Nagar, Yellapuvvanipalem,
+                    Proprietor: {companyProfile.proprietor}
                     <br />
-                    Gopalapatnam, Visakhapatnam,
+                    <b>GSTIN:</b> {companyProfile.gstin}
                     <br />
-                    Andhra Pradesh 530027
+                    {companyProfile.address.doorNo}, {companyProfile.address.building},
+                    <br />
+                    {companyProfile.address.colony},
+                    <br />
+                    {companyProfile.address.area},
+                    <br />
+                    {companyProfile.address.state} - {companyProfile.address.pincode}
                   </span>
                 </p>
               </address>
@@ -840,16 +849,18 @@ export default function App() {
                     value={selectedProjectType}
                     onChange={(e) => setSelectedProjectType(e.target.value)}
                   >
-                    <option value="">Select Project / Service</option>
-                    <option value="Structural Fabrication">Structural Fabrication</option>
-                    <option value="Structural Erection">Structural Erection</option>
-                    <option value="Heavy Equipment Works">Heavy Equipment Works</option>
-                    <option value="Industrial Construction">Industrial Construction</option>
+                    <option value="">Select Required Service</option>
+                    <option value="Structural Works">01. Structural Works</option>
+                    <option value="Fabrication Works">02. Fabrication Works</option>
+                    <option value="Erection Works">03. Erection Works</option>
+                    <option value="Equipment Installation">04. Equipment Installation</option>
+                    <option value="Maintenance Services">05. Maintenance Services</option>
+                    <option value="Commissioning Work">06. Commissioning &amp; Specialized Machinery</option>
                   </select>
-                  <textarea aria-label="Project details" placeholder="Project Details & Requirements *" required />
+                  <textarea aria-label="Project details" placeholder="Project Scope, Drawings, & Tonnage Details *" required />
                 </div>
                 <button className="button button--red button--small button--full" type="submit">
-                  Send Enquiry <Arrow />
+                  Send Project Enquiry <Arrow />
                 </button>
               </form>
             </div>
@@ -859,12 +870,12 @@ export default function App() {
 
       {/* Floating Mobile Bottom Action Bar */}
       <nav className="mobile-quick-bar" aria-label="Quick contact actions">
-        <a href="tel:+919441771333" className="mobile-quick-btn mobile-call-btn">
+        <a href={`tel:+91${companyProfile.phonePrimary}`} className="mobile-quick-btn mobile-call-btn">
           <PhoneCallIcon />
           <span>Call Now</span>
         </a>
         <a
-          href="https://wa.me/919441771333?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20S%20Ganapati%20Construction%20services."
+          href={`https://wa.me/91${companyProfile.phonePrimary}?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20S%20Ganapati%20Construction%20services.`}
           target="_blank"
           rel="noopener noreferrer"
           className="mobile-quick-btn mobile-whatsapp-btn"
@@ -885,7 +896,14 @@ export default function App() {
       {/* Footer */}
       <footer>
         <div className="container footer-inner">
-          <Brand footer onBrandClick={() => navigateToHome()} />
+          <div className="footer-brand-block">
+            <Brand footer onBrandClick={() => navigateToHome()} />
+            <div className="footer-legal-line">
+              <span><b>Proprietor:</b> {companyProfile.proprietor}</span>
+              <span className="footer-dot">•</span>
+              <span><b>GSTIN:</b> {companyProfile.gstin}</span>
+            </div>
+          </div>
           <div className="footer-links">
             <a
               href="#home"
@@ -942,7 +960,7 @@ export default function App() {
               Contact
             </a>
           </div>
-          <p>© 2024 S Ganapati Construction. All rights reserved.</p>
+          <p>© 2024 {companyProfile.name}. All rights reserved.</p>
         </div>
       </footer>
     </div>

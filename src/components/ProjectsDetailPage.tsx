@@ -12,7 +12,13 @@ const BackArrow = () => <span aria-hidden="true">←</span>
 export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: ProjectsDetailPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All')
 
-  const categories = ['All', 'Structural Fabrication', 'Structural Erection', 'Heavy Equipment Works', 'Industrial Construction']
+  const categories = [
+    'All',
+    'Equipment Installation',
+    'Commissioning & Specialized Machinery',
+    'Structural Works',
+    'Erection Works',
+  ]
 
   const filteredProjects =
     activeCategory === 'All'
@@ -29,7 +35,7 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
               Home
             </button>
             <span className="breadcrumb-sep">/</span>
-            <span className="breadcrumb-current">Projects Showcase</span>
+            <span className="breadcrumb-current">Projects Portfolio</span>
           </div>
           <button type="button" className="button button--outline-dark button--small" onClick={onNavigateHome}>
             <BackArrow /> Back to Overview
@@ -39,20 +45,20 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
 
       {/* Hero */}
       <section className="detail-hero">
-        <div className="detail-hero-backdrop" style={{ backgroundImage: "url('/assets/plant.jpg')" }} />
+        <div className="detail-hero-backdrop" style={{ backgroundImage: "url('/assets/crane-high-lift.jpg')" }} />
         <div className="detail-hero-overlay" />
         <div className="container detail-hero-inner">
           <div className="detail-hero-badge">
             <span className="detail-number-badge green">PROJ</span>
-            <span className="detail-badge-text">Track Record &amp; Portfolio</span>
+            <span className="detail-badge-text">Track Record &amp; Executed Works</span>
           </div>
-          <h1>Our Work Speaks for Itself</h1>
+          <h1>Engineered Lifting. Controlled Erection. Assured Stability.</h1>
           <p className="detail-hero-tagline">
-            Explore our delivered industrial fabrication, erection, and equipment installation projects across South India.
+            Showcase of industrial machinery installation, coke oven SCP systems, RMHS conveyor networks, and heavy technological erection.
           </p>
           <div className="detail-hero-actions">
             <button type="button" className="button button--red" onClick={() => onContactClick()}>
-              Discuss Your Project <Arrow />
+              Enquire for Your Project <Arrow />
             </button>
             <button type="button" className="button button--outline" onClick={onNavigateHome}>
               Return to Home
@@ -119,9 +125,11 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
           {/* Bottom CTA Box */}
           <div className="projects-bottom-cta">
             <div className="cta-copy">
-              <span className="eyebrow eyebrow--green">Plan Your Next Phase</span>
-              <h2>Ready to Execute Your Industrial Construction?</h2>
-              <p>Contact our project management team in Visakhapatnam for technical proposals, BOQ estimation, and site surveys.</p>
+              <span className="eyebrow eyebrow--green">S Ganapati Construction</span>
+              <h2>Ready to Execute Your Next Heavy Project?</h2>
+              <p>
+                Get in touch with our engineering team in Visakhapatnam for structural fabrication, crane lifting plans, machinery assembly, and commissioning quotes.
+              </p>
             </div>
             <button type="button" className="button button--red" onClick={() => onContactClick()}>
               Get in Touch Today <Arrow />
