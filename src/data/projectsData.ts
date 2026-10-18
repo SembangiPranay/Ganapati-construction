@@ -15,6 +15,17 @@ export interface ExecutedItem {
   category?: string
 }
 
+export interface ProjectGalleryPhoto {
+  id: string
+  url: string
+  title: string
+  description: string
+  category: 'steel-structures' | 'crane-lifts' | 'bridges-fob' | 'foundations-civil' | 'utilities'
+  categoryLabel: string
+  projectId?: string
+  projectTitle?: string
+}
+
 export interface OfficialProject {
   id: string
   projectNumber: string
@@ -40,6 +51,7 @@ export interface OfficialProject {
     description: string
     imageUrl?: string
   }[]
+  galleryPhotos?: ProjectGalleryPhoto[]
   summary: string
   detailedScope: string[]
   keyMetrics: {
@@ -374,3 +386,292 @@ export const authenticProjects: OfficialProject[] = [
     ],
   },
 ]
+
+export const masterGalleryPhotos: ProjectGalleryPhoto[] = [
+  {
+    id: 'p01',
+    url: '/projects/0a98a433-bbc2-4c61-8704-a8c79019ee9a.jpg',
+    title: 'Industrial Heavy Steel Bay Columns',
+    description: 'Massive red structural steel bay columns, overhead gantry crane runways, and high-altitude roof trusses at JSW Toranagallu complex',
+    category: 'steel-structures',
+    categoryLabel: 'Heavy Steel Structures',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p02',
+    url: '/projects/20b32382-3a6a-4068-8e67-88f96af9741a.jpg',
+    title: 'Night Crane Lift of Transmission Duct',
+    description: 'Telescopic crane hoisting massive cylindrical steel duct section onto transport carrier during night shift rigging',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p03',
+    url: '/projects/25f44efb-2dc6-485b-a81c-e7a36e6ddcba.jpg',
+    title: 'Foundation Bolt Cage Alignment & Pedestals',
+    description: 'Heavy rebar foundation cages, template-positioned anchor bolts, and reinforced concrete pedestals for column baseplates',
+    category: 'foundations-civil',
+    categoryLabel: 'Civil Foundations & Pedestals',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p04',
+    url: '/projects/2aedb4ca-7e16-4475-87b6-96739d1512df.jpg',
+    title: 'Night High-Altitude Box Girder Rigging',
+    description: 'Heavy crawler lattice boom crane hoisting industrial box girder onto concrete pier during nighttime plant shutdown window',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p05',
+    url: '/projects/340bd80d-55a0-494c-83df-694462dded8b.jpg',
+    title: 'Concrete Boom Pump & Industrial Steel Bays',
+    description: 'Mobile concrete boom pump and transit mixer pouring foundation pedestals alongside heavy structural steel portal frames',
+    category: 'steel-structures',
+    categoryLabel: 'Heavy Steel Structures',
+    projectId: 'peddapuram-ulb-ra02',
+    projectTitle: 'Peddapuram ULB Water Pipeline',
+  },
+  {
+    id: 'p06',
+    url: '/projects/3a4cbea8-a0a9-46ee-9533-9b556c71a37a.jpg',
+    title: 'Railway Foot-Overbridge Stairway Framing',
+    description: 'Pre-engineered steel staircase framework and elevated tower landing support over railway line embankment',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p07',
+    url: '/projects/3fcecc41-badb-4e81-9d43-27015c99ce1b.jpg',
+    title: 'Crane Placement of FOB Truss over Live Rail Tracks',
+    description: 'Heavy mobile crane lowering foot-overbridge steel pedestrian truss across live electrified 25kV traction railway lines under line block',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p08',
+    url: '/projects/41f08e9f-7b79-4a65-9a7e-7c788e4195c8.jpg',
+    title: 'FOB Elevated Approach Tower & Stair Stringers',
+    description: 'Heavy section channel columns and multi-tier stairway stringers under erection for public pedestrian crossing',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p09',
+    url: '/projects/422642a8-ab9d-4183-a534-245620c9d81a.jpg',
+    title: 'Colossal Conical Cyclone Rigging Lift',
+    description: 'Heavy crane hoist of colossal metallurgical conical cyclone vessel equipped with perimeter waffle stiffening rings and tagline guides',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p10',
+    url: '/projects/4fe1b776-ceb2-4166-add7-2f7018340c2c.jpg',
+    title: 'SANY Heavy Crawler Crane Night Rigging',
+    description: 'Precision multi-point tagline rigging with certified safety slings lifting heavy cylindrical equipment at night',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'peddapuram-ulb-ra02',
+    projectTitle: 'Peddapuram ULB Water Pipeline',
+  },
+  {
+    id: 'p11',
+    url: '/projects/5669f4d0-aa94-461c-945f-78d6c5ffcfcf.jpg',
+    title: 'Rail-Mounted Electric Gantry with Magnetic Beam',
+    description: 'Heavy-duty rail-mounted portal gantry crane with electromagnetic spreader beam for billet, beam, and plate handling',
+    category: 'steel-structures',
+    categoryLabel: 'Heavy Steel Structures',
+    projectId: 'mandapeta-ulb-ra01',
+    projectTitle: 'Mandapeta ULB Water Pipeline',
+  },
+  {
+    id: 'p12',
+    url: '/projects/5afbf099-8e4f-4ad8-852b-aeafafa2b3c2.jpg',
+    title: 'Plate Fabrication Yard & Hydra Crane Operation',
+    description: 'Fabrication yard with fitters, certified SMAW/MIG welders, and Hydra mobile crane fabricating built-up plate girders',
+    category: 'steel-structures',
+    categoryLabel: 'Heavy Steel Structures',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p13',
+    url: '/projects/66a3f2c8-783f-4a8d-bc77-25485927ebb4.jpg',
+    title: 'Open Fabrication Yard & Steel Plate Stacks',
+    description: 'Raw materials stockyard and mobile cranes staging heavy structural steel plates for layout and automated cutting',
+    category: 'steel-structures',
+    categoryLabel: 'Heavy Steel Structures',
+    projectId: 'mandapeta-ulb-ra01',
+    projectTitle: 'Mandapeta ULB Water Pipeline',
+  },
+  {
+    id: 'p14',
+    url: '/projects/751149f9-616a-48ea-98a2-3c2be6c85eb0.jpg',
+    title: 'Multi-Bay Technological Plant Steel Structure',
+    description: 'Interconnected multi-bay industrial plant steel framework with overhead crane runway girders and high-altitude walkways',
+    category: 'steel-structures',
+    categoryLabel: 'Heavy Steel Structures',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p15',
+    url: '/projects/7a42a22e-209c-4ee8-a002-3b1905c174b9.jpg',
+    title: 'Pipeline Spool & Materials Yard',
+    description: 'Transmission pipeline spools, fabricated specials, and precast foundation pedestals on active utility site with engineers',
+    category: 'utilities',
+    categoryLabel: 'Public Utility & Piping',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p16',
+    url: '/projects/9c63692e-c2ee-486a-9ab8-aa1c8aa40929.jpg',
+    title: 'Under-Erection FOB Support Tower',
+    description: 'Structural steel tower column with bracing and rigging rope guides for railway pedestrian overpass integration',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p17',
+    url: '/projects/9fd38768-4fee-4e39-bc58-8525b4e4bd49.jpg',
+    title: 'Railway Corridor FOB Truss Launching Operations',
+    description: 'Platform overview of heavy mobile crane and engineering crews erecting steel pedestrian bridge across active railway tracks',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p18',
+    url: '/projects/a5d96051-f795-4187-8faa-653ce8fb0d7f.jpg',
+    title: 'Liebherr Heavy Crane Composite Girder Launching',
+    description: 'Liebherr multi-axle telescopic all-terrain crane lowering composite steel bridge girder with shear connectors onto pier abutment',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p19',
+    url: '/projects/ae85c8dc-1afa-49bc-9a39-d26eeeafa937.jpg',
+    title: 'Foundation Pedestal Rebar Cages & Baseplates',
+    description: 'High-density reinforcing steel cages, leveling shims, and grouting formwork for heavy industrial building columns',
+    category: 'foundations-civil',
+    categoryLabel: 'Civil Foundations & Pedestals',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p20',
+    url: '/projects/bcadc803-778a-45f8-a3db-8aeae5566a16.jpg',
+    title: 'Elevated Stairway Stringers & Safety Handrails',
+    description: 'Structural staircase framing and handrail balustrades aligned with foundation pedestals at railway approach',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p21',
+    url: '/projects/c2826311-34c7-470f-ad14-477068410786.jpg',
+    title: 'Underside View of Composite Bridge Girders',
+    description: 'Underside perspective of erected composite bridge superstructure showing high-strength bolted splice plates, cross-frames, and bearings',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'mandapeta-ulb-ra01',
+    projectTitle: 'Mandapeta ULB Water Pipeline',
+  },
+  {
+    id: 'p22',
+    url: '/projects/c6f30603-c914-4603-8419-c37909597bb7.jpg',
+    title: 'Platform Gantry Superstructure Integration',
+    description: 'Completed steel gantry footbridge and staircase structure adjacent to railway platform edge',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p23',
+    url: '/projects/ca1a0ec5-c32d-4f32-b9fc-c25c81b27a78.jpg',
+    title: 'Mandapeta Site Engineering Supervision',
+    description: 'Engineers, supervisors, and technicians inspecting pipeline alignment, precast pedestals, and equipment placement',
+    category: 'utilities',
+    categoryLabel: 'Public Utility & Piping',
+    projectId: 'mandapeta-ulb-ra01',
+    projectTitle: 'Mandapeta ULB Water Pipeline',
+  },
+  {
+    id: 'p24',
+    url: '/projects/d29f8059-59c6-42e1-9a85-bb6d7991cd32.jpg',
+    title: 'Heavy Telescopic Crane Launching Bridge Girder',
+    description: 'Heavy telescopic crane with outriggers deployed launching steel composite bridge girder with top shear studs across canal corridor',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+  {
+    id: 'p25',
+    url: '/projects/e08d930c-4f01-40ce-8dac-749d1f2aec22.jpg',
+    title: 'Cylindrical Duct & Vessel Erection Hoist',
+    description: 'Crane hoisting large-diameter steel transmission cylinder with internal radial spider stiffeners and tagline guides',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'peddapuram-ulb-ra02',
+    projectTitle: 'Peddapuram ULB Water Pipeline',
+  },
+  {
+    id: 'p26',
+    url: '/projects/e7d8de15-df77-4096-bbc0-d5ae7336e7e8.jpg',
+    title: 'Night Crane Box Girder Placement',
+    description: 'Nighttime crane hoist aligning heavy box-section runway girder onto structural column brackets',
+    category: 'crane-lifts',
+    categoryLabel: 'Crane Lifts & Rigging',
+    projectId: 'jsw-toranagallu-steel-cement',
+    projectTitle: 'JSW Steel & Cement Complex',
+  },
+  {
+    id: 'p27',
+    url: '/projects/ee6f4400-591f-4457-b8a5-ee338ef356d6.jpg',
+    title: 'Civil Foundation Blocks, Scaffolding & Footings',
+    description: 'Reinforced concrete foundation blocks, shuttering formwork, and staging scaffolding for heavy industrial columns',
+    category: 'foundations-civil',
+    categoryLabel: 'Civil Foundations & Pedestals',
+    projectId: 'peddapuram-ulb-ra02',
+    projectTitle: 'Peddapuram ULB Water Pipeline',
+  },
+  {
+    id: 'p28',
+    url: '/projects/ffce7dbb-68d9-4a27-9d05-a3e3da5fa9f5.jpg',
+    title: 'Railway Foot-Overbridge Span & Stairway Framing',
+    description: 'Overhead view of pre-engineered pedestrian footbridge superstructure framing and approach stairs along electrified rail line',
+    category: 'bridges-fob',
+    categoryLabel: 'Bridges & Railway FOBs',
+    projectId: 'amrut-master-1314-a1',
+    projectTitle: 'AP AMRUT 2.0 Water & Utility Schemes',
+  },
+]
+
+// Automatically bind project-specific gallery photos to authenticProjects
+authenticProjects.forEach((p) => {
+  p.galleryPhotos = masterGalleryPhotos.filter((g) => g.projectId === p.id)
+})
+

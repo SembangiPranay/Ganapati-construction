@@ -184,7 +184,7 @@ type ActiveView =
   | { type: 'home' }
   | { type: 'service'; serviceId: string }
   | { type: 'about' }
-  | { type: 'projects' }
+  | { type: 'projects'; targetProjectId?: string }
 
 export default function App() {
   const [currentView, setCurrentView] = useState<ActiveView>({ type: 'home' })
@@ -219,9 +219,19 @@ export default function App() {
         setCurrentView({ type: 'about' })
         window.scrollTo({ top: 0, behavior: 'smooth' })
         return
-      } else if (hash === '#/all-projects' || hash === '#all-projects' || hash === '#/projects-showcase') {
-        setCurrentView({ type: 'projects' })
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else if (
+        hash.startsWith('#/all-projects') ||
+        hash.startsWith('#all-projects') ||
+        hash === '#/projects-showcase'
+      ) {
+        const targetId = hash.replace(/^#\/?all-projects\/?/, '')
+        setCurrentView({
+          type: 'projects',
+          targetProjectId: targetId && targetId.length > 0 ? targetId : undefined,
+        })
+        if (!targetId) {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
         return
       }
 
@@ -266,11 +276,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const navigateToProjects = () => {
+  const navigateToProjects = (projectId?: string) => {
     setMobileMenuOpen(false)
-    window.location.hash = '#/all-projects'
-    setCurrentView({ type: 'projects' })
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.location.hash = projectId ? `#/all-projects/${projectId}` : '#/all-projects'
+    setCurrentView({ type: 'projects', targetProjectId: projectId })
+    if (!projectId) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   const handleContactClick = (serviceOrProject?: string) => {
@@ -549,6 +561,7 @@ export default function App() {
         />
       ) : currentView.type === 'projects' ? (
         <ProjectsDetailPage
+          initialProjectId={currentView.targetProjectId}
           onNavigateHome={() => navigateToHome('projects')}
           onContactClick={(type) => handleContactClick(type)}
         />
@@ -832,13 +845,24 @@ export default function App() {
 
               <div className="our-works-home-grid">
                 {authenticProjects.map((proj) => (
-                  <article className="our-works-home-card" key={proj.id}>
+                  <article
+                    className="our-works-home-card clickable-home-card"
+                    key={proj.id}
+                    onClick={() => navigateToProjects(proj.id)}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        navigateToProjects(proj.id)
+                      }
+                    }}
+                  >
                     <div className="home-work-img-wrap">
                       <img src={proj.coverImage} alt={proj.title} loading="lazy" decoding="async" />
                       <span className="home-work-num">Project {proj.projectNumber}</span>
                       <span className="home-work-badge">{proj.verifiedBadge}</span>
                       <div className="home-work-photo-indicator">
-                        <span>📸 {proj.imageSlots.filter((s) => s.imageUrl).length || proj.imageSlots.length} Authentic Site Photos</span>
+                        <span>📸 {proj.galleryPhotos?.length || proj.imageSlots.length} Authentic Site Photos</span>
                       </div>
                     </div>
                     <div className="home-work-content">
@@ -863,14 +887,20 @@ export default function App() {
                         <button
                           type="button"
                           className="button button--red button--small"
-                          onClick={() => handleOpenDossier(proj)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            navigateToProjects(proj.id)
+                          }}
                         >
-                          View Project Dossier <Arrow />
+                          View Full Project &amp; Photos <Arrow />
                         </button>
                         <button
                           type="button"
                           className="button button--outline-dark button--small"
-                          onClick={() => handleContactClick(proj.shortTitle)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleContactClick(proj.shortTitle)
+                          }}
                         >
                           Enquire
                         </button>
