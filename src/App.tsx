@@ -7,9 +7,11 @@ import {
   industriesServed,
   whyChooseUs,
 } from './data/servicesData'
+import { authenticProjects, OfficialProject } from './data/projectsData'
 import ServiceDetailPage from './components/ServiceDetailPage'
 import AboutDetailPage from './components/AboutDetailPage'
 import ProjectsDetailPage from './components/ProjectsDetailPage'
+import ProjectDossierModal from './components/ProjectDossierModal'
 
 const Arrow = () => <span aria-hidden="true">→</span>
 
@@ -279,6 +281,14 @@ export default function App() {
     navigateToHome('contact')
   }
 
+  const [dossierProject, setDossierProject] = useState<OfficialProject | null>(null)
+  const [dossierModalOpen, setDossierModalOpen] = useState<boolean>(false)
+
+  const handleOpenDossier = (proj: OfficialProject) => {
+    setDossierProject(proj)
+    setDossierModalOpen(true)
+  }
+
   const activeService =
     currentView.type === 'service'
       ? servicesData.find((s) => s.id === currentView.serviceId) || servicesData[0]
@@ -348,7 +358,7 @@ export default function App() {
                 }
               }}
             >
-              Projects
+              Our Works
             </a>
             <a
               href="#safety"
@@ -475,7 +485,7 @@ export default function App() {
               className={`mobile-nav-item ${currentView.type === 'projects' ? 'active' : ''}`}
               onClick={navigateToProjects}
             >
-              <span>🏗️ Projects Portfolio</span>
+              <span>🏗️ Our Works (4 Authentic Projects)</span>
               <Arrow />
             </button>
 
@@ -810,85 +820,79 @@ export default function App() {
             </div>
           </section>
 
-          {/* Featured Projects (Matching Brochure Formats & Official Work Orders) */}
-          <section className="projects" id="projects">
-            <div className="project-intro">
-              <div>
-                <p className="eyebrow eyebrow--green">Featured Projects</p>
-                <h2>
-                  Our Work
-                  <br />
-                  Speaks for Itself
-                </h2>
+          {/* Our Works: 4 Official Government & Heavy Industrial Contracts */}
+          <section className="our-works-section" id="projects">
+            <div className="container">
+              <div className="our-works-header">
+                <SectionTitle kicker="Our Works Portfolio" title="Verified Government & Industrial Contracts" />
                 <p>
-                  Official contractor for Government of Andhra Pradesh AMRUT 2.0 Water Supply Schemes, Wire Rod Mills (WRM), Coke Oven SCP machinery, and RMHS conveyor networks.
+                  Official executed contracts and running account milestone deliveries across Government of Andhra Pradesh AMRUT 2.0 public water supply schemes and JSW Toranagallu integrated metallurgical and cement complexes.
                 </p>
+              </div>
+
+              <div className="our-works-home-grid">
+                {authenticProjects.map((proj) => (
+                  <article className="our-works-home-card" key={proj.id}>
+                    <div className="home-work-img-wrap">
+                      <img src={proj.coverImage} alt={proj.title} loading="lazy" decoding="async" />
+                      <span className="home-work-num">Project {proj.projectNumber}</span>
+                      <span className="home-work-badge">{proj.verifiedBadge}</span>
+                      <div className="home-work-photo-indicator">
+                        <span>📸 {proj.imageSlots.filter((s) => s.imageUrl).length || proj.imageSlots.length} Authentic Site Photos</span>
+                      </div>
+                    </div>
+                    <div className="home-work-content">
+                      <div className="home-work-meta">
+                        <span className="home-work-loc">📍 {proj.location}</span>
+                        <span className="home-work-cat">{proj.categoryLabel}</span>
+                      </div>
+                      <h3>{proj.title}</h3>
+                      <div className="home-work-client-snippet">
+                        <p><strong>Client:</strong> {proj.client}</p>
+                        <p><strong>Contract:</strong> <code>{proj.workOrderNo}</code></p>
+                      </div>
+                      <p className="home-work-desc">{proj.summary}</p>
+                      <div className="home-work-chips">
+                        {proj.keyMetrics.slice(0, 3).map((m, mIdx) => (
+                          <span className="home-work-chip" key={mIdx}>
+                            <b>{m.value}</b> {m.label}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="home-work-actions">
+                        <button
+                          type="button"
+                          className="button button--red button--small"
+                          onClick={() => handleOpenDossier(proj)}
+                        >
+                          View Project Dossier <Arrow />
+                        </button>
+                        <button
+                          type="button"
+                          className="button button--outline-dark button--small"
+                          onClick={() => handleContactClick(proj.shortTitle)}
+                        >
+                          Enquire
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div className="our-works-footer-cta">
+                <div className="our-works-cta-text">
+                  <h4>Looking for detailed measurement sheets, billing certificates, or lift schedules?</h4>
+                  <p>Our engineering and planning office provides verified documentation and technical tenders for EPC contractors.</p>
+                </div>
                 <button
                   type="button"
-                  className="button button--white button--small"
+                  className="button button--white"
                   onClick={navigateToProjects}
                 >
-                  View All Projects <Arrow />
+                  Explore All 4 Projects &amp; Specifications <Arrow />
                 </button>
               </div>
-            </div>
-            <div
-              className="project-photo"
-              style={{ backgroundImage: "url('/assets/pipe-rigging.jpg')" }}
-            />
-            <div className="project-list">
-              {[
-                {
-                  number: '01',
-                  name: 'AP AMRUT 2.0 Municipal Water Supply & HDPE Pipeline Project',
-                  place: 'Mandapeta & Peddapuram | Civet Projects (Govt of AP)',
-                  badge: '✓ Official WO: 1314-A1 (11.7+ km HDPE)',
-                  action: () => navigateToProjects(),
-                  isVerified: true,
-                },
-                {
-                  number: '02',
-                  name: 'Wire Rod Mill (WRM) Equipment Assembly',
-                  place: 'Integrated Steel Plant Complex',
-                  badge: 'Precision Laser Aligned (0.04mm)',
-                  action: () => navigateToService('equipment-installation'),
-                  isVerified: false,
-                },
-                {
-                  number: '03',
-                  name: 'Coke Oven SCP Car & CDQ System Installation',
-                  place: 'Metallurgical Facility, South India',
-                  badge: 'Coke Pusher & CDQ Duct Systems',
-                  action: () => navigateToService('commissioning-works'),
-                  isVerified: false,
-                },
-                {
-                  number: '04',
-                  name: 'RMHS Raw Material Conveyor Network',
-                  place: 'Visakhapatnam Port / Plant Corridor',
-                  badge: '2,500 TPH High-Bay Galleries',
-                  action: () => navigateToService('structural-works'),
-                  isVerified: false,
-                },
-              ].map((proj) => (
-                <div
-                  className={`project-item ${proj.isVerified ? 'project-item--verified' : ''}`}
-                  key={proj.number}
-                  style={{ cursor: 'pointer' }}
-                  onClick={proj.action}
-                >
-                  <b>{proj.number}</b>
-                  <span>
-                    <strong>
-                      {proj.name}
-                      {proj.isVerified && <span className="verified-badge-pill">✓ Official WO</span>}
-                    </strong>
-                    <small>{proj.place}</small>
-                    <span className="project-highlight-note">{proj.badge}</span>
-                  </span>
-                  <Arrow />
-                </div>
-              ))}
             </div>
           </section>
 
@@ -1116,6 +1120,14 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Interactive Project Dossier Modal */}
+      <ProjectDossierModal
+        project={dossierProject}
+        isOpen={dossierModalOpen}
+        onClose={() => setDossierModalOpen(false)}
+        onContactClick={(pTitle) => handleContactClick(pTitle)}
+      />
     </div>
   )
 }

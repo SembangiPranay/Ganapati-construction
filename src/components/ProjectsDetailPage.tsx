@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { projectsData } from '../data/servicesData'
+import { authenticProjects, OfficialProject } from '../data/projectsData'
+import ProjectDossierModal from './ProjectDossierModal'
 
 interface ProjectsDetailPageProps {
   onNavigateHome: () => void
@@ -10,25 +11,29 @@ const Arrow = () => <span aria-hidden="true">→</span>
 const BackArrow = () => <span aria-hidden="true">←</span>
 
 export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: ProjectsDetailPageProps) {
-  const [activeCategory, setActiveCategory] = useState<string>('All')
+  const [activeFilter, setActiveFilter] = useState<string>('all')
+  const [selectedProject, setSelectedProject] = useState<OfficialProject | null>(null)
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
 
-  const categories = [
-    'All',
-    'Water & Public Infrastructure',
-    'Equipment Installation',
-    'Commissioning & Specialized Machinery',
-    'Structural Works',
-    'Erection Works',
+  const filterOptions = [
+    { id: 'all', label: 'All 4 Flagship Projects' },
+    { id: 'water', label: 'AP AMRUT 2.0 Water Schemes' },
+    { id: 'jsw', label: 'JSW Steel & Cement (Toranagallu)' },
+    { id: 'ra-bills', label: 'Verified RA Milestone Bills' },
   ]
 
-  const filteredProjects =
-    activeCategory === 'All'
-      ? projectsData
-      : projectsData.filter(
-          (p) =>
-            p.category.toLowerCase().includes(activeCategory.toLowerCase()) ||
-            (p.secondaryCategory && p.secondaryCategory.toLowerCase().includes(activeCategory.toLowerCase()))
-        )
+  const filteredProjects = authenticProjects.filter((p) => {
+    if (activeFilter === 'all') return true
+    if (activeFilter === 'water') return p.category === 'water-utilities'
+    if (activeFilter === 'jsw') return p.category === 'steel-metallurgical' || p.category === 'cement-plants'
+    if (activeFilter === 'ra-bills') return p.contractType === 'Running Account (RA) Milestone Bill'
+    return true
+  })
+
+  const handleOpenDossier = (project: OfficialProject) => {
+    setSelectedProject(project)
+    setModalOpen(true)
+  }
 
   return (
     <div className="projects-detail-view">
@@ -40,7 +45,7 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
               Home
             </button>
             <span className="breadcrumb-sep">/</span>
-            <span className="breadcrumb-current">Projects Portfolio</span>
+            <span className="breadcrumb-current">Our Works &amp; Executed Contracts</span>
           </div>
           <button type="button" className="button button--outline-dark button--small" onClick={onNavigateHome}>
             <BackArrow /> Back to Overview
@@ -48,18 +53,18 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
         </div>
       </section>
 
-      {/* Hero */}
+      {/* Hero Banner */}
       <section className="detail-hero">
         <div className="detail-hero-backdrop" style={{ backgroundImage: "url('/assets/crane-high-lift.jpg')" }} />
         <div className="detail-hero-overlay" />
         <div className="container detail-hero-inner">
           <div className="detail-hero-badge">
-            <span className="detail-number-badge green">PROJ</span>
-            <span className="detail-badge-text">Track Record &amp; Executed Works</span>
+            <span className="detail-number-badge green">WORKS</span>
+            <span className="detail-badge-text">Authentic Projects Portfolio</span>
           </div>
-          <h1>Engineered Lifting. Controlled Erection. Assured Stability.</h1>
+          <h1>Our Works &amp; Executed Industrial Contracts</h1>
           <p className="detail-hero-tagline">
-            Showcase of Government of Andhra Pradesh AMRUT 2.0 municipal water supply networks, industrial machinery installation, coke oven SCP systems, RMHS conveyor networks, and heavy technological erection.
+            Complete dossier of verified government and industrial contracts: Government of Andhra Pradesh AMRUT 2.0 urban water supply HDPE pipelines in Mandapeta &amp; Peddapuram, and JSW Steel &amp; JSW Cement industrial fabrication and erection in Toranagallu, Bellary.
           </p>
           <div className="detail-hero-actions">
             <button type="button" className="button button--red" onClick={() => onContactClick()}>
@@ -72,97 +77,79 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
         </div>
       </section>
 
-      {/* Project Filters and Grid */}
+      {/* Main Works Module */}
       <main className="detail-main-content">
         <div className="container">
-          {/* Category Filter Pills */}
+          {/* Filter Pills */}
           <div className="project-filter-bar">
-            {categories.map((cat) => (
+            {filterOptions.map((f) => (
               <button
                 type="button"
-                key={cat}
-                className={`project-filter-btn ${activeCategory === cat ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
+                key={f.id}
+                className={`project-filter-btn ${activeFilter === f.id ? 'active' : ''}`}
+                onClick={() => setActiveFilter(f.id)}
               >
-                {cat}
+                {f.label}
               </button>
             ))}
           </div>
 
-          {/* Projects Grid */}
-          <div className="projects-showcase-grid">
+          {/* Interactive 4-Project Grid */}
+          <div className="our-works-grid">
             {filteredProjects.map((project) => (
-              <article
-                className={`project-showcase-card ${project.isVerifiedWO ? 'project-showcase-card--verified' : ''}`}
-                key={project.id}
-              >
-                <div className="project-card-image">
-                  <img src={project.image} alt={project.title} loading="lazy" decoding="async" />
-                  <span className="project-card-num">{project.id}</span>
-                  <span className="project-card-badge">{project.category}</span>
-                  {project.isVerifiedWO && (
-                    <span className="project-card-verified-tag">✓ Official Work Order</span>
-                  )}
-                </div>
-                <div className="project-card-body">
-                  <div className="project-card-meta">
-                    <span className="project-loc">📍 {project.location}</span>
-                    {project.client && <span className="project-client">🏛️ {project.client}</span>}
+              <article className="our-work-card" key={project.id}>
+                {/* Visual Area */}
+                <div className="our-work-media">
+                  <img src={project.coverImage} alt={project.title} loading="lazy" decoding="async" />
+                  <span className="our-work-num-ribbon">Project {project.projectNumber}</span>
+                  <span className="our-work-seal-badge">{project.verifiedBadge}</span>
+                  <div className="our-work-photo-status">
+                    <span>📸 {project.imageSlots.filter((s) => s.imageUrl).length || project.imageSlots.length} Authentic Site Photos</span>
                   </div>
-                  <h3>{project.title}</h3>
+                </div>
 
-                  {project.isVerifiedWO && project.woDetails && (
-                    <div className="wo-verified-credential-box">
-                      <div className="wo-verified-header">
-                        <span className="wo-seal-badge">✓ VERIFIED WORK ORDER</span>
-                        <span className="wo-ref-code">{project.woNumber}</span>
+                {/* Content Area */}
+                <div className="our-work-body">
+                  <div className="our-work-meta-row">
+                    <span className="our-work-loc">📍 {project.location}, {project.districtState}</span>
+                    <span className="our-work-cat-tag">{project.categoryLabel}</span>
+                  </div>
+
+                  <h3 className="our-work-heading">{project.title}</h3>
+
+                  <div className="our-work-client-box">
+                    <p><strong>Issuing Contractor:</strong> {project.client}</p>
+                    <p><strong>Beneficiary / Client:</strong> {project.endClient}</p>
+                    <p className="our-work-wo-code"><strong>Contract Ref:</strong> <code>{project.workOrderNo}</code></p>
+                  </div>
+
+                  <p className="our-work-summary">{project.summary}</p>
+
+                  {/* Highlights / Metrics */}
+                  <div className="our-work-metrics-strip">
+                    {project.keyMetrics.map((m, idx) => (
+                      <div className="our-work-metric-chip" key={idx}>
+                        <b>{m.value}</b>
+                        <small>{m.label}</small>
                       </div>
-                      <div className="wo-client-details">
-                        <p><strong>Issuing Main Contractor:</strong> {project.woDetails.issuingClient}</p>
-                        <p><strong>Government Scheme:</strong> {project.woDetails.scheme}</p>
-                        <p><strong>Contractor Entity:</strong> {project.woDetails.contractor} (Proprietor: {project.woDetails.proprietor} • GSTIN: {project.woDetails.gstin})</p>
-                      </div>
-
-                      <div className="wo-schedule-box">
-                        <strong>HDPE Pipeline Diameter Schedule (11,735+ Rmtr):</strong>
-                        <div className="wo-pipes-grid">
-                          {project.woDetails.pipeSizes.map((pipe, pIdx) => (
-                            <div className="wo-pipe-item" key={pIdx}>
-                              <span className="pipe-dia">{pipe.dia}</span>
-                              <span className="pipe-len">{pipe.length}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="wo-operations-box">
-                        <strong>Verified Engineering Operations:</strong>
-                        <ul className="wo-operations-list">
-                          {project.woDetails.operations.map((op, oIdx) => (
-                            <li key={oIdx}>{op}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  <p className="project-scope-text">{project.scope}</p>
-
-                  <div className="project-metrics-row">
-                    {project.metrics.map((m, idx) => (
-                      <span className="project-metric-pill" key={idx}>
-                        ✓ {m}
-                      </span>
                     ))}
                   </div>
 
-                  <div className="project-card-footer">
+                  {/* Card Actions */}
+                  <div className="our-work-card-footer">
                     <button
                       type="button"
-                      className="button button--red button--small button--full"
-                      onClick={() => onContactClick(project.title)}
+                      className="button button--red button--small"
+                      onClick={() => handleOpenDossier(project)}
                     >
-                      Enquire Similar Project <Arrow />
+                      View Complete Work Order &amp; Specs <Arrow />
+                    </button>
+                    <button
+                      type="button"
+                      className="button button--outline-dark button--small"
+                      onClick={() => onContactClick(project.shortTitle)}
+                    >
+                      Enquire for Similar Work
                     </button>
                   </div>
                 </div>
@@ -170,21 +157,33 @@ export default function ProjectsDetailPage({ onNavigateHome, onContactClick }: P
             ))}
           </div>
 
-          {/* Bottom CTA Box */}
+          {/* Bottom Tender Support Banner */}
           <div className="projects-bottom-cta">
             <div className="cta-copy">
-              <span className="eyebrow eyebrow--green">S Ganapati Construction</span>
-              <h2>Ready to Execute Your Next Heavy Project?</h2>
+              <span className="eyebrow eyebrow--green">Tenders &amp; Turnaround Packages</span>
+              <h2>Have Technical Drawings, Tonnages, or Pipeline Alignments?</h2>
               <p>
-                Get in touch with our engineering team in Visakhapatnam for structural fabrication, crane lifting plans, machinery assembly, and commissioning quotes.
+                S Ganapati Construction provides comprehensive technical bids, crane lift plans, equipment mobilization schedules, and OHSAS 18001 safety dossiers for EPC contractors and municipal authorities across India.
               </p>
             </div>
-            <button type="button" className="button button--red" onClick={() => onContactClick()}>
-              Get in Touch Today <Arrow />
+            <button
+              type="button"
+              className="button button--red"
+              onClick={() => onContactClick('All Projects & Engineering Tenders')}
+            >
+              Request Technical Consultation <Arrow />
             </button>
           </div>
         </div>
       </main>
+
+      {/* Interactive Project Dossier Modal */}
+      <ProjectDossierModal
+        project={selectedProject}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onContactClick={(pTitle) => onContactClick(pTitle)}
+      />
     </div>
   )
 }
