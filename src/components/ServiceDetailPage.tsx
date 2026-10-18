@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { ServiceDetail } from '../data/servicesData'
-import { servicesData } from '../data/servicesData'
+import { servicesData, companyProfile } from '../data/servicesData'
 
 interface ServiceDetailPageProps {
   service: ServiceDetail
@@ -198,11 +198,11 @@ export default function ServiceDetailPage({
               <div className="sidebar-contacts">
                 <div className="sidebar-contact-row">
                   <strong>Direct Phone:</strong>
-                  <span>94417 71333 / 90320 79333</span>
+                  <span>+91 {companyProfile.phonePrimary} / +91 {companyProfile.phoneSecondary}</span>
                 </div>
                 <div className="sidebar-contact-row">
                   <strong>Email Enquiries:</strong>
-                  <span>sganapati1585@gmail.com</span>
+                  <span>{companyProfile.email}</span>
                 </div>
                 <div className="sidebar-contact-row">
                   <strong>Location:</strong>

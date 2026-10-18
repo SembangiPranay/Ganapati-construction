@@ -269,10 +269,14 @@ export default function ProjectDossierModal({
                   <dl className="cred-dl">
                     <dt>Company:</dt>
                     <dd><strong>M/S S GANAPATI CONSTRUCTION</strong></dd>
-                    <dt>Proprietor / Key Contact:</dt>
-                    <dd>Garaka Sreedevi / G Suresh Reddy</dd>
+                    <dt>Proprietor:</dt>
+                    <dd>Garaka Suresh</dd>
+                    <dt>Managing Director:</dt>
+                    <dd>Garaka Sreedevi</dd>
                     <dt>GSTIN:</dt>
                     <dd><strong>37DIPPG2975E1ZX</strong></dd>
+                    <dt>Contact Phones:</dt>
+                    <dd>+91 94417 71333 / +91 92430 12133</dd>
                     <dt>Registered Office:</dt>
                     <dd>11-30/27, F-303, GSN Towers, Bhagath Singh Nagar, Yellapuvanipalem, Gopalapatnam, Visakhapatnam, AP 530027</dd>
                   </dl>

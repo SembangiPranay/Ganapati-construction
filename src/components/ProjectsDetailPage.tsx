@@ -4,6 +4,7 @@ import {
   OfficialProject,
   ProjectGalleryPhoto,
 } from '../data/projectsData'
+import { companyProfile } from '../data/servicesData'
 import FullScreenImageViewer from './FullScreenImageViewer'
 
 interface ProjectsDetailPageProps {
@@ -258,8 +259,12 @@ export default function ProjectsDetailPage({
                           <dd>
                             <code>37DIPPG2975E1ZX</code>
                           </dd>
-                          <dt>Proprietor / Key Contact:</dt>
-                          <dd>Garaka Sreedevi / G Suresh Reddy (Cell: 9441771333)</dd>
+                          <dt>Proprietor:</dt>
+                          <dd>{companyProfile.proprietor}</dd>
+                          <dt>Managing Director:</dt>
+                          <dd>{companyProfile.managingDirector}</dd>
+                          <dt>Contact Phones:</dt>
+                          <dd>+91 {companyProfile.phonePrimary} / +91 {companyProfile.phoneSecondary}</dd>
                           <dt>Contract Validity:</dt>
                           <dd>{project.validityPeriod}</dd>
                         </dl>
@@ -551,8 +556,11 @@ export default function ProjectsDetailPage({
                         >
                           Enquire for This Scope <Arrow />
                         </button>
-                        <a href="tel:+919441771333" className="button button--outline-dark">
-                          📞 Call: +91 9441771333
+                        <a href={`tel:+91${companyProfile.phonePrimary}`} className="button button--outline-dark">
+                          📞 +91 {companyProfile.phonePrimary}
+                        </a>
+                        <a href={`tel:+91${companyProfile.phoneSecondary}`} className="button button--outline-dark">
+                          📞 +91 {companyProfile.phoneSecondary}
                         </a>
                       </div>
                     </div>
@@ -593,8 +601,11 @@ export default function ProjectsDetailPage({
               >
                 Request Technical Consultation <Arrow />
               </button>
-              <a href="tel:+919441771333" className="button button--outline">
-                📞 +91 9441771333
+              <a href={`tel:+91${companyProfile.phonePrimary}`} className="button button--outline">
+                📞 +91 {companyProfile.phonePrimary}
+              </a>
+              <a href={`tel:+91${companyProfile.phoneSecondary}`} className="button button--outline">
+                📞 +91 {companyProfile.phoneSecondary}
               </a>
             </div>
           </div>

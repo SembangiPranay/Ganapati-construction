@@ -62,7 +62,7 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
                 <h2>S Ganapati Construction</h2>
               </div>
               <p className="detail-lead-paragraph">
-                <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>) is an established industrial engineering and contracting firm specializing in structural works, heavy fabrication, on-site erection, mechanical equipment installation, and turnkey commissioning.
+                <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>, Managing Director: <strong>{companyProfile.managingDirector}</strong>) is an established industrial engineering and contracting firm specializing in structural works, heavy fabrication, on-site erection, mechanical equipment installation, and turnkey commissioning.
               </p>
               <p>
                 Operating with certified occupational safety procedures under <strong>OHSAS 18001</strong> standards, we execute critical packages across integrated steel plants, cement manufacturing complexes, heavy material handling corridors, rolling mills, and power stations.
@@ -70,6 +70,7 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
               <div className="profile-specs-pill-row">
                 <span className="profile-pill"><b>GSTIN:</b> {companyProfile.gstin}</span>
                 <span className="profile-pill"><b>Proprietor:</b> {companyProfile.proprietor}</span>
+                <span className="profile-pill"><b>Managing Director:</b> {companyProfile.managingDirector}</span>
                 <span className="profile-pill"><b>HQ:</b> Visakhapatnam, AP</span>
                 <span className="profile-pill"><b>Work Order:</b> AP AMRUT 2.0 (11.7+ km HDPE)</span>
                 <span className="profile-pill"><b>Track Record:</b> 1000+ Projects</span>
@@ -214,12 +215,16 @@ export default function AboutDetailPage({ onNavigateHome, onContactClick }: Abou
                   <span>{companyProfile.proprietor}</span>
                 </div>
                 <div className="sidebar-contact-row">
+                  <strong>Managing Director:</strong>
+                  <span>{companyProfile.managingDirector}</span>
+                </div>
+                <div className="sidebar-contact-row">
                   <strong>GSTIN Registration:</strong>
                   <span>{companyProfile.gstin}</span>
                 </div>
                 <div className="sidebar-contact-row">
                   <strong>Direct Phones:</strong>
-                  <span>{companyProfile.phonePrimary} / {companyProfile.phoneSecondary}</span>
+                  <span>+91 {companyProfile.phonePrimary} / +91 {companyProfile.phoneSecondary}</span>
                 </div>
                 <div className="sidebar-contact-row">
                   <strong>Alternate:</strong>

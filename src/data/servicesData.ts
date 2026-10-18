@@ -23,9 +23,10 @@ export interface ServiceDetail {
 export const companyProfile = {
   name: 'S GANAPATI CONSTRUCTION',
   legalName: 'M/S. S GANAPATI CONSTRUCTION',
-  proprietor: 'Garaka Sreedevi',
+  proprietor: 'Garaka Suresh',
+  managingDirector: 'Garaka Sreedevi',
   phonePrimary: '94417 71333',
-  phoneSecondary: '91005 49053',
+  phoneSecondary: '92430 12133',
   phoneTertiary: '90320 79333',
   gstin: '37DIPPG2975E1ZX',
   email: 'sganapati1585@gmail.com',
@@ -466,6 +467,7 @@ export interface ProjectItem {
     cin: string
     contractor: string
     proprietor: string
+    managingDirector?: string
     gstin: string
     totalLength: string
     pipeSizes: { dia: string; length: string }[]
@@ -492,7 +494,8 @@ export const projectsData: ProjectItem[] = [
       issuingClient: 'M/s. Civet Projects Pvt Ltd (Hyderabad / Rajahmundry, AP)',
       cin: 'U45500TG1018PTC122108',
       contractor: 'M/S. S GANAPATI CONSTRUCTION',
-      proprietor: 'Garaka Sreedevi',
+      proprietor: 'Garaka Suresh',
+      managingDirector: 'Garaka Sreedevi',
       gstin: '37DIPPG2975E1ZX',
       totalLength: '11,735+ Running Meters (11.7+ km)',
       pipeSizes: [

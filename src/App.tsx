@@ -676,7 +676,7 @@ export default function App() {
                   }
                 />
                 <p>
-                  Headquartered in Visakhapatnam, Andhra Pradesh, <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>, GSTIN: <strong>{companyProfile.gstin}</strong>) is an established industrial contractor specializing in structural steel fabrication, high-altitude erection, mechanical equipment assembly, and urban water infrastructure pipelines.
+                  Headquartered in Visakhapatnam, Andhra Pradesh, <strong>S Ganapati Construction</strong> (Proprietor: <strong>{companyProfile.proprietor}</strong>, Managing Director: <strong>{companyProfile.managingDirector}</strong>, GSTIN: <strong>{companyProfile.gstin}</strong>) is an established industrial contractor specializing in structural steel fabrication, high-altitude erection, mechanical equipment assembly, and urban water infrastructure pipelines.
                 </p>
                 <div className="about-active-pill">
                   <span>🏛️</span>
@@ -1015,6 +1015,8 @@ export default function App() {
                     <br />
                     Proprietor: {companyProfile.proprietor}
                     <br />
+                    Managing Director: {companyProfile.managingDirector}
+                    <br />
                     <b>GSTIN:</b> {companyProfile.gstin}
                     <br />
                     {companyProfile.address.doorNo}, {companyProfile.address.building},
@@ -1096,6 +1098,7 @@ export default function App() {
               </p>
               <div className="footer-proprietor-badge">
                 <span><b>Proprietor:</b> {companyProfile.proprietor}</span>
+                <span><b>Managing Director:</b> {companyProfile.managingDirector}</span>
                 <span><b>GSTIN:</b> {companyProfile.gstin}</span>
               </div>
             </div>

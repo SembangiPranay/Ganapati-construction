@@ -195,7 +195,7 @@ export const authenticProjects: OfficialProject[] = [
       },
     ],
     summary:
-      'Official industrial subcontract work orders awarded to M/s Ganapati Constructions (Contact: Mr. G Suresh Reddy, 9441771333) by Indu Constructions for structural steel fabrication and high-altitude technological erection inside the integrated JSW Steel Ltd and JSW Cement Ltd industrial complexes in Toranagallu, Bellary, Karnataka.',
+      'Official industrial subcontract work orders awarded to M/s Ganapati Constructions (Proprietor: Garaka Suresh, Managing Director: Garaka Sreedevi, Contact: +91 94417 71333 / +91 92430 12133) by Indu Constructions for structural steel fabrication and high-altitude technological erection inside the integrated JSW Steel Ltd and JSW Cement Ltd industrial complexes in Toranagallu, Bellary, Karnataka.',
     detailedScope: [
       'Heavy structural steel fabrication of industrial building frameworks, crane runways, blast furnace ducting supports, and raw material handling transfer towers.',
       'Technological erection of structural columns, roof trusses, bracing systems, and equipment support platforms using 100T+ heavy mobile and crawler cranes.',
@@ -238,19 +238,14 @@ export const authenticProjects: OfficialProject[] = [
     location: 'Mandapeta Municipality (ULB)',
     districtState: 'Dr. B.R. Ambedkar Konaseema / East Godavari, Andhra Pradesh',
     contractType: 'Running Account (RA) Milestone Bill',
-    coverImage: '/projects/ca1a0ec5-c32d-4f32-b9fc-c25c81b27a78.jpg',
+    coverImage: '/projects/66a3f2c8-783f-4a8d-bc77-25485927ebb4.jpg',
     awaitingUserImages: false,
     placeholderNote: 'Certified milestone execution photographs from Mandapeta Municipality ULB pipeline corridor under RA Bill 01.',
     imageSlots: [
       {
-        title: 'Mandapeta Site Engineering Supervision',
-        imageUrl: '/projects/ca1a0ec5-c32d-4f32-b9fc-c25c81b27a78.jpg',
-        description: 'Supervisory engineers and technicians inspecting pipeline alignment and valve components',
-      },
-      {
-        title: 'Fabrication Yard Steel Plate Stacking',
+        title: 'Fabrication Yard Steel Plate Stacking & Handling',
         imageUrl: '/projects/66a3f2c8-783f-4a8d-bc77-25485927ebb4.jpg',
-        description: 'Handling equipment and steel plates preparation yard for utility structures',
+        description: 'Hydra crane and steel plates preparation yard with plant facilities in backdrop',
       },
       {
         title: 'Rail-Mounted Gantry Material Handling',
@@ -261,6 +256,11 @@ export const authenticProjects: OfficialProject[] = [
         title: 'Composite Span Underdeck Alignment',
         imageUrl: '/projects/c2826311-34c7-470f-ad14-477068410786.jpg',
         description: 'Bolted diaphragms, shear splices, and elastomeric bearings across completed span',
+      },
+      {
+        title: 'Structural Steel Frame Quality Inspection',
+        imageUrl: '/projects/4fe1b776-ceb2-4166-add7-2f7018340c2c.jpg',
+        description: 'Site engineer checking alignment and bolting tolerances on high-load framing',
       },
     ],
     summary:
@@ -675,10 +675,10 @@ export const masterGalleryPhotos: ProjectGalleryPhoto[] = [
 // Photo 1: Featured In-line Scope & Fabrication Photo
 // Photo 2 & 3: In-Field Execution & Technical Measurement Photo Pair
 const curatedProjectPhotosMap: Record<string, string[]> = {
-  'amrut-master-1314-a1': ['p01', 'p02', 'p24', 'p03'],
-  'jsw-toranagallu-steel-cement': ['p04', 'p06', 'p07', 'p08'],
-  'mandapeta-ulb-ra01': ['p09', 'p10', 'p11', 'p12'],
-  'peddapuram-ulb-ra02': ['p13', 'p25', 'p18', 'p27'],
+  'amrut-master-1314-a1': ['p15', 'p24', 'p07', 'p18'],
+  'jsw-toranagallu-steel-cement': ['p01', 'p12', 'p09', 'p03'],
+  'mandapeta-ulb-ra01': ['p13', 'p11', 'p21', 'p10'],
+  'peddapuram-ulb-ra02': ['p05', 'p25', 'p02', 'p27'],
 }
 
 authenticProjects.forEach((p) => {
