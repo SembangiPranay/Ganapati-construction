@@ -163,6 +163,15 @@ function WhatsAppIcon() {
   )
 }
 
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  )
+}
+
 function Icon({ name }: { name: string }) {
   const paths: Record<string, ReactNode> = {
     helmet: (
@@ -293,6 +302,66 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
   const [activeSlide, setActiveSlide] = useState<number>(0)
 
+  // Contact & Project Enquiry Form State
+  const [enquiryForm, setEnquiryForm] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    service: '',
+    details: '',
+  })
+  const [enquirySubmitted, setEnquirySubmitted] = useState<boolean>(false)
+
+  const handleEnquirySubmit = (e: React.FormEvent<HTMLFormElement>, channel: 'both' | 'whatsapp' | 'email' = 'both') => {
+    e.preventDefault()
+
+    const name = enquiryForm.name.trim()
+    const email = enquiryForm.email.trim()
+    const details = enquiryForm.details.trim()
+
+    if (!name || !email || !details) {
+      alert('Please fill in the required fields: Name, Email, and Project Details.')
+      return
+    }
+
+    const cleanPhone = companyProfile.phonePrimary.replace(/\D/g, '')
+    const serviceName = enquiryForm.service || selectedProjectType || 'General Industrial Infrastructure'
+
+    const messageLines = [
+      `*PROJECT ENQUIRY - S GANAPATI CONSTRUCTION*`,
+      ``,
+      `*Client Name:* ${name}`,
+      enquiryForm.company.trim() ? `*Company:* ${enquiryForm.company.trim()}` : null,
+      `*Email:* ${email}`,
+      enquiryForm.phone.trim() ? `*Phone:* ${enquiryForm.phone.trim()}` : null,
+      `*Service Required:* ${serviceName}`,
+      ``,
+      `*Project Scope & Details:*`,
+      details,
+    ].filter(Boolean) as string[]
+
+    const formattedMessage = messageLines.join('\n')
+    const encodedMessage = encodeURIComponent(formattedMessage)
+    const emailSubject = encodeURIComponent(`Project Enquiry: ${serviceName} - ${name} ${enquiryForm.company ? `(${enquiryForm.company})` : ''}`)
+
+    const whatsappUrl = `https://wa.me/91${cleanPhone}?text=${encodedMessage}`
+    const mailtoUrl = `mailto:${companyProfile.email}?subject=${emailSubject}&body=${encodedMessage}`
+
+    setEnquirySubmitted(true)
+
+    if (channel === 'whatsapp') {
+      window.open(whatsappUrl, '_blank')
+    } else if (channel === 'email') {
+      window.location.href = mailtoUrl
+    } else {
+      window.open(whatsappUrl, '_blank')
+      setTimeout(() => {
+        window.location.href = mailtoUrl
+      }, 400)
+    }
+  }
+
   // Auto-advance visual slides on mobile
   useEffect(() => {
     const timer = setInterval(() => {
@@ -399,6 +468,7 @@ export default function App() {
     setMobileMenuOpen(false)
     if (serviceOrProject) {
       setSelectedProjectType(serviceOrProject)
+      setEnquiryForm((prev) => ({ ...prev, service: serviceOrProject }))
     }
     navigateToHome('contact')
   }
@@ -782,8 +852,8 @@ export default function App() {
                     }}
                   >
                     <img
-                      src="/assets/industrial-steelworks-reference.jpg"
-                      alt="Industrial Steelworks Construction and Heavy Rigging"
+                      src="/projects/0a98a433-bbc2-4c61-8704-a8c79019ee9a.jpg"
+                      alt="Real Heavy Structural Steelwork Bays and Overhead Crane Girders at JSW Steel Complex"
                       className="hero-ref-img"
                       loading="eager"
                     />
@@ -1311,17 +1381,49 @@ export default function App() {
                   </span>
                 </p>
               </address>
-              <form className="enquiry" onSubmit={(event) => event.preventDefault()}>
-                <h3>Project Enquiry</h3>
+              <form className="enquiry" onSubmit={(e) => handleEnquirySubmit(e, 'both')}>
+                <div className="enquiry-header">
+                  <h3>Project Enquiry</h3>
+                  <span className="enquiry-routing-tag">Direct to WhatsApp &amp; Official Mail</span>
+                </div>
+
                 <div className="form-grid">
-                  <input aria-label="Your name" placeholder="Your Name *" required />
-                  <input aria-label="Company name" placeholder="Company Name" />
-                  <input aria-label="Email address" type="email" placeholder="Email Address *" required />
-                  <input aria-label="Phone number" type="tel" inputMode="tel" placeholder="Phone Number" />
+                  <input
+                    aria-label="Your name"
+                    placeholder="Your Name *"
+                    required
+                    value={enquiryForm.name}
+                    onChange={(e) => setEnquiryForm((prev) => ({ ...prev, name: e.target.value }))}
+                  />
+                  <input
+                    aria-label="Company name"
+                    placeholder="Company Name"
+                    value={enquiryForm.company}
+                    onChange={(e) => setEnquiryForm((prev) => ({ ...prev, company: e.target.value }))}
+                  />
+                  <input
+                    aria-label="Email address"
+                    type="email"
+                    placeholder="Email Address *"
+                    required
+                    value={enquiryForm.email}
+                    onChange={(e) => setEnquiryForm((prev) => ({ ...prev, email: e.target.value }))}
+                  />
+                  <input
+                    aria-label="Phone number"
+                    type="tel"
+                    inputMode="tel"
+                    placeholder="Phone Number"
+                    value={enquiryForm.phone}
+                    onChange={(e) => setEnquiryForm((prev) => ({ ...prev, phone: e.target.value }))}
+                  />
                   <select
                     aria-label="Project type"
-                    value={selectedProjectType}
-                    onChange={(e) => setSelectedProjectType(e.target.value)}
+                    value={enquiryForm.service || selectedProjectType}
+                    onChange={(e) => {
+                      setSelectedProjectType(e.target.value)
+                      setEnquiryForm((prev) => ({ ...prev, service: e.target.value }))
+                    }}
                   >
                     <option value="">Select Required Service</option>
                     <option value="Water & Public Infrastructure (AMRUT 2.0)">00. Water &amp; Public Infrastructure (AMRUT 2.0 Pipeline)</option>
@@ -1332,11 +1434,84 @@ export default function App() {
                     <option value="Maintenance Services">05. Maintenance Services</option>
                     <option value="Commissioning Work">06. Commissioning &amp; Specialized Machinery</option>
                   </select>
-                  <textarea aria-label="Project details" placeholder="Project Scope, Drawings, & Tonnage Details *" required />
+                  <textarea
+                    aria-label="Project details"
+                    placeholder="Project Scope, Drawings, & Tonnage Details *"
+                    required
+                    rows={4}
+                    value={enquiryForm.details}
+                    onChange={(e) => setEnquiryForm((prev) => ({ ...prev, details: e.target.value }))}
+                  />
                 </div>
-                <button className="button button--red button--small button--full" type="submit">
-                  Send Project Enquiry <Arrow />
-                </button>
+
+                {/* Direct Action Dispatch Buttons */}
+                <div className="enquiry-submit-row">
+                  <button
+                    type="submit"
+                    className="button button--red enquiry-btn-main"
+                  >
+                    <span>Send Project Enquiry</span>
+                    <Arrow />
+                  </button>
+
+                  <div className="enquiry-channel-buttons">
+                    <button
+                      type="button"
+                      className="button enquiry-channel-btn enquiry-channel-whatsapp"
+                      onClick={(e) => handleEnquirySubmit(e as any, 'whatsapp')}
+                      title="Send directly via WhatsApp to +91 94417 71333"
+                    >
+                      <WhatsAppIcon />
+                      <span>Send via WhatsApp</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="button enquiry-channel-btn enquiry-channel-email"
+                      onClick={(e) => handleEnquirySubmit(e as any, 'email')}
+                      title="Send directly via Email to sganapati1585@gmail.com"
+                    >
+                      <MailIcon />
+                      <span>Send via Email</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Instant Submission Confirmation / Fallback Panel */}
+                {enquirySubmitted && (
+                  <div className="enquiry-success-panel">
+                    <div className="enquiry-success-badge">
+                      <CheckIcon />
+                      <strong>Enquiry Prepared &amp; Redirected!</strong>
+                    </div>
+                    <p>
+                      Your project scope has been formatted for <strong>S Ganapati Construction</strong>. Tap below if your browser blocked automatic popups:
+                    </p>
+                    <div className="enquiry-success-actions">
+                      <a
+                        href={`https://wa.me/91${companyProfile.phonePrimary.replace(/\D/g, '')}?text=${encodeURIComponent(
+                          `*PROJECT ENQUIRY - S GANAPATI CONSTRUCTION*\n\n*Client:* ${enquiryForm.name}\n${enquiryForm.company ? `*Company:* ${enquiryForm.company}\n` : ''}*Email:* ${enquiryForm.email}\n${enquiryForm.phone ? `*Phone:* ${enquiryForm.phone}\n` : ''}*Service:* ${enquiryForm.service || selectedProjectType || 'General'}\n\n*Scope & Details:*\n${enquiryForm.details}`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="enquiry-action-btn enquiry-action-whatsapp"
+                      >
+                        <WhatsAppIcon />
+                        <span>Open WhatsApp</span>
+                      </a>
+                      <a
+                        href={`mailto:${companyProfile.email}?subject=${encodeURIComponent(
+                          `Project Enquiry: ${enquiryForm.service || selectedProjectType || 'Industrial'} - ${enquiryForm.name} ${enquiryForm.company ? `(${enquiryForm.company})` : ''}`
+                        )}&body=${encodeURIComponent(
+                          `PROJECT ENQUIRY - S GANAPATI CONSTRUCTION\n\nClient Name: ${enquiryForm.name}\nCompany: ${enquiryForm.company}\nEmail: ${enquiryForm.email}\nPhone: ${enquiryForm.phone}\nService: ${enquiryForm.service || selectedProjectType}\n\nProject Scope & Details:\n${enquiryForm.details}`
+                        )}`}
+                        className="enquiry-action-btn enquiry-action-email"
+                      >
+                        <MailIcon />
+                        <span>Open Email</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
               </form>
             </div>
           </section>
