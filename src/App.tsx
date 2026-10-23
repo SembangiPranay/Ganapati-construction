@@ -502,7 +502,7 @@ export default function App() {
             <button
               type="button"
               className={`mobile-nav-item ${currentView.type === 'projects' ? 'active' : ''}`}
-              onClick={navigateToProjects}
+              onClick={() => navigateToProjects()}
             >
               <span>Projects Showcase</span>
               <Arrow />
@@ -583,36 +583,45 @@ export default function App() {
             <div className="container hero-inner">
               <div className="hero-copy">
                 <p className="eyebrow eyebrow--light">
-                  {companyProfile.name} • Visakhapatnam, Andhra Pradesh
+                  <span className="eyebrow-accent" aria-hidden="true" />
+                  <span className="eyebrow-text">
+                    {companyProfile.name} • Visakhapatnam, AP
+                  </span>
                 </p>
-                <h1>
-                  Engineering Excellence in<br />
-                  <span>Steel Infrastructure &amp; Public Utilities.</span>
+                <h1 className="hero-heading">
+                  <span className="hero-title-main">Engineering Excellence</span>{' '}
+                  <span className="hero-title-sub">in Steel Infrastructure &amp; Public Utilities.</span>
                 </h1>
                 <p className="hero-subtitle">
                   Specialists in heavy structural fabrications, high-altitude technological erection, rolling mill equipment assembly, and Government of Andhra Pradesh AMRUT 2.0 municipal water supply pipelines.
                 </p>
                 <div className="hero-badges-row">
-                  <span className="hero-badge-pill">
-                    <CheckIcon className="pill-check-icon" /> Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)
+                  <span className="hero-badge-pill hero-badge-pill--govt">
+                    <CheckIcon className="pill-check-icon" />
+                    <span className="badge-desktop">Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)</span>
+                    <span className="badge-mobile">Govt of AP AMRUT 2.0 (WO 1314-A1)</span>
                   </span>
                   <span className="hero-badge-pill">
-                    <CheckIcon className="pill-check-icon" /> OHSAS 18001 Certified Standards
+                    <CheckIcon className="pill-check-icon" />
+                    <span className="badge-desktop">OHSAS 18001 Certified Standards</span>
+                    <span className="badge-mobile">OHSAS 18001 Standards</span>
                   </span>
                   <span className="hero-badge-pill">
-                    <CheckIcon className="pill-check-icon" /> 1,000+ Industrial Projects Delivered
+                    <CheckIcon className="pill-check-icon" />
+                    <span className="badge-desktop">1,000+ Industrial Projects Delivered</span>
+                    <span className="badge-mobile">1,000+ Projects Delivered</span>
                   </span>
                 </div>
-                <div className="button-row">
+                <div className="button-row hero-button-row">
                   <button
                     type="button"
-                    className="button button--red"
-                    onClick={navigateToProjects}
+                    className="button button--red hero-btn-primary"
+                    onClick={() => navigateToProjects()}
                   >
                     Explore Our Work <Arrow />
                   </button>
-                  <a className="button button--outline" href="#contact">
-                    Contact Our Office
+                  <a className="button button--outline hero-btn-secondary" href="#contact">
+                    Contact Office
                   </a>
                 </div>
                 <div className="slider-index">
@@ -925,7 +934,7 @@ export default function App() {
                 <button
                   type="button"
                   className="button button--white"
-                  onClick={navigateToProjects}
+                  onClick={() => navigateToProjects()}
                 >
                   Explore All 4 Projects &amp; Specifications <Arrow />
                 </button>

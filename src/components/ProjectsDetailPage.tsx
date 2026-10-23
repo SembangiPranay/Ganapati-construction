@@ -14,6 +14,7 @@ import {
   CameraIcon,
   PhoneIcon,
   ExpandIcon,
+  CheckIcon,
 } from './CorporateIcons'
 
 interface ProjectsDetailPageProps {
