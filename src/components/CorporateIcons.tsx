@@ -88,3 +88,31 @@ export function GovEmblemIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function IBeamIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M6 3h12v3h-4v12h4v3H6v-3h4V6H6V3z" />
+    </svg>
+  )
+}
+
+export function CraneHookIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <rect x="8" y="2" width="8" height="5" rx="1" />
+      <path d="M12 7v4" />
+      <path d="M12 11c0 3 2.5 4 2.5 6.5a2.5 2.5 0 1 1-5 0c0-1.2.8-2 1.8-2.8" />
+    </svg>
+  )
+}
+
+export function FactoryPlantIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M2 20h20M3 20V9l5 4V9l5 4V4h7v16H3z" />
+      <circle cx="16.5" cy="8.5" r="1" fill="currentColor" />
+      <circle cx="16.5" cy="13.5" r="1" fill="currentColor" />
+    </svg>
+  )
+}

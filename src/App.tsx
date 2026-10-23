@@ -18,6 +18,9 @@ import {
   CameraIcon,
   PinIcon,
   GovEmblemIcon,
+  IBeamIcon,
+  CraneHookIcon,
+  FactoryPlantIcon,
 } from './components/CorporateIcons'
 
 const Arrow = () => <span aria-hidden="true">→</span>
@@ -682,7 +685,8 @@ export default function App() {
               <div className="hero-ring" aria-hidden="true" />
               <div className="hero-green" aria-hidden="true" />
               <div className="container hero-inner">
-                <div className="hero-copy">
+                {/* Desktop Hero Layout */}
+                <div className="hero-copy desktop-hero-layout">
                   <p className="eyebrow eyebrow--light">
                     <span className="eyebrow-accent" aria-hidden="true" />
                     <span className="eyebrow-text">
@@ -694,104 +698,150 @@ export default function App() {
                     <span className="hero-title-sub">in Steel Infrastructure &amp; Public Utilities.</span>
                   </h1>
                   <p className="hero-subtitle">
-                    <span className="subtitle-desktop">
-                      Specialists in heavy structural fabrications, high-altitude technological erection, rolling mill equipment assembly, and Government of Andhra Pradesh AMRUT 2.0 municipal water supply pipelines.
-                    </span>
-                    <span className="subtitle-mobile">
-                      Specialized in heavy structural steel, high-altitude plant erection, and AP AMRUT 2.0 water pipeline infrastructure.
-                    </span>
+                    Specialists in heavy structural fabrications, high-altitude technological erection, rolling mill equipment assembly, and Government of Andhra Pradesh AMRUT 2.0 municipal water supply pipelines.
                   </p>
-
-                  {/* Mobile Interactive Visual Project Showcase */}
-                  <div className="mobile-visual-showcase">
-                    <div
-                      className="mobile-visual-stage"
-                      onClick={() => navigateToProjects(mobileVisualProjects[activeSlide].targetId)}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`View Project: ${mobileVisualProjects[activeSlide].title}`}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          navigateToProjects(mobileVisualProjects[activeSlide].targetId)
-                        }
-                      }}
-                    >
-                      <img
-                        key={mobileVisualProjects[activeSlide].image}
-                        src={mobileVisualProjects[activeSlide].image}
-                        alt={mobileVisualProjects[activeSlide].title}
-                        className="mobile-stage-img"
-                        loading="eager"
-                      />
-                      <div className="mobile-stage-gradient" />
-
-                      <div className="mobile-stage-top-bar">
-                        <span className="live-dot" />
-                        <span className="mobile-stage-tag">{mobileVisualProjects[activeSlide].tag}</span>
-                      </div>
-
-                      <div className="mobile-stage-caption">
-                        <strong>{mobileVisualProjects[activeSlide].title}</strong>
-                        <span>{mobileVisualProjects[activeSlide].subtitle}</span>
-                      </div>
-
-                      <div className="mobile-stage-view-pill">
-                        <span>View Project</span>
-                        <Arrow />
-                      </div>
-                    </div>
-
-                    {/* 4 Interactive Visual Filter Chips */}
-                    <div className="mobile-visual-chips-bar">
-                      {mobileVisualProjects.map((p, idx) => (
-                        <button
-                          type="button"
-                          key={p.id}
-                          className={`mobile-chip-btn ${activeSlide === idx ? 'active' : ''}`}
-                          onClick={() => setActiveSlide(idx)}
-                        >
-                          <span className="chip-icon">{p.icon}</span>
-                          <span className="chip-text">{p.tab}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
 
                   <div className="hero-badges-row">
                     <span className="hero-badge-pill hero-badge-pill--govt">
                       <CheckIcon className="pill-check-icon" />
-                      <span className="badge-desktop">Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)</span>
-                      <span className="badge-mobile">Govt of AP AMRUT 2.0 Partner</span>
+                      <span>Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)</span>
                     </span>
                     <span className="hero-badge-pill">
                       <CheckIcon className="pill-check-icon" />
-                      <span className="badge-desktop">OHSAS 18001 Certified Standards</span>
-                      <span className="badge-mobile">OHSAS 18001 Standards</span>
+                      <span>OHSAS 18001 Certified Standards</span>
                     </span>
                     <span className="hero-badge-pill">
                       <CheckIcon className="pill-check-icon" />
-                      <span className="badge-desktop">1,000+ Industrial Projects Delivered</span>
-                      <span className="badge-mobile">1,000+ Projects Done</span>
+                      <span>1,000+ Industrial Projects Delivered</span>
                     </span>
                   </div>
-                <div className="button-row hero-button-row">
-                  <button
-                    type="button"
-                    className="button button--red hero-btn-primary"
-                    onClick={() => navigateToProjects()}
+
+                  <div className="button-row hero-button-row">
+                    <button
+                      type="button"
+                      className="button button--red hero-btn-primary"
+                      onClick={() => navigateToProjects()}
+                    >
+                      Explore Our Work <Arrow />
+                    </button>
+                    <a className="button button--outline hero-btn-secondary" href="#contact">
+                      Contact Office
+                    </a>
+                  </div>
+
+                  <div className="slider-index">
+                    <b>01</b>
+                    <span>02</span>
+                    <span>03</span>
+                  </div>
+                </div>
+
+                {/* Mobile Hero Layout: Minimal, Visual-First Reference Design */}
+                <div className="mobile-hero-ref-layout">
+                  <p className="hero-ref-eyebrow">
+                    <span className="hero-ref-bar" aria-hidden="true" />
+                    <span className="hero-ref-eyebrow-text">
+                      {companyProfile.name} • VISAKHAPATNAM, AP
+                    </span>
+                  </p>
+
+                  <h1 className="hero-ref-heading">
+                    <span className="hero-ref-white">Engineering steel.</span>
+                    <span className="hero-ref-green">Building industry.</span>
+                  </h1>
+
+                  <p className="hero-ref-subtitle">
+                    Structural fabrication, erection and heavy equipment works for industrial infrastructure.
+                  </p>
+
+                  <div className="hero-ref-buttons">
+                    <button
+                      type="button"
+                      className="button button--red hero-ref-btn-primary"
+                      onClick={() => navigateToProjects()}
+                    >
+                      <span>Explore Our Work</span>
+                      <Arrow />
+                    </button>
+                    <a className="button hero-ref-btn-secondary" href="#contact">
+                      Contact Office
+                    </a>
+                  </div>
+
+                  {/* High-Impact Hero Photographic Showcase Card */}
+                  <div
+                    className="hero-ref-card"
+                    onClick={() => navigateToProjects('jsw-toranagallu-steel-cement')}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="View Industrial Steelworks Project Dossier"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        navigateToProjects('jsw-toranagallu-steel-cement')
+                      }
+                    }}
                   >
-                    Explore Our Work <Arrow />
-                  </button>
-                  <a className="button button--outline hero-btn-secondary" href="#contact">
-                    Contact Office
-                  </a>
+                    <img
+                      src="/assets/industrial-steelworks-reference.jpg"
+                      alt="Industrial Steelworks Construction and Heavy Rigging"
+                      className="hero-ref-img"
+                      loading="eager"
+                    />
+                    <div className="hero-ref-badge">
+                      <span className="hero-ref-badge-bar" aria-hidden="true" />
+                      <span className="hero-ref-badge-text">INDUSTRIAL STEELWORKS</span>
+                    </div>
+                  </div>
+
+                  {/* 3-Column Engineering Features Strip with Vector Icons */}
+                  <div className="hero-ref-feature-strip">
+                    <div
+                      className="hero-ref-feature-col"
+                      onClick={() => navigateToService('structural-works')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <IBeamIcon className="hero-ref-feature-icon" />
+                      <div className="hero-ref-feature-text">
+                        <span>STEEL</span>
+                        <span>FABRICATION</span>
+                      </div>
+                      <span className="hero-ref-feature-underline" />
+                    </div>
+
+                    <div className="hero-ref-feature-divider" />
+
+                    <div
+                      className="hero-ref-feature-col"
+                      onClick={() => navigateToService('erection-works')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <CraneHookIcon className="hero-ref-feature-icon" />
+                      <div className="hero-ref-feature-text">
+                        <span>HEAVY</span>
+                        <span>LIFTING</span>
+                      </div>
+                      <span className="hero-ref-feature-underline" />
+                    </div>
+
+                    <div className="hero-ref-feature-divider" />
+
+                    <div
+                      className="hero-ref-feature-col"
+                      onClick={() => navigateToService('equipment-installation')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <FactoryPlantIcon className="hero-ref-feature-icon" />
+                      <div className="hero-ref-feature-text">
+                        <span>PLANT</span>
+                        <span>INSTALLATION</span>
+                      </div>
+                      <span className="hero-ref-feature-underline" />
+                    </div>
+                  </div>
                 </div>
-                <div className="slider-index">
-                  <b>01</b>
-                  <span>02</span>
-                  <span>03</span>
-                </div>
-              </div>
               <p className="hero-statement">
                 Precision<br />
                 Engineering<br />
@@ -818,7 +868,8 @@ export default function App() {
 
           {/* Core Capabilities Strip */}
           <section className="capability-strip" aria-label="Core capabilities">
-            <div className="container capability-inner">
+            {/* Desktop Capability Inner */}
+            <div className="container capability-inner desktop-capability-layout">
               <strong>
                 Our Core
                 <br />
@@ -835,6 +886,59 @@ export default function App() {
                     {s.title}
                   </span>
                 ))}
+              </div>
+            </div>
+
+            {/* Mobile Capability Layout (Matches Reference Image Exactly) */}
+            <div className="container mobile-capability-layout">
+              <div className="mobile-cap-header">
+                <p className="mobile-cap-kicker">
+                  <span className="mobile-cap-bar" aria-hidden="true" />
+                  <span>OUR CAPABILITIES</span>
+                </p>
+                <h2 className="mobile-cap-title">
+                  Industrial work,<br />
+                  <span className="mobile-cap-green">executed with precision.</span>
+                </h2>
+                <p className="mobile-cap-desc">
+                  We deliver reliable, safe and high-quality solutions for industrial and public utility infrastructure projects through a skilled team and disciplined execution.
+                </p>
+              </div>
+
+              <div className="mobile-cap-cards">
+                <div
+                  className="mobile-cap-card"
+                  onClick={() => navigateToService('structural-works')}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="View Structural Fabrication Works"
+                >
+                  <div className="mobile-cap-card-img-wrap">
+                    <img
+                      src="/assets/welding.jpg"
+                      alt="Industrial Structural Fabrication & Welding"
+                      className="mobile-cap-img"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className="mobile-cap-card"
+                  onClick={() => navigateToService('erection-works')}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="View Heavy Erection Works"
+                >
+                  <div className="mobile-cap-card-img-wrap">
+                    <img
+                      src="/assets/structure.jpg"
+                      alt="High-Altitude Heavy Erection & Rigging"
+                      className="mobile-cap-img"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
