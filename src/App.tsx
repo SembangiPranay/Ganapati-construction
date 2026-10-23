@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode } from 'react'
+import { useState, useEffect, Component, type ErrorInfo, type ReactNode } from 'react'
 import {
   servicesData,
   companyProfile,
@@ -21,6 +21,54 @@ import {
 } from './components/CorporateIcons'
 
 const Arrow = () => <span aria-hidden="true">→</span>
+
+interface ErrorBoundaryProps {
+  children: ReactNode
+}
+interface ErrorBoundaryState {
+  hasError: boolean
+  error?: Error
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props)
+    this.state = { hasError: false }
+  }
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error }
+  }
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('ErrorBoundary caught:', error, errorInfo)
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <main className="detail-page-wrapper">
+          <div className="container" style={{ padding: '80px 20px', textAlign: 'center' }}>
+            <h2 style={{ fontSize: '24px', color: '#c82a20', marginBottom: '12px', fontWeight: 800 }}>
+              Notice: Unable to Load Detail View
+            </h2>
+            <p style={{ color: '#555', marginBottom: '24px', fontSize: '15px' }}>
+              {this.state.error?.message || 'An unexpected rendering issue occurred.'}
+            </p>
+            <button
+              type="button"
+              className="button button--red"
+              onClick={() => {
+                window.location.hash = ''
+                window.location.reload()
+              }}
+            >
+              Return to Home Overview <Arrow />
+            </button>
+          </div>
+        </main>
+      )
+    }
+    return this.props.children
+  }
+}
 
 function BrandLogo({ small = false }: { small?: boolean }) {
   return (
@@ -554,64 +602,106 @@ export default function App() {
       </aside>
 
       {/* Conditional View Rendering */}
-      {currentView.type === 'service' && activeService ? (
-        <ServiceDetailPage
-          service={activeService}
-          onNavigateHome={() => navigateToHome('services')}
-          onNavigateService={navigateToService}
-          onContactClick={handleContactClick}
-        />
-      ) : currentView.type === 'about' ? (
-        <AboutDetailPage
-          onNavigateHome={() => navigateToHome('about')}
-          onContactClick={() => handleContactClick()}
-        />
-      ) : currentView.type === 'projects' ? (
-        <ProjectsDetailPage
-          initialProjectId={currentView.targetProjectId}
-          onNavigateHome={() => navigateToHome('projects')}
-          onContactClick={(type) => handleContactClick(type)}
-        />
-      ) : (
-        /* Standard Home Page */
-        <main>
-          {/* Hero */}
-          <section className="hero">
-            <div className="hero-image" />
-            <div className="hero-ring" aria-hidden="true" />
-            <div className="hero-green" aria-hidden="true" />
-            <div className="container hero-inner">
-              <div className="hero-copy">
-                <p className="eyebrow eyebrow--light">
-                  <span className="eyebrow-accent" aria-hidden="true" />
-                  <span className="eyebrow-text">
-                    {companyProfile.name} • Visakhapatnam, AP
-                  </span>
-                </p>
-                <h1 className="hero-heading">
-                  <span className="hero-title-main">Engineering Excellence</span>{' '}
-                  <span className="hero-title-sub">in Steel Infrastructure &amp; Public Utilities.</span>
-                </h1>
-                <p className="hero-subtitle">
-                  Specialists in heavy structural fabrications, high-altitude technological erection, rolling mill equipment assembly, and Government of Andhra Pradesh AMRUT 2.0 municipal water supply pipelines.
-                </p>
-                <div className="hero-badges-row">
-                  <span className="hero-badge-pill hero-badge-pill--govt">
-                    <CheckIcon className="pill-check-icon" />
-                    <span className="badge-desktop">Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)</span>
-                    <span className="badge-mobile">Govt of AP AMRUT 2.0 (WO 1314-A1)</span>
-                  </span>
-                  <span className="hero-badge-pill">
-                    <CheckIcon className="pill-check-icon" />
-                    <span className="badge-desktop">OHSAS 18001 Certified Standards</span>
-                    <span className="badge-mobile">OHSAS 18001 Standards</span>
-                  </span>
-                  <span className="hero-badge-pill">
-                    <CheckIcon className="pill-check-icon" />
-                    <span className="badge-desktop">1,000+ Industrial Projects Delivered</span>
-                    <span className="badge-mobile">1,000+ Projects Delivered</span>
-                  </span>
-                </div>
+      <ErrorBoundary>
+        {currentView.type === 'service' && activeService ? (
+          <ServiceDetailPage
+            service={activeService}
+            onNavigateHome={() => navigateToHome('services')}
+            onNavigateService={navigateToService}
+            onContactClick={handleContactClick}
+          />
+        ) : currentView.type === 'about' ? (
+          <AboutDetailPage
+            onNavigateHome={() => navigateToHome('about')}
+            onContactClick={() => handleContactClick()}
+          />
+        ) : currentView.type === 'projects' ? (
+          <ProjectsDetailPage
+            initialProjectId={currentView.targetProjectId}
+            onNavigateHome={() => navigateToHome('projects')}
+            onContactClick={(type) => handleContactClick(type)}
+          />
+        ) : (
+          /* Standard Home Page */
+          <main>
+            {/* Hero */}
+            <section className="hero">
+              <div className="hero-image" />
+              <div className="hero-ring" aria-hidden="true" />
+              <div className="hero-green" aria-hidden="true" />
+              <div className="container hero-inner">
+                <div className="hero-copy">
+                  <p className="eyebrow eyebrow--light">
+                    <span className="eyebrow-accent" aria-hidden="true" />
+                    <span className="eyebrow-text">
+                      {companyProfile.name} • Visakhapatnam, AP
+                    </span>
+                  </p>
+                  <h1 className="hero-heading">
+                    <span className="hero-title-main">Engineering Excellence</span>{' '}
+                    <span className="hero-title-sub">in Steel Infrastructure &amp; Public Utilities.</span>
+                  </h1>
+                  <p className="hero-subtitle">
+                    <span className="subtitle-desktop">
+                      Specialists in heavy structural fabrications, high-altitude technological erection, rolling mill equipment assembly, and Government of Andhra Pradesh AMRUT 2.0 municipal water supply pipelines.
+                    </span>
+                    <span className="subtitle-mobile">
+                      Specialized in heavy structural steel, high-altitude plant erection, and AP AMRUT 2.0 water pipeline infrastructure.
+                    </span>
+                  </p>
+
+                  {/* Mobile Visual Project Card: Shows what design/work has been done */}
+                  <div
+                    className="mobile-hero-project-preview"
+                    onClick={() => navigateToProjects('amrut-master-1314-a1')}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="View featured project: AP AMRUT 2.0 Infrastructure"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        navigateToProjects('amrut-master-1314-a1')
+                      }
+                    }}
+                  >
+                    <div className="mobile-project-img-box">
+                      <img
+                        src="/assets/steel-hero.jpg"
+                        alt="S Ganapati heavy steel infrastructure and high-altitude crane erection"
+                        loading="eager"
+                      />
+                      <div className="mobile-project-overlay" />
+                      <div className="mobile-project-tag-top">
+                        <span className="live-dot" />
+                        <span>Executed Site Work</span>
+                      </div>
+                      <div className="mobile-project-info">
+                        <strong>AP AMRUT 2.0 &amp; Steel Works</strong>
+                        <span>WO 1314-A1 • 11.7+ km Pipeline</span>
+                      </div>
+                      <div className="mobile-project-view-pill">
+                        <span>View Work</span>
+                        <Arrow />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="hero-badges-row">
+                    <span className="hero-badge-pill hero-badge-pill--govt">
+                      <CheckIcon className="pill-check-icon" />
+                      <span className="badge-desktop">Official Work Order: WO 1314-A1 (Govt of AP AMRUT 2.0)</span>
+                      <span className="badge-mobile">Govt of AP AMRUT 2.0 Partner</span>
+                    </span>
+                    <span className="hero-badge-pill">
+                      <CheckIcon className="pill-check-icon" />
+                      <span className="badge-desktop">OHSAS 18001 Certified Standards</span>
+                      <span className="badge-mobile">OHSAS 18001 Standards</span>
+                    </span>
+                    <span className="hero-badge-pill">
+                      <CheckIcon className="pill-check-icon" />
+                      <span className="badge-desktop">1,000+ Industrial Projects Delivered</span>
+                      <span className="badge-mobile">1,000+ Projects Done</span>
+                    </span>
+                  </div>
                 <div className="button-row hero-button-row">
                   <button
                     type="button"
@@ -1076,6 +1166,7 @@ export default function App() {
           </section>
         </main>
       )}
+      </ErrorBoundary>
 
       {/* Floating Mobile Bottom Action Bar */}
       <nav className="mobile-quick-bar" aria-label="Quick contact actions">
