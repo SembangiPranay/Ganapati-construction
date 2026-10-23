@@ -235,6 +235,49 @@ const strengths = [
   ['team', 'Client', 'Centric'],
 ]
 
+const mobileVisualProjects = [
+  {
+    id: 'steel',
+    tab: 'Heavy Steel',
+    icon: '🏗️',
+    title: 'Heavy Structural Steel Bays',
+    subtitle: 'JSW Steel Complex • 1,000+ MT Fabricated',
+    image: '/projects/0a98a433-bbc2-4c61-8704-a8c79019ee9a.jpg',
+    targetId: 'jsw-toranagallu-steel-cement',
+    tag: 'Industrial Steel Plant',
+  },
+  {
+    id: 'amrut',
+    tab: 'AMRUT 2.0',
+    icon: '💧',
+    title: 'Govt AP AMRUT 2.0 Water Mains',
+    subtitle: 'Mandapeta & Peddapuram • 11.7+ km Pipeline',
+    image: '/projects/7a42a22e-209c-4ee8-a002-3b1905c174b9.jpg',
+    targetId: 'amrut-master-1314-a1',
+    tag: 'Govt Work Order WO 1314-A1',
+  },
+  {
+    id: 'crane',
+    tab: '90m Rigging',
+    icon: '🚜',
+    title: '90m Tandem Rigging & Erection',
+    subtitle: '100T+ Tandem Crane Heavy Lifts & Trusses',
+    image: '/assets/steel-hero.jpg',
+    targetId: 'jsw-toranagallu-steel-cement',
+    tag: 'High-Elevation Erection',
+  },
+  {
+    id: 'machinery',
+    tab: 'Plant Work',
+    icon: '⚙️',
+    title: 'Heavy Foundation & Plant Bays',
+    subtitle: 'Concrete Pumping & Structural Portal Bays',
+    image: '/projects/340bd80d-55a0-494c-83df-694462dded8b.jpg',
+    targetId: 'peddapuram-ulb-ra02',
+    tag: 'Structural Engineering',
+  },
+]
+
 type ActiveView =
   | { type: 'home' }
   | { type: 'service'; serviceId: string }
@@ -245,6 +288,15 @@ export default function App() {
   const [currentView, setCurrentView] = useState<ActiveView>({ type: 'home' })
   const [selectedProjectType, setSelectedProjectType] = useState<string>('')
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
+  const [activeSlide, setActiveSlide] = useState<number>(0)
+
+  // Auto-advance visual slides on mobile
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % mobileVisualProjects.length)
+    }, 4500)
+    return () => clearInterval(timer)
+  }, [])
 
   // Prevent body scrolling when mobile drawer is open
   useEffect(() => {
@@ -650,38 +702,58 @@ export default function App() {
                     </span>
                   </p>
 
-                  {/* Mobile Visual Project Card: Shows what design/work has been done */}
-                  <div
-                    className="mobile-hero-project-preview"
-                    onClick={() => navigateToProjects('amrut-master-1314-a1')}
-                    role="button"
-                    tabIndex={0}
-                    aria-label="View featured project: AP AMRUT 2.0 Infrastructure"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        navigateToProjects('amrut-master-1314-a1')
-                      }
-                    }}
-                  >
-                    <div className="mobile-project-img-box">
+                  {/* Mobile Interactive Visual Project Showcase */}
+                  <div className="mobile-visual-showcase">
+                    <div
+                      className="mobile-visual-stage"
+                      onClick={() => navigateToProjects(mobileVisualProjects[activeSlide].targetId)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`View Project: ${mobileVisualProjects[activeSlide].title}`}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          navigateToProjects(mobileVisualProjects[activeSlide].targetId)
+                        }
+                      }}
+                    >
                       <img
-                        src="/assets/steel-hero.jpg"
-                        alt="S Ganapati heavy steel infrastructure and high-altitude crane erection"
+                        key={mobileVisualProjects[activeSlide].image}
+                        src={mobileVisualProjects[activeSlide].image}
+                        alt={mobileVisualProjects[activeSlide].title}
+                        className="mobile-stage-img"
                         loading="eager"
                       />
-                      <div className="mobile-project-overlay" />
-                      <div className="mobile-project-tag-top">
+                      <div className="mobile-stage-gradient" />
+
+                      <div className="mobile-stage-top-bar">
                         <span className="live-dot" />
-                        <span>Executed Site Work</span>
+                        <span className="mobile-stage-tag">{mobileVisualProjects[activeSlide].tag}</span>
                       </div>
-                      <div className="mobile-project-info">
-                        <strong>AP AMRUT 2.0 &amp; Steel Works</strong>
-                        <span>WO 1314-A1 • 11.7+ km Pipeline</span>
+
+                      <div className="mobile-stage-caption">
+                        <strong>{mobileVisualProjects[activeSlide].title}</strong>
+                        <span>{mobileVisualProjects[activeSlide].subtitle}</span>
                       </div>
-                      <div className="mobile-project-view-pill">
-                        <span>View Work</span>
+
+                      <div className="mobile-stage-view-pill">
+                        <span>View Project</span>
                         <Arrow />
                       </div>
+                    </div>
+
+                    {/* 4 Interactive Visual Filter Chips */}
+                    <div className="mobile-visual-chips-bar">
+                      {mobileVisualProjects.map((p, idx) => (
+                        <button
+                          type="button"
+                          key={p.id}
+                          className={`mobile-chip-btn ${activeSlide === idx ? 'active' : ''}`}
+                          onClick={() => setActiveSlide(idx)}
+                        >
+                          <span className="chip-icon">{p.icon}</span>
+                          <span className="chip-text">{p.tab}</span>
+                        </button>
+                      ))}
                     </div>
                   </div>
 
