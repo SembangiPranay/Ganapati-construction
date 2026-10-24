@@ -2856,10 +2856,21 @@ a:hover > .link-arrow .ico-arrow,
   background: var(--ink-2);
   color: var(--text-ink);
 }
-.enquiry > .btn {
+.enquiry-send {
   grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
   margin: 22px;
-  width: auto;
+}
+.page-error {
+  min-height: 80svh;
+  display: flex;
+  align-items: center;
+  padding-block: 160px 96px;
+}
+.page-error .h-display {
+  margin-bottom: 40px;
 }
 .enquiry-note {
   grid-column: 1 / -1;
@@ -3428,6 +3439,9 @@ a:hover > .link-arrow .ico-arrow,
     columns: 1;
   }
   .enquiry {
+    grid-template-columns: 1fr;
+  }
+  .enquiry-send {
     grid-template-columns: 1fr;
   }
   .field:nth-of-type(odd):not(.field--wide) {

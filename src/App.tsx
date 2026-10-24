@@ -1,4 +1,14 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
+import {
+  Component,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ErrorInfo,
+  type FormEvent,
+  type ReactNode,
+} from 'react'
 import { flushSync } from 'react-dom'
 import { servicesData, companyProfile } from './data/servicesData'
 import { prefersReducedMotion, useInView } from './lib/motion'
@@ -276,15 +286,17 @@ export default function App() {
 
       {/* ------------------------------------------------------------- pages */}
       <div className="view" key={viewKey(view)}>
-        {view.type === 'service' && activeService ? (
-          <ServicePage service={activeService} go={go} enquire={enquire} view={view_} />
-        ) : view.type === 'about' ? (
-          <AboutPage go={go} enquire={enquire} />
-        ) : view.type === 'projects' ? (
-          <ProjectsPage go={go} enquire={enquire} view={view_} />
-        ) : (
-          <Home go={go} enquire={enquire} />
-        )}
+        <ErrorBoundary>
+          {view.type === 'service' && activeService ? (
+            <ServicePage service={activeService} go={go} enquire={enquire} view={view_} />
+          ) : view.type === 'about' ? (
+            <AboutPage go={go} enquire={enquire} />
+          ) : view.type === 'projects' ? (
+            <ProjectsPage go={go} enquire={enquire} view={view_} />
+          ) : (
+            <Home go={go} enquire={enquire} />
+          )}
+        </ErrorBoundary>
       </div>
 
       <Contact topic={topic} setTopic={setTopic} />
@@ -319,6 +331,36 @@ export default function App() {
   )
 }
 
+/* ---------------------------------------------------------- error boundary */
+
+/** Keeps the nav, contact and footer usable if a page fails to render. Resets on navigation (the view is keyed). */
+class ErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('Page failed to render:', error, info)
+  }
+
+  render() {
+    if (!this.state.failed) return this.props.children
+    return (
+      <main id="main" className="page-error ink">
+        <div className="wrap">
+          <p className="kicker">Something went wrong</p>
+          <h1 className="h-display">This page didn&rsquo;t load.</h1>
+          <a className="btn btn--solid" href="/">
+            Back to home <Arrow />
+          </a>
+        </div>
+      </main>
+    )
+  }
+}
+
 /* ---------------------------------------------------------------- contact */
 
 const serviceOptions = [
@@ -328,11 +370,14 @@ const serviceOptions = [
 ]
 
 function Contact({ topic, setTopic }: { topic: string; setTopic: (t: string) => void }) {
-  const [sent, setSent] = useState(false)
+  const [sent, setSent] = useState<'whatsapp' | 'email' | null>(null)
   const options = topic && !serviceOptions.includes(topic) ? [topic, ...serviceOptions] : serviceOptions
 
+  // The enquiry goes out through WhatsApp or the visitor's email app — there is no backend.
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null
+    const channel = submitter?.value === 'email' ? 'email' : 'whatsapp'
     const data = new FormData(e.currentTarget)
     const field = (k: string) => String(data.get(k) ?? '').trim()
     const body = [
@@ -344,9 +389,14 @@ function Contact({ topic, setTopic }: { topic: string; setTopic: (t: string) => 
       '',
       field('details'),
     ].join('\n')
-    const subject = `Project enquiry${field('service') ? ` — ${field('service')}` : ''} (${field('name')})`
-    window.location.href = `mailto:${companyProfile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    setSent(true)
+    if (channel === 'whatsapp') {
+      const text = `Hi S Ganapati Construction, I have a project enquiry.\n\n${body}`
+      window.open(`https://wa.me/91${companyProfile.phonePrimary.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`, '_blank', 'noopener')
+    } else {
+      const subject = `Project enquiry${field('service') ? ` — ${field('service')}` : ''} (${field('name')})`
+      window.location.href = `mailto:${companyProfile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    }
+    setSent(channel)
   }
 
   return (
@@ -426,13 +476,20 @@ function Contact({ topic, setTopic }: { topic: string; setTopic: (t: string) => 
               <span className="mono">Scope, drawings & tonnage *</span>
               <textarea name="details" required rows={4} />
             </label>
-            <button className="btn btn--solid btn--full" type="submit">
-              Send enquiry <Arrow />
-            </button>
+            <div className="enquiry-send">
+              <button className="btn btn--solid" type="submit" name="channel" value="whatsapp">
+                <WhatsAppIcon /> Send on WhatsApp
+              </button>
+              <button className="btn btn--line" type="submit" name="channel" value="email">
+                Send by email <Arrow />
+              </button>
+            </div>
             {sent && (
               <p className="enquiry-note" role="status">
-                Your email app should now open with the enquiry ready to send. Prefer to talk? Call +91{' '}
-                {companyProfile.phonePrimary}.
+                {sent === 'whatsapp'
+                  ? 'WhatsApp should now open with your enquiry ready to send.'
+                  : 'Your email app should now open with the enquiry ready to send.'}{' '}
+                Prefer to talk? Call +91 {companyProfile.phonePrimary}.
               </p>
             )}
           </Reveal>
