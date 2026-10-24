@@ -5,6 +5,7 @@ export interface ServiceDetail {
   shortDescription: string
   fullDescription: string
   heroImage: string
+  gallery: string[]
   badgeColor: 'green' | 'red'
   tagline: string
   capabilities: {
@@ -128,7 +129,12 @@ export const servicesData: ServiceDetail[] = [
     title: 'Structural Works',
     shortDescription: 'Industrial steel frameworks, technological platforms, process buildings, and pipeline civil integration.',
     tagline: 'Comprehensive structural engineering and fabrication for large-scale industrial & municipal complexes.',
-    heroImage: '/assets/industrial-crane-site.jpg',
+    heroImage: '/projects/751149f9-616a-48ea-98a2-3c2be6c85eb0.jpg',
+    gallery: [
+      '/projects/0a98a433-bbc2-4c61-8704-a8c79019ee9a.jpg',
+      '/assets/industrial-crane-site.jpg',
+      '/projects/ae85c8dc-1afa-49bc-9a39-d26eeeafa937.jpg',
+    ],
     badgeColor: 'green',
     fullDescription:
       'S Ganapati Construction specializes in large-scale structural works across steel plants, cement plants, material handling facilities, and government infrastructure corridors. We deliver end-to-end solutions spanning engineering review, material sourcing, structural framing, and integrated site assembly with strict dimensional tolerances and safety compliance.',
@@ -183,6 +189,11 @@ export const servicesData: ServiceDetail[] = [
     shortDescription: 'Precision fabrication of structural steel components, built-up girders, and bulk handling vessels.',
     tagline: 'High-tolerance fabrication with automatic submerged arc welding and certified NDT testing.',
     heroImage: '/assets/welding.jpg',
+    gallery: [
+      '/projects/5afbf099-8e4f-4ad8-852b-aeafafa2b3c2.jpg',
+      '/assets/steel-worker.jpg',
+      '/projects/66a3f2c8-783f-4a8d-bc77-25485927ebb4.jpg',
+    ],
     badgeColor: 'red',
     fullDescription:
       'Operating equipped fabrication yards with automated cutting, submerged arc welding, and plate bending, we fabricate heavy built-up plate girders, box columns, storage bins, chutes, and hoppers engineered for high mechanical stress, vibration, and harsh thermal environments.',
@@ -237,7 +248,12 @@ export const servicesData: ServiceDetail[] = [
     title: 'Erection Works',
     shortDescription: 'High-altitude lifting, precision alignment, and erection of prefabricated steel structures.',
     tagline: 'Disciplined high-altitude erection: "Engineered Lifting. Controlled Erection. Assured Stability."',
-    heroImage: '/assets/crane-high-lift.jpg',
+    heroImage: '/projects/a5d96051-f795-4187-8faa-653ce8fb0d7f.jpg',
+    gallery: [
+      '/projects/3fcecc41-badb-4e81-9d43-27015c99ce1b.jpg',
+      '/assets/crane-high-lift.jpg',
+      '/projects/2aedb4ca-7e16-4475-87b6-96739d1512df.jpg',
+    ],
     badgeColor: 'green',
     fullDescription:
       'We carry out the safe lifting, positioning, and erection of prefabricated steel structures for industrial buildings, process towers, and plant support systems. Our certified rigging crews, heavy crane fleet, and experienced site engineers ensure precision structural alignment with an uncompromising safety record.',
@@ -291,7 +307,12 @@ export const servicesData: ServiceDetail[] = [
     title: 'Equipment Installation',
     shortDescription: 'Mechanical assembly, heavy positioning, and precision installation of industrial machinery.',
     tagline: 'Precision mechanical installation of rotary equipment, mills, gearboxes, and overhead cranes.',
-    heroImage: '/assets/gearbox-assembly.jpg',
+    heroImage: '/projects/e08d930c-4f01-40ce-8dac-749d1f2aec22.jpg',
+    gallery: [
+      '/assets/gearbox-assembly.jpg',
+      '/projects/422642a8-ab9d-4183-a534-245620c9d81a.jpg',
+      '/assets/heavy-platform-skid.jpg',
+    ],
     badgeColor: 'red',
     fullDescription:
       'S Ganapati Construction provides comprehensive mechanical installation for industrial machinery, including reduction gearboxes, rotary mills, conveyors, bucket elevators, and rolling mill machinery. We deploy laser alignment tools and non-shrink grouting to ensure vibration-free, long-term operational reliability.',
@@ -345,7 +366,12 @@ export const servicesData: ServiceDetail[] = [
     title: 'Maintenance Services',
     shortDescription: 'Industrial plant maintenance, bearing fitting, gearbox overhauling, and pipeline hydrostatic testing.',
     tagline: 'Planned turnaround maintenance, precision alignment, and emergency shutdown support.',
-    heroImage: '/assets/pipe-rigging.jpg',
+    heroImage: '/projects/5669f4d0-aa94-461c-945f-78d6c5ffcfcf.jpg',
+    gallery: [
+      '/assets/pipe-rigging.jpg',
+      '/assets/gearbox-assembly.jpg',
+      '/assets/safety-team-site.jpg',
+    ],
     badgeColor: 'green',
     fullDescription:
       'We provide specialized industrial plant maintenance and alignment services designed to maximize equipment uptime and prevent costly operational failures. Our mechanical maintenance teams handle bearing fitting, heavy gearbox overhauling, conveyor belt setup, and high-pressure hydraulic and pneumatic pipeline installation during planned plant shutdowns.',
@@ -399,7 +425,12 @@ export const servicesData: ServiceDetail[] = [
     title: 'Commissioning & Specialized Machinery',
     shortDescription: 'Coke oven & CDQ systems, launching gantries, RMHS conveyor networks, and AMRUT 2.0 public utilities.',
     tagline: 'Specialized industrial commissioning, battery equipment alignment, and public infrastructure pipelines.',
-    heroImage: '/assets/coke-oven-machinery.jpg',
+    heroImage: '/projects/20b32382-3a6a-4068-8e67-88f96af9741a.jpg',
+    gallery: [
+      '/assets/coke-oven-machinery.jpg',
+      '/projects/d29f8059-59c6-42e1-9a85-bb6d7991cd32.jpg',
+      '/assets/rmhs-conveyor-network.jpg',
+    ],
     badgeColor: 'red',
     fullDescription:
       'We excel in specialized industrial machinery erection, precision battery equipment alignment, and public infrastructure pipeline commissioning. From Coke Oven Stamping-Charging-Pushing (SCP) cars and CDQ systems to Segmental Launching Gantries, RMHS conveyor networks, and Government of Andhra Pradesh AMRUT 2.0 water pipeline networks, we ensure seamless operational handover.',
